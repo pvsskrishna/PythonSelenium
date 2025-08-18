@@ -33,5 +33,3 @@ print(title)
 print(driver.current_url)
 time.sleep(2)
 driver.close()
-print("hello")
-

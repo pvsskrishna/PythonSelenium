@@ -1,0 +1,41 @@
+Locators:
+---------
+    1. ID
+    2. Name
+    3. Class Name
+    4. Link_Text
+    5. Partial link text
+    6. CSS Selector
+    7. Xpath
+    8. Tag name
+
+Syntax:
+-------
+    driver.find_element(By.locator,"value")
+
+    css_selector:
+        driver.find_element(By.CSS_SELECTOR,"tagname[attribute_name = 'value']")
+
+    xpath:
+        driver.find_element(By.XPATH,"//tagname[@attribute_name = 'value']")
+
+methods:
+--------
+    1. To extract text from message use .text method
+        .text
+
+    2. Assertions:
+        assert "Success" in message
+
+    3. to send keys:
+        send_keys("value")
+
+    4. To click:
+        .click()
+
+shortcuts:
+---------
+    when using css_selector we can use the below shortcuts to find the elements.
+    1. #id  ---> to find id
+    2. .classname   ---> to find element with class name
+    3.
