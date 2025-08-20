@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support import expected_conditions as ec
 
 #url = r"https://apaims2.0.vassarlabs.com/login"
 url = r"https://apaims2.0.vassarlabs.com/schemes/polam-badi"
@@ -44,7 +44,7 @@ print("clicking")
 schemes_button = (By.XPATH,"//a[.//span[normalize-space(text())='Schemes']]")
 
 schemes = WebDriverWait(driver, 15).until(
-EC.element_to_be_clickable(schemes_button))
+ec.element_to_be_clickable(schemes_button))
 
 #schemes.click()
 driver.execute_script("arguments[0].scrollIntoView(true);", schemes)
