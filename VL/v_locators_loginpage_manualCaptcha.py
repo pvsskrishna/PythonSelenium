@@ -10,7 +10,7 @@ url = r"https://apaims2.0.vassarlabs.com/schemes/polam-badi"
 
 
 # chrome
-service_obj = Service(r"C:\Users\varun\PycharmProjects\PythonSelenium\Drivers\chromedriver.exe")
+service_obj = Service(r"/Drivers/chromedriver.exe")
 driver = webdriver.Chrome(service=service_obj)
 driver.get(url)
 driver.maximize_window()

@@ -1,0 +1,5 @@
+https://rahulshettyacademy.com/
+
+website made of html and php e-commerce: https://rahulshettyacademy.com/seleniumPractise/#/
+website made of Angular e-commerce: https://rahulshettyacademy.com/angularpractice/
+website having all web elements for practice: https://rahulshettyacademy.com/AutomationPractice/

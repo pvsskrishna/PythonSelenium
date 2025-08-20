@@ -11,13 +11,33 @@ Locators:
 
 Syntax:
 -------
-    driver.find_element(By.locator,"value")
+    driver.find_element(By.locator_name,"attribute_value")
 
     css_selector:
-        driver.find_element(By.CSS_SELECTOR,"tagname[attribute_name = 'value']")
+    -------------
+        1. driver.find_element(By.CSS_SELECTOR,"tagname[attribute_name = 'value']")
+
+        2. or we can also write the css_selector without using the attribute and its value just by giving the path to it.
+        ex:
+        driver.find_element(By.CSS_SELECTOR,"form div:nth-child(1) input")
+
 
     xpath:
-        driver.find_element(By.XPATH,"//tagname[@attribute_name = 'value']")
+    ------
+        1. driver.find_element(By.XPATH,"//tagname[@attribute_name = 'value']")
+
+        2. or we can also write the xpath without using the attribute and its value just by giving the path to it.
+        ex:
+
+        driver.find_element(By.XPATH,"//input/div[1]/input")
+
+        ---> here the difference between the xpath and css_selector is "space" is replaced with the "slashes"
+
+        3. locator LINK_TEXT and PARTIAL_LINK_TEXT will be used only if the tag name is having the tag "a".
+        but using the XPATH we can find the elements using the text available.
+
+        driver.find_element(By.XPATH, "//button[text()='Save New Password']")
+
 
 methods:
 --------
@@ -32,6 +52,9 @@ methods:
 
     4. To click:
         .click()
+
+    5. to clear the fields:
+        .clear()
 
 shortcuts:
 ---------
