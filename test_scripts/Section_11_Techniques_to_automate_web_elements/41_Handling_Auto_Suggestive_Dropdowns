@@ -1,0 +1,23 @@
+ - This is not a Select tag
+ here we will be using find elements to extract all the elements into a list
+ we will iterate them until our desired value is found by using the .text method
+
+ example:
+ --------
+dropdown = driver.find_element(By.ID,"autosuggest")
+dropdown.send_keys("ind")
+countries = driver.find_elements(By.CSS_SELECTOR,"li[class ='ui-menu-item'] a")
+print(len(countries))
+
+for country in countries:
+    if country.text == 'India':
+        print("India")
+        country.click()
+        break
+
+
+.text
+------
+    text method will work only on the elements which are loaded when the page is loaded
+    it wont work for the elements which are generating after manipulation
+    ex: for auto suggestive drop down values we cant find the text directly, because the values are not preloaded.
