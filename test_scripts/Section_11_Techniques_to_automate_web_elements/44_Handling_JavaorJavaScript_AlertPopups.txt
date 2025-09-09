@@ -1,0 +1,13 @@
+for handling popups first we need to switch to that popup/alert
+    alert = driver.switch_to.alert
+
+next, we can grab the text from it using the method called text
+    alert_text = alert.text
+    print(alert_text)
+
+to click ok in alert, we will use method accept()
+    alert.accept()
+
+to click cancel in alert, we will use method dismiss()
+    alert.dismiss()
+

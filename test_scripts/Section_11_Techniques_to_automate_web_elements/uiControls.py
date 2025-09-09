@@ -12,7 +12,7 @@ driver.get(url)
 driver.maximize_window()
 driver.implicitly_wait(15)
 
-#handling the checkboxes dynamically and using is_selected() method
+#handling the checkboxes dynamically and using is_selected() method ---> video 43
 checkboxes = driver.find_elements(By.XPATH,"//input[@type='checkbox']")
 print(len(checkboxes))
 for checkbox in checkboxes:
@@ -23,7 +23,7 @@ for checkbox in checkboxes:
         break
 time.sleep(3)
 
-#handling the radio buttons dynamically and using is_selected() method
+#handling the radio buttons dynamically and using is_selected() method ---> video 44
 radiobuttons = driver.find_elements(By.XPATH,"//input[@type='radio']")
 for radiobutton in radiobuttons:
     if radiobutton.get_attribute("value") == 'radio2':
