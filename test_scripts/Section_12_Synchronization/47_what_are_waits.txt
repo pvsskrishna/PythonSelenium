@@ -1,0 +1,51 @@
+Q. Chaining of web elements?
+    Ans: chaining the parent web element with the child web element to construct dynamically is called the concept of
+    chaining of web elements
+
+
+Q. Implicit wait?
+    Ans: Its a global wait and dynamic
+    Its always good to have one dynamic wait like implicit wait in our code, in case of webdriver unable to find any element
+    it will make the driver wait till it load.
+    it will not use extra time assigned to it just like sleep() if an element is available with in the assigned time.
+
+Exceptional cases:
+-----------------
+    we will use time.sleep() function even if we use implicit wait because:
+    in case of using driver.find_elements() it will produce a list,
+     where if it doesnt find any element it will produce an empty list.
+
+     so, we will intentionally use time.sleep() method just before the find_elements() method just to make sure that
+     elements will load and list won't be empty.
+
+
+
+
+Q. Explicit wait?
+    Ans:
+    Case 1:
+    what if the element is taking more than the implicit time, but it will display but take more time.
+    in this case implicit wait is not efficient to use and we cant use time.sleep() since we don't know how much it is taking.
+    and
+
+    Case 2:
+    there are chances that element might not available/failed to load/fetch
+
+    Case 3:
+    if system know that element is not available/fetched after (n+1)th second after using time.sleep() method
+    implicit wait will come's into the picture where it is of no use waiting for some extra seconds right since element will not exist
+
+    Solution:
+    in this case we will use explicit wait based on conditions.
+    here using explicit wait we can target a specific element and we can set exclusively or explicitly wait to that element upto desired time/seconds.
+
+    when we did that it will override the implicit wait available
+
+    code:
+        from selenium.webdriver.support import expected_conditions as EC
+        from selenium.webdriver.support.ui import WebdriverWait
+
+        wait = WebDriverWait(driver,20)
+        wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'promoInfo')))
+
+
