@@ -1,0 +1,14 @@
+Static dropdown: where values are fixed
+Dynamic dropdown: where values will change based on the input we provided
+
+code:
+-----
+    from selenium.webdriver.support.select import Select
+
+    dropdown= Select(driver.find_element(By.ID, "exampleFormControlSelect1"))
+    dropdown.select_by_visible_text("Female")
+    dropdown.select_by_index(1)  ---> index starts from 0
+    dropdown.select_by_value(1) ---> if value property is available in dropdown we can use here
+
+
+when inspecting if you see the select tag then that is a static drop down - we can go with the select class

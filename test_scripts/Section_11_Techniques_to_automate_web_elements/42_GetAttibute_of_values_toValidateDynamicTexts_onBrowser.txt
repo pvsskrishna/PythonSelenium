@@ -1,0 +1,20 @@
+To overcome the restriction in .text method we are using this get_attribute('attribute_name') method
+To extract the text which .text cant extract, we will use this get_attribute() method when the text is entered dynamically
+
+get_attribute("attribute_name"):
+--------------------------------
+    used to get the attribute and its values
+    it's a javascript method
+
+    Ex:
+        dropdown = driver.find_element(By.ID,"autosuggest")
+        print(dropdown.text)
+        print(dropdown.get_attribute("value"))
+
+Interview Question:
+-------------------
+Q. When you update value dynamically through script how do you extract the text?
+Ans: we cant use this .text method
+    because it cant extract the text which is displayed dynamically and which is not loaded when page is loaded.
+    we use the get_attribute("value") which will get the values which were entered dynamically through the script.
+
