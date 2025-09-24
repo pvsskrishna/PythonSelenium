@@ -1,0 +1,51 @@
+*** #Interview Question ***
+
+Frames:: An embedded html, which sits top over your base html. But they look like part of a page but they are actually not.
+that piece of a component what we called as a frame - that is another page but we just embedded into our parent html
+
+1. Selenium dont have access to the embedded frames that exist in a window. because thats a outsider piece.
+so to access it just like child windows we need to 'switch to' frames.
+
+2. How to know whether frames exist in our page?
+    1. we should ask our developer or
+    2. inspect to see if there are any <iframe> tags
+
+3. How to switch using switch_to method?
+    driver.switch_to.frame("mce_0_ifr")
+        Inside this frame method either we can use id or name of the frame
+
+4. In Selenium, .clear() only works on input or textarea elements, not on contenteditable elements like TinyMCE’s body.
+
+    ✅ Fix:You need to use .send_keys() after selecting the <body> element, and to "clear", you can use Ctrl+A + Delete instead.
+    Try this:
+
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.common.keys import Keys
+
+    # switch to iframe
+    driver.switch_to.frame("mce_0_ifr")
+
+    # locate the editable body inside TinyMCE
+    editor = driver.find_element(By.ID, "tinymce")
+
+    # clear existing text (CTRL + A -> DELETE)
+    editor.send_keys(Keys.CONTROL + "a")
+    editor.send_keys(Keys.DELETE)
+
+    # type new text
+    editor.send_keys("Hello")
+
+    🔑 Key points:
+    TinyMCE uses an <iframe>. You switched correctly using driver.switch_to.frame("mce_0_ifr")
+    Inside the iframe, the element id="tinymce" is <body contenteditable="true">, not <input>
+    For contenteditable elements, you must use keyboard actions instead of .clear()
+
+*** #Interview Question ***
+5. so when user goes inside the frame how can he come back to the window.
+    driver.switch_to.default_content()
+
+    using this above method user can come back to the normal browser scope
+
+
+6. Another site to practise frames
+       https://rahulshettyacademy.com/AutomationPractice/

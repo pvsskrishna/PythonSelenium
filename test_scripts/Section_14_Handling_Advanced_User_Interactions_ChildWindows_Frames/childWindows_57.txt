@@ -1,0 +1,16 @@
+1. Selenium will not have the knowledge of the child window unless it is switched to it
+because the scope of the selenium is upto the window which is opened at present - so to access that child window we need to switch first.
+
+2. to switch we will be using the 'switch_to' method and
+to switch to desired window we will be using the method to collect the all opened windows is 'driver.window_handles'
+which will return all the windows inside a list with name of the windows in string format
+
+    openWindows = driver.window_handles
+    driver.switch_to.window(openWindows[0]) #0 ---> parent window
+
+3. There exist an another locator called TAG_NAME
+    driver.find_element(By.TAG_NAME,"h3").text
+
+4. If we open a child window and close a child window using driver.close()
+then it will automatically switch back to the parent window
+

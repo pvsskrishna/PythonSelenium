@@ -1,0 +1,16 @@
+from selenium.webdriver.common import action_chains
+
+action = action_chains.ActionChains(driver)
+
+different methods:
+-------------------
+action.click_and_hold(driver.find_element())
+action.click()
+action.context_click() ---> Right click
+action.double_click()
+action.drag_and_drop(source,target)
+action.move_to_element() ---> it will just go to that element
+
+
+NOTE: when ever we use the action at last/end we should use the method perform() then only action will execute
+Ex: action.click().perform()
