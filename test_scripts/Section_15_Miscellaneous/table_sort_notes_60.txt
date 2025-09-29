@@ -1,0 +1,11 @@
+Interview Question:
+-------------------
+
+Q. How to sort the table?
+Ans::
+    lets take one scenario:
+    1. Sort all the items present in the column by clicking the sort button
+    2. collect them into a list lets say list_1
+    3. sort the list_1 lets say this new list generated is list_2
+    4. compare this list_1 with list_2 to check whether the sort happened properly or not.
+

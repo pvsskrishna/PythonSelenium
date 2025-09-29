@@ -1,0 +1,34 @@
+Q. What is Headless mode??
+
+    In headless mode we cant see the UI displaying while executing the script.
+    browser will run in the background without displaying the UI.
+    so, to execute the scripts in headless mode we need to use the class called "ChromeOptions()" from webdriver package.
+    and add that chrome_options as argument in driver
+    ----------------------------------------------------------------------
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("headless")
+
+    ...
+    driver = webdriver.Chrome(service=service_obj, options= chrome_options)
+    ------------------------------------------------------------------------
+
+
+Q. How to bypass the SSL Certificates? like "Your connection is not private"
+    To bypass that we have add one more flag or argument in chrome options is
+    ---------------------------------------------------------
+    chrome_options.add_argument("--ignore-certificate-errors")
+    ----------------------------------------------------------
+    if we give like this whenever it lands on a page like showing ssl certificate, it will automatically take care of it and take you to the website.
+
+so, This is how we will change the browser behaviours using the chrome options and sending them in driver as options.
+
+
+
+Q. How to open the browser automatically in maximize mode without calling it manually to maximize?
+ANS:: we can acheive that using the ChromeOptions() class
+    --------------------------------------------------
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--start-maximized")
+    ---------------------------------------------------
+
+For more chrome options visit this site:: https://www.programcreek.com/python/example/100025/selenium.webdriver.ChromeOptions

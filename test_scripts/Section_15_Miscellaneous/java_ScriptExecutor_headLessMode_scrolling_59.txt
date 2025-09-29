@@ -1,0 +1,78 @@
+Q. what is java script executor?
+Q. where do we need it selenium?
+
+
+Executing the java scripts on the browser using python.
+There are some events we need to use the java script
+
+basically all the browsers were madeup of java scripts
+what selenium supports is :- executing the java script commands using python
+
+for example::
+Q. if we want to scroll the web page? How?
+Ans::   Inspect > Go to Console
+    type the command
+    -------------------------------
+    window.scroll(x_value, y_value)
+    Ex: window.scroll(0,1000)
+    -------------------------------
+   Q.Difference between window.scrollTo() and window.scroll()
+    window.scrollTo(x, y)
+    Scrolls the window to an absolute position (from the top-left of the page).
+    Example: window.scrollTo(0, 20000) → goes exactly 20000px down from the top.
+
+    window.scroll(x, y)
+    Newer method, but works the same as scrollTo(x, y).
+    Accepts both (x, y) coordinates or an options object with {top, left, behavior}.
+    ✅ In practice, both are equivalent when using (x, y).
+    👉 Difference: scrollTo is the older method, while scroll is the modern alias with the same functionality.
+
+    --> Instead of number in y axis, we can provide dynamic value
+    using the below command
+    -------------------------------------------------
+    window.scroll(x_value,document.body.scrollHeight)
+    -------------------------------------------------
+    document.body.scrollHeight --> this will dynamically fetch the max height of the webpage where it can scroll, it will scroll page to last
+
+
+--> Now the selenium commands to execute this java script commands is "driver.execute_script()"
+    if it is a execute_script() method then it is a java script methods
+
+    ----------------------------------------------
+    driver.execute_script("java_script command ;")
+    ----------------------------------------------
+
+    ex:
+    driver.execute_script("window.scroll(x_value,document.body.scrollHeight);")
+    ; ---> is important
+    double quotes ---> put inside the double quotes
+
+
+Q. What is Headless mode??
+
+    In headless mode we cant see the UI displaying while executing the script.
+    browser will run in the background without displaying the UI.
+    so, to execute the scripts in headless mode we need to use the class called "ChromeOptions()" from webdriver package.
+    and add that chrome_options as argument in driver
+    ----------------------------------------------------------------------
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("headless")
+
+    ...
+    driver = webdriver.Chrome(service=service_obj, options= chrome_options)
+    ------------------------------------------------------------------------
+
+
+Q. How to bypass the SSL Certificates? like "Your connection is not private"
+    To bypass that we have add one more flag or argument in chrome options is
+    ---------------------------------------------------------
+    chrome_options.add_argument("--ignore-certificate-errors")
+    ----------------------------------------------------------
+    if we give like this whenever it lands on a page like showing ssl certificate, it will automatically take care of it and take you to the website.
+
+so, This is how we will change the browser behaviours using the chrome options and sending them in driver as options.
+
+
+
+
+
