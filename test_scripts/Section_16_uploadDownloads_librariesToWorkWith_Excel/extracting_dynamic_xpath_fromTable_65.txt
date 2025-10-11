@@ -1,0 +1,8 @@
+//div[text() = 'Apple']/parent::div/parent::div//div[@id='cell-4-undefined']
+
+here
+--> /parent:: means moving to immediate parent
+
+#extracting fruit actual price from the table
+priceColumnNo = driver.find_element(By.XPATH,"//div[text()='Price']").get_attribute('data-column-id')
+actual_price = driver.find_element(By.XPATH,"//div[text() ="+fruit_name+"]/parent::div/parent::div//div[@id='cell-"+priceColumnNo+"-undefined']").text

@@ -12,3 +12,4 @@ driver = webdriver.Chrome(service=service_obj,options=chrome_options)
 
 url = r"https://rahulshettyacademy.com/angularpractice/"
 driver.get(url)
+print(driver.title)

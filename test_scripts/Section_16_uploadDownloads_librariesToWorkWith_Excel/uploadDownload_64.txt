@@ -1,0 +1,10 @@
+Rule 1:
+
+    To upload a file by clicking the upload button or choose button
+    that button should have the property called type="file" in the html
+
+    if not there we need to consult the developer to add this.
+    automation is not possible if this attribute and value is not exist.
+
+    ex: <input type="file" id="fileinput" accept=".xlsx,.xlx" class="upload">…</input>
+

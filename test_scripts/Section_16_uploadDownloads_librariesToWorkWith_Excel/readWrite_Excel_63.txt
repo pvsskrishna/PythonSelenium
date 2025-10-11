@@ -1,0 +1,70 @@
+To write in Excel we will be make use of python excel library called "openpyxl"
+This is not present in selenium by default - so we need to install this package
+
+---------------------------
+pip install openpyxl
+---------------------------
+
+steps:
+1. 1st we need to import the package in file
+    ---------------
+    import openpyxl
+    ----------------
+2. we need to tell the path where our excel sheet is exist. that means first we need to load the excel.
+    ------------------------------------
+    book = openpyxl.loadworkbook(path_of_file,mode)
+    ------------------------------------
+    in file path  update the \ to \\
+    ex: C:\Users\varun\PycharmProjects\PythonSelenium\test_scripts\Section_16_uploadDownloads_librariesToWorkWith_Excel\Demo.xlsx
+    C:\\Users\\varun\PycharmProjects\\PythonSelenium\\test_scripts\\Section_16_uploadDownloads_librariesToWorkWith_Excel\\Demo.xlsx
+
+3. To get control to the active sheet we need to make use the book.active and then we will get control of sheet object.
+    --------------------
+    sheet = book.active
+    ---------------------
+
+4. in python each row/column will be treated starting from number 1.
+
+5. If we want to go to the desired cell, then we need to specify which row and column the cell is.
+    ----------------------------------------
+    sheet.cell(row =row_no, column = col_no)
+    ----------------------------------------
+
+    Ex: cell = sheet.cell(row=1,column=1)
+    o/p: <Cell 'Sheet1'.A1>
+
+6. To extract the data present inside the cell we need to use .value method
+
+    ----------------------------------------------
+    cell = sheet.cell(row =row_no, column = col_no)
+    print(cell.value)
+    ------------------------------------------------
+
+    we can also use one shortcut like example:
+    ----------------
+    sheet['A5'].value
+    sheet['C3'].value
+    -----------------
+
+Note:: make sure that we saved the excel file
+
+7. If we write something inside a cell then also same process but reverse
+    ----------------------------------------------
+    sheet.cell(row = 2, column = 2).value = "Varun"
+    -----------------------------------------------
+
+8. If we want to know total number of maximum rows present in the excel sheet with data.
+    --------------
+    sheet.max_row
+    --------------
+    print(sheet.max_row)
+
+    similarly maximum columns is
+    ------------------
+    sheet.max_column
+    -------------------
+
+
+
+
+

@@ -205,3 +205,4 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+/test_scripts/Section_15_Miscellaneous/screenshot.png
