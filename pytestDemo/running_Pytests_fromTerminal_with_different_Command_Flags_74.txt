@@ -1,0 +1,76 @@
+step 1: Go to terminal and change the directory to our package where tests exist
+    cd C:\Users\varun\PycharmProjects\PythonSelenium\pytestDemo
+
+
+Command 1:
+    if we want to run all the pytests/ test methods present inside our package/directory then we will make you of the following command
+     -------------
+        py.test
+     -------------
+
+     based upon the following rules it will find out which method to run.
+
+        Rule 1: Any pytest file name should start with test_ or end with _test
+        Rule 2:  pytest method names should start with test
+        Rule 3:  anycode should be wrapped in method only
+
+
+        Results:
+            PS C:\Users\varun\PycharmProjects\PythonSelenium\pytestDemo> py.test
+            ==================================================================== test session starts =====================================================================
+            platform win32 -- Python 3.13.7, pytest-8.4.2, pluggy-1.6.0
+            rootdir: C:\Users\varun\PycharmProjects\PythonSelenium\pytestDemo
+            collected 1 item
+
+            test_demo1_73.py .                                                                                                                                      [100%]
+
+            =====================================================================1 passed in 0.05s ======================================================================
+
+command 2:
+    To get more information about the test case results and execution we will be using the following command
+    -----------------
+        py.test -v
+    ------------------
+
+    where v means verbose/ more info metadata
+
+    Results:
+        ==================================================================== test session starts =====================================================================
+        platform win32 -- Python 3.13.7, pytest-8.4.2, pluggy-1.6.0 -- C:\Users\varun\AppData\Local\Programs\Python\Python313\python.exe
+        cachedir: .pytest_cache
+        rootdir: C:\Users\varun\PycharmProjects\PythonSelenium\pytestDemo
+        collected 1 item
+
+        test_demo1_73.py::test_firstProgram PASSED                                                                                                              [100%]
+
+        ===================================================================== 1 passed in 0.02s ======================================================================
+
+
+
+command 3:
+
+    If we observe when executing these tests, the outputs or prints are not printing
+    by default it will not display them in the output - if we want to show them then we have to pass an another flag called
+    ---------------
+    py.test -v -s
+    ---------------
+
+    this -s flag will help you to display all the console logs in the output
+
+    Result:
+        PS C:\Users\varun\PycharmProjects\PythonSelenium\pytestDemo> py.test -v -s
+        ==================================================================== test session starts =====================================================================
+        platform win32 -- Python 3.13.7, pytest-8.4.2, pluggy-1.6.0 -- C:\Users\varun\AppData\Local\Programs\Python\Python313\python.exe
+        cachedir: .pytest_cache
+        rootdir: C:\Users\varun\PycharmProjects\PythonSelenium\pytestDemo
+        collecting ... hello
+        collected 1 item
+
+        test_demo1_73.py::test_firstProgram hello
+        PASSED
+
+        ===================================================================== 1 passed in 0.01s ======================================================================
+
+    Here in the result you can find that "hello" is printed in console
+
+Rule 4: In pytest, Every method is considered as one test case.

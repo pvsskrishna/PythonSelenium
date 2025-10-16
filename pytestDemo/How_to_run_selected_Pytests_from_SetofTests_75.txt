@@ -1,0 +1,36 @@
+Command 4:
+    if we want to execute the tests from a selected pytest file then we will make use of the following command.
+    ---------------------------
+    py.test test_demo2_74.py -v -s
+    ---------------------------
+
+Command 5:
+    How to run the selected test cases from the different pytest files:
+    that means only test methods which are having specific name text in the method/testcase name
+
+    Here we are asking to run all complete tests present in the parent directory but run only selected tests
+
+    NOTE: Careful in writing the testcase name (i.e method name) it will be used in this case
+    ----------------------------
+    py.test -k CreditCard -v -s
+    ----------------------------
+
+    here -k stands for regular expression/ method name execution
+    here it will run all the test cases which are having the name 'CreditCard' in the test case name.
+
+    Result:
+        PS C:\Users\varun\PycharmProjects\PythonSelenium\pytestDemo> py.test -k CreditCard -v -s
+        ==================================================================== test session starts =====================================================================
+        platform win32 -- Python 3.13.7, pytest-8.4.2, pluggy-1.6.0 -- C:\Users\varun\AppData\Local\Programs\Python\Python313\python.exe
+        cachedir: .pytest_cache
+        rootdir: C:\Users\varun\PycharmProjects\PythonSelenium\pytestDemo
+        collected 6 items / 4 deselected / 2 selected
+
+        test_demo1_73.py::test_CreditCard1 Credit1
+        PASSED
+        test_demo2_74.py::test_CreditCard2 Credit2
+        PASSED
+
+        ============================================================== 2 passed, 4 deselected in 0.02s ===============================================================
+
+Rule 5: Careful in writing the testcase name (i.e method name) it will be used in running selected testcases, Method name should have sense

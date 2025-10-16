@@ -1,0 +1,37 @@
+
+Command 6:
+    # Concept is how will you run only smoke test cases or regression test cases etc...
+    we cant keep the names smoke, regression etc.. these testing names in the method/testcase name
+
+    so we will go with concept called "MARK"
+    in Cucumber we called it as "Tags" in TestNg we called it as "Groups"
+
+    Below is the syntax to mark the test case
+    ---------------------
+    pytest.mark.marmName
+    ---------------------
+
+    Ex:
+        @pytest.mark.smoke
+        def test_firstprogram():
+            print('hello')
+
+    Command to execute the marked test cases is
+    --------------------------
+    py.test -m markName -v -s
+    --------------------------
+    here -m means mark
+
+        Ex: py.test -m smoke -v -s
+
+    Q. How to skip a test case using marks?
+    Ans: There are some predefined marks in pytest, one of them is skip mark
+        ------------------------
+            @pytest.mark.skip
+        ------------------------
+
+        Ex:
+            @pytest.mark.skip
+            @pytest.mark.smoke
+            def test_thirdprogram():
+                print('Good afternoon')
