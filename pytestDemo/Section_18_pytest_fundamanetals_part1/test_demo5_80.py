@@ -18,6 +18,21 @@ def test_fourthprogram():
     b = 6
     assert a+4 == 6,"Summation is not matching"
 
-
+@pytest.mark.xfail
 def test_CreditCard2():
     print("Credit2")
+
+@pytest.mark.skip
+@pytest.mark.xfail
+def test_CreditCard3():
+    print("Credit3")
+
+
+def test_crossBrowser(crossBrowser):
+    print(crossBrowser)
+
+def test_crossBrowser1(crossBrowser1):
+    print(crossBrowser1)
+
+def test_crossBrowser2(crossBrowser1):
+    print(crossBrowser1[0])

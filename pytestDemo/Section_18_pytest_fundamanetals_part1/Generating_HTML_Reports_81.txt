@@ -1,0 +1,9 @@
+1. To generate pytest html reports we need to install a plugin
+    ------------------------
+    pip install pytest-html
+    ------------------------
+
+2. To generate the html report, basic command line is
+    --------------------------
+    pytest --html=report.html       ---> Here --html is also one of the flag
+    --------------------------

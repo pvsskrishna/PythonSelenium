@@ -1,4 +1,6 @@
 #install pytest
+import pytest
+
 
 # Any pytest file name should start with test_ or end with _test
 # pytest method names should start with test

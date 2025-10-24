@@ -1,0 +1,95 @@
+Scenario 1:
+    In the case where if we want to run the test methods with multiple data sets then we can use the parametrization.
+
+    we can make the fixture parametrized by passing the data in the fixture by passing the parameter 'params'
+    ------------------------------------------
+    @pytest.fixture(params=[data1,data2,...])
+    ------------------------------------------
+
+    Execution::
+    So when we pass like this,
+    this fixture on the 1st run it will take the data1 and give that to test method and our test method will run.
+    on the 2nd run it will take the data2 and give that to test method and our test method will run. so on...
+
+    Q. How can we send that data to test without the variable???
+    Ans: So for that we will be passing an 'instance' for the fixture method and that instance we will return to test method.
+
+    Ex:-----------------------------------------------------
+        @pytest.fixture(params=['Chrome','Firefox','IE'])
+        def crossBrowser(request):
+            return request.param
+       -----------------------------------------------------
+
+    We will be using this 'instance' concept only when we have the fixture with some values available.
+
+    Ex:
+        py.test test_demo5_80.py -v -s
+
+        def test_crossBrowser(crossBrowser):
+            print(crossBrowser)
+
+        Output:
+        collected 7 items
+
+        test_demo5_80.py::test_secondprogram FAILED
+        test_demo5_80.py::test_fourthprogram PASSED
+        test_demo5_80.py::test_CreditCard2 Credit2
+        XPASS
+        test_demo5_80.py::test_CreditCard3 SKIPPED (unconditional skip)
+        test_demo5_80.py::test_crossBrowser[Chrome] Chrome
+        PASSED
+        test_demo5_80.py::test_crossBrowser[Firefox] Firefox
+        PASSED
+        test_demo5_80.py::test_crossBrowser[IE] IE
+        PASSED
+
+Scenario 2:
+    Multiple values in one single run:
+
+    If we want to provide multiple data and specific data only for a particular dataset iteration, we can define it as shown below.
+    This ensures that the given data is used only in that specific iteration.
+        --------------------------------------------------------------------------
+        @pytest.fixture(params=[('Chrome','Varun','Paladugula'),('Firefox','Krishna'),'IE'])
+        def crossBrowser1(request):
+            return request.param
+        --------------------------------------------------------------------------
+
+        In this example, The test will run for 3 times.
+        during the first iteration, Pytest will use 'Chrome' along with the additional data items 'Varun' and 'Paladugula'.
+        Second iteration, Pytest will use 'Firefox' along with the additional data item 'Krishna'.
+        Similarly, in Third iteration it pytest will take only one data item 'IE'.
+
+    Ex:
+        py.test test_demo5_80.py -v -s
+
+        Output:
+        test_demo5_80.py::test_crossBrowser1[crossBrowser10] ('Chrome', 'Varun', 'Paladugula')
+        PASSED
+        test_demo5_80.py::test_crossBrowser1[crossBrowser11] ('Firefox', 'Krishna')
+        PASSED
+        test_demo5_80.py::test_crossBrowser1[IE] IE
+        PASSED
+
+    Scenario 2.1:
+        For example if we want to print any specific data from data set provided in the fixture, in every iteration.
+        we can use indexing in the test method.
+        ---------------------------------------
+        def test_crossBrowser2(crossBrowser1):          <--- test_method
+            print(crossBrowser1[0])
+        ---------------------------------------
+
+        conftest.py
+        @pytest.fixture(params=[('Chrome','Varun','Paladugula'),('Firefox','Krishna'),'IE'])
+        def crossBrowser1(request):
+            return request.param
+
+        Output:
+        test_demo5_80.py::test_crossBrowser2[crossBrowser10] Chrome
+        PASSED
+        test_demo5_80.py::test_crossBrowser2[crossBrowser11] Firefox
+        PASSED
+        test_demo5_80.py::test_crossBrowser2[IE] I
+        PASSED
+
+
+        Here it printed all the 0 index values from all data sets

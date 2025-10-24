@@ -1,0 +1,137 @@
+Scenario 1:
+    In Every test case/method if we pass the fixture method as an argument
+    when every test case is running same thing will happen again and again which looks like duplication.
+
+    Ex: when every test case is running opening the browser and closing the browser is same but it is not necessary to open and close everytime right.
+    why are we duplicating our efforts by writing the same fixture code for every test file
+
+    So, Instead in python pytest framework there is one file called "conftest.py"
+    we have to define specifically with that name only - This is the standard we have to follow.
+
+    So, in that file if we declare the fixture - then that will be available to all the pytest test files.
+    now, we can delete the all the fixtures we have written in all the test files, and then we can call all of them from this conftest.py file
+
+
+Executing flow:
+    1st:: when we declare the fixture method name as an argument to the test method, it will check in local file whether that method fixture is available or not.
+    2nd:: if it is not present, then it will go to 'conftest' file and it will check whether conftest file present or not.
+    3rd:: if conftest file is present then it will go to that file and will check in that file as well.
+    4th:: if that fixture method is found in that file then it will execute.
+
+Example:
+    test_fixturedemo1.py
+
+    def test_fixtureDemoMethod1(setup):
+    print("I will be executing the fixture demo method 1")
+    --------
+    conftest.py
+
+    @pytest.fixture
+    def setup():
+        print("I will be executing 1st")
+        yield
+        print(" I will be executing last")
+    ----------
+    output:
+    py.test test_fixturedemo1.py -v -s
+
+    test_fixturedemo1.py::test_fixtureDemoMethod1 I will be executing 1st
+    I will be executing the fixture demo method 1
+    PASSED I will be executing last
+
+Scenario 2:
+    For example a file is having multiple test cases/ methods. where we are passing the fixture method as an argument for every method.
+    so for n number of test cases we are writing in pytest file, for every file we are passing this fixture.
+
+    Q. So Can't we optimize this?
+
+    Yes, we can by wrapping all the test cases into a class.
+    and by declaring an annotation on top of the class.
+    -----------------------------------------
+    @pytest.mark.usefixtures("fixture_name")
+    -----------------------------------------
+
+    Ex:
+        @pytest.mark.usefixtures("setup")
+        class TestExample:
+            def test_fixtureDemoMethod1(self):
+                print("I will be executing the fixture demo method 1")
+
+            def test_fixtureDemoMethod2(self):
+                print("I will be executing the fixture demo method 2")
+
+            def test_fixtureDemoMethod3(self):
+                print("I will be executing the fixture demo method 3")
+
+            def test_fixtureDemoMethod4(self):
+                print("I will be executing the fixture demo method 4")
+
+        Output:
+        py.test test_fixturedemo1_78.py -v -s
+
+
+        collected 4 items
+
+        test_fixturedemo1_78.py::TestExample::test_fixtureDemoMethod1 I will be executing 1st
+        I will be executing the fixture demo method 1
+        PASSED I will be executing last
+
+        test_fixturedemo1_78.py::TestExample::test_fixtureDemoMethod2 I will be executing 1st
+        I will be executing the fixture demo method 2
+        PASSED I will be executing last
+
+        test_fixturedemo1_78.py::TestExample::test_fixtureDemoMethod3 I will be executing 1st
+        I will be executing the fixture demo method 3
+        PASSED I will be executing last
+
+        test_fixturedemo1_78.py::TestExample::test_fixtureDemoMethod4 I will be executing 1st
+        I will be executing the fixture demo method 4
+        PASSED I will be executing last
+
+
+        ========================================= 4 passed in 0.03s ====================================================
+
+
+Scenario 3:
+    If we observe in scenario 2, fixture is executing for all the methods inside the class,
+    what if we want to execute the fixture only once before all the test cases start executing.
+
+    Example like clearing cache data, clearing data entry fields and not closing the page after every test case etc...
+
+    In this case we need to update the scope of the fixture to class level, By providing the parameter 'scope' and argument as 'class'.
+
+    -------------------------------
+    @pytest.fixture(scope="class")          ---> conftest.py file
+    -------------------------------
+
+    Ex:(Same from scenario 2, nothing is changed only conftest.py fixture parameter is updated)
+        @pytest.mark.usefixtures("setup")
+        class TestExample:
+            def test_fixtureDemoMethod1(self):
+                print("I will be executing the fixture demo method 1")
+
+            def test_fixtureDemoMethod2(self):
+                print("I will be executing the fixture demo method 2")
+
+            def test_fixtureDemoMethod3(self):
+                print("I will be executing the fixture demo method 3")
+
+            def test_fixtureDemoMethod4(self):
+                print("I will be executing the fixture demo method 4")
+
+
+        Output:
+        collected 4 items
+
+        test_fixturedemo1_78.py::TestExample::test_fixtureDemoMethod1 I will be executing 1st
+        I will be executing the fixture demo method 1
+        PASSED
+        test_fixturedemo1_78.py::TestExample::test_fixtureDemoMethod2 I will be executing the fixture demo method 2
+        PASSED
+        test_fixturedemo1_78.py::TestExample::test_fixtureDemoMethod3 I will be executing the fixture demo method 3
+        PASSED
+        test_fixturedemo1_78.py::TestExample::test_fixtureDemoMethod4 I will be executing the fixture demo method 4
+        PASSED I will be executing last
+
+
+        ============================================= 4 passed in 0.02s ================================================

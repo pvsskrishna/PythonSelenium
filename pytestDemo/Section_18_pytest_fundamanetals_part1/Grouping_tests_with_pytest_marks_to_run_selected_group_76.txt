@@ -35,3 +35,20 @@ Command 6:
             @pytest.mark.smoke
             def test_thirdprogram():
                 print('Good afternoon')
+
+
+        ---> mostly, we will be using this skip mark to avoid testcases which are failing.
+
+
+    Q. How to make the test case run but in output we dont want about Pass or Fail?
+        like running the test case but not reporting.
+
+    -------------------
+    @pytest.mark.xfail
+    -------------------
+
+    ex:
+        test_demo4_76.py::test_secondprogram FAILED                            [ 25%]
+        test_demo4_76.py::test_fourthprogram PASSED                            [ 50%]
+    --> test_demo4_76.py::test_CreditCard2 XPASS                               [ 75%]
+        test_demo4_76.py::test_CreditCard3 SKIPPED (unconditional skip)        [100%]

@@ -1,0 +1,78 @@
+Scenario 1:
+    When you want to run the test, before that you can load the data using the fixture, and you can pass the data from fixture to your actual test.
+    DATA ---> FIXTURE ---> TEST_CASE/TEST_METHOD
+
+    In this scenario we can understand that,
+    Fixture is not only to run pre-request it will also help you to load the data, that also pre-request right.
+
+    When ever we are loading data from the fixture it is mandatory to pass the fixture name in the test method.
+    Ex:
+
+     ---> conftest.py
+        @pytest.fixture()
+        def dataLoad():
+            print("User profile data is being created")
+            return ["Varun","Paladugula","varunpaladugula.com"]
+
+     ---> test_fixtureData1_79.py
+        @pytest.mark.usefixture('dataLoad')
+        class TestExample2:
+            def test_editProfile(self,dataLoad):
+                print(dataLoad)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+INTERVIEW QUESTION:: In what scenario, you will be forced to pass the fixture name in test method, through you have declared globally???
+Ans: Basically when we declared globally it is no need to pass the fixture name into the method as an argument but
+    when we are returning something then we need to forcefully pass the fixture name as the argument to the method through the fixture is globally available.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Ex: 1
+    py.test test_fixturesData1_79.py -v -s
+
+    ---> test_fixturesData1_79.py
+    @pytest.mark.usefixtures('dataLoad')
+    class TestExample2:
+        def test_editProfile(self,dataLoad):
+            print(dataLoad)
+
+    ---> conftest.py
+    @pytest.fixture()
+    def dataLoad():
+        print("User profile data is being created")
+        return ["Varun","Paladugula","varunpaladugula.com"]
+
+    Output:
+    test_fixturesData1_79.py::TestExample2::test_editProfile
+    User profile data is being created
+    ['Varun', 'Paladugula', 'varunpaladugula.com']
+    PASSED
+
+===================================================================== 1 passed in 0.01s ================================
+
+Ex: 2
+    py.test test_fixturesData1_79.py -v -s
+
+    ---> test_fixturesData1_79.py
+    @pytest.mark.usefixtures('dataLoad')
+    class TestExample2:
+        def test_editProfile(self,dataLoad):
+            print(dataLoad)
+            print(dataLoad[0])
+            print(dataLoad[1])
+            print(dataLoad[2])
+
+    ---> conftest.py
+    @pytest.fixture()
+    def dataLoad():
+        print("User profile data is being created")
+        return ["Varun","Paladugula","varunpaladugula.com"]
+
+    Output:
+    test_fixturesData1_79.py::TestExample2::test_editProfile
+    User profile data is being created
+    ['Varun', 'Paladugula', 'varunpaladugula.com']
+    Varun
+    Paladugula
+    varunpaladugula.com
+    PASSED
+===================================================================== 1 passed in 0.01s ================================
+

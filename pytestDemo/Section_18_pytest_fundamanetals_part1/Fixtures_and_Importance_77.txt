@@ -1,0 +1,68 @@
+Base concept of fixture is :: Used for Setup and Teardown process.
+
+Importance :
+    used mostly for:
+    1. Browser setups/ opening browsers
+    2. Setting up some data base instances
+    3. Creating some configuration properties
+    4. Environment variables
+    It's all like pre-request stuff
+
+
+Annotation should be:
+    ----------------
+    pytest.fixture()
+    -----------------
+
+    it will be written on anywhere but on top of the method/test case just like marks. then it will be treated as fixture.
+
+
+Q. Scenario how will the methods know about the fixture?
+    ---> so we need to pass the fixture method inside the test method as an argument so that fixture will execute.
+        this is how we will give connection between the test method and the fixture
+
+
+    Ex:1
+     py.test test_fixturedemo.py -v -s
+
+        def test_CreditCard1():
+            print("Credit1")
+
+        @pytest.fixture
+        def setup():
+            print("I will be executed first")
+
+        def test_testFixtureDemo(setup):
+            print("I will execute steps in fixtureDemo method")
+
+        Output:
+            test_fixturedemo.py::test_CreditCard1 Credit1
+            PASSED
+            test_fixturedemo.py::test_testFixtureDemo I will be executed first
+            I will execute steps in fixtureDemo method
+            PASSED
+
+     Ex: 2
+     py.test test_fixturedemo.py -v -s
+
+         def test_CreditCard1():
+            print("Credit1")
+
+
+        @pytest.fixture
+        def setup():
+            print("I will be executed first")
+            yield
+            print('I will be executing last')
+
+
+        def test_testFixtureDemo(setup):
+            print("I will execute steps in fixtureDemo method")
+
+        Output:
+        test_fixturedemo.py::test_CreditCard1 Credit1
+        PASSED
+        test_fixturedemo.py::test_testFixtureDemo I will be executed first
+        I will execute steps in fixtureDemo method
+        PASSED I will be executing last
+
