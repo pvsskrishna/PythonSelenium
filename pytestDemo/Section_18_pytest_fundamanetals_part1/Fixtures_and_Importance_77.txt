@@ -28,11 +28,11 @@ Q. Scenario how will the methods know about the fixture?
         def test_CreditCard1():
             print("Credit1")
 
-        @pytest.fixture
+        @pytest.fixture         ---> This is fixture
         def setup():
             print("I will be executed first")
 
-        def test_testFixtureDemo(setup):
+        def test_testFixtureDemo(setup):            ---> using that fixture here
             print("I will execute steps in fixtureDemo method")
 
         Output:

@@ -1,0 +1,55 @@
+# To write the code in pytest standard, all we need to do is just write code in the test method.
+Step1 :
+    1st bring all the imports from (Section_17_e2eTest)
+step 2:
+    write all the code under the test method
+
+    Execute it by changing the directory in terminal 1st and use the command
+        py.test test_e2eTestFramework_83.py
+
+        output:
+        ==================================================================== test session starts =====================================================================
+        platform win32 -- Python 3.13.7, pytest-8.4.2, pluggy-1.6.0
+        rootdir: C:\Users\varun\PycharmProjects\PythonSelenium\pytestDemo\Section_19_Framework_Design_Overview_SettingUpBrowser_invoking_Fixtures_part2
+        plugins: html-4.1.1, metadata-3.1.1
+        collected 1 item
+
+        test_e2eTestFramework_83.py
+        DevTools listening on ws://127.0.0.1:52683/devtools/browser/45aced76-1f24-48b3-a0c0-c1cf0f6d078b
+        [13972:1608:1027/183256.811:ERROR:google_apis\gcm\engine\registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT
+        .                                                                                                                           [100%]
+
+        ===================================================================== 1 passed in 26.30s =====================================================================
+
+Step 3: Now making the browser dynamic, by not keeping the browser name statick.
+    So, to achieve that we need "conftest.py" file
+    in coftest.py file 1st configure the fixture and remove the browser calling in test method.
+
+        conftest.py file:
+        ------------------
+        @pytest.fixture(scope="function")
+        def browserInstance():
+            service_obj = Service(ChromeDriverManager().install()) #Instead of path to the driver we are placing this "ChromeDriverManager().install()" to staty updated
+            chrome_options = webdriver.ChromeOptions()
+            chrome_options.add_argument("--start-maximized")
+            driver = webdriver.Chrome(service = service_obj,options=chrome_options)
+
+            yield driver
+
+        test_e2eTestFramework_83.py
+        ---------------------------
+
+        def test_e2e(browserInstance):
+        driver = browserInstance
+
+        url = r"https://rahulshettyacademy.com/angularpractice/"
+        driver.get(url)
+        .
+        .
+        .
+
+        In the above conftest.py file fixture is returning the driver from yield and that returned value is storing in the driver object "driver = browserInstance()"
+        NOTE: Only fixtures are allowed in the functions/test methods as arguments
+        Ex: def test_e2e(browserInstance):
+
+Step 4:

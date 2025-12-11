@@ -1,0 +1,146 @@
+selenium by using python programming lang.
+===================================
+*python should be completed 
+*selenium is only for testing students(software testing course)
+*selenium is for both freshers and experience students.
+*working employees also.
+
+syllabus:
+=======
+1.introduction of selenium
+2.history of selenium
+3.selenium flavous
+4.how to launch empty browser
+(chrome, firefox, edge)
+5.webdriver methods
+    -->entering url method
+    -->closing browser methods
+    -->minimize, maximize, full screen window methods
+    -->verification properties
+    -->refresh, forward, backward actions
+6.locators
+    (id, name, class name, tag name, link text, partial link text, css, xpath)
+7.web element methods
+8.automating drop-down(standard drop down)
+9.action chains class method
+10.handling keyboard, scrolling action
+11.automating non-standard drop-down
+12.find_elements methods
+13.handling frames
+14.handling popups
+15.taking screenshot
+16.assert
+17.data driven 
+18.synchronization
+19.pytest
+20.pom
+21.hybrid framework
+22.github
+==========================================================================================================================================
+automation: it is a set of instruction/steps to perform automatically is called as automation.
+slenium: it is a tool/software which is used to perform automation. 
+python: is a programming lang which is used to write set of instruction which need to be do automatically.
+
+there are 3 types of application are present,
+------------------------------------------------------
+1.standalone/desktop application:
+-------------------------------------------
+*any application which we can access without opening browser, without entering url, without internet connection, without server
+then those applications are called as standalone application.
+example: paint, notepad, ms-office , calculator, alram, clock, flashlight, calender, etc..
+------------
+2.client-server/mobile application:
+--------------------------------------------
+*there are 2 application will be present that is client and server application.
+*client application will interact with server application and required information.
+example: whats app, instagram, gamil, facebook, twitter, etc..
+------------
+3.web based application:
+-------------------------------
+*any application which we can access by opening the browser, entering url, with internet, withserver connection then those application
+are called as web based application.
+example:
+-----------
+www.fb.com, www.student.qspiders.com, www.instgram.com, etc..
+
+what is selenium?
+----------------------
+*selenium is a free and open source web-based autmation tool.
+(free--> anyone can download and use from google,
+open source--> the source code of selenium is freely available in google)
+*selenium will support multiple programming lang.
+(python, java, c#/.net, java script, r, go, etc..)
+*selenium will support multiple browsers.
+(chrome, edge, firefox, safari, etc.)
+*selenium will support multiple OS.
+(windows,mac, linux)
+*the official websit of selenium is
+https://www.selenium.dev/
+
+dis-advantages of selenium:
+------------------------------------
+*we can't automate client-server and stand alone application.
+*we can't automate OTP, captch, image, animation, sub-title, audio, video, i'm not a robot, etc..
+
+history of selenium
+-------------------------
+*selenium was developed by Jason Huggins in a year 2004 in a thought works company as a internal tool.
+*later he joined to Google in a year 2007, then Google acquired selenium and the current owner is google.
+====================================================================================================
+
+falvours/types of selenium:
+-----------------------------------
+*there are 4 types of selenium is present,
+1.selenium IDE(integerated development environement)
+2.selenium RC(remote control)
+3.selenium webdriver
+4.selenium grid
+
+1.selenium IDE:
+--------------------
+*it  will do simple record-and-playback of interactions with the browser.
+
+2.selenium webdriver:
+-----------------------------
+*a updated version of selenium RC is selenium webdriver
+*the latest version of selenium is selenium4.
+
+selenium webdriver architecture diagram
+-----------------------------------------------------
+
+eplination:
+---------------
+*a Test Engineer will write set of instruction/script by using a programming lang is called as client/lang binding.
+*a set ofinstruction will perform automatically on  browser by using selenium web-driver.
+*a selenium webdriver will follow W3C protocol(World Wide Web Consortium).
+
+3.selenium grid
+--------------------
+*the tests against a vast combination of browsers/OS, then you want to use Selenium Grid
+
+========================================================================================================
+selenium installation:
+---------------------------
+-->install latest version of python 
+-->install pyharm community edition
+https://www.jetbrains.com/pycharm/download/?section=windows --> click on download button
+-->open pycharm and create a new project --> give project name as "E20Batch"
+-->install selenium
+1st option to install selenium
+(click on 4 lines on top left corner --> click on settings --> click on python --> click on interpreter --> click on + --> search for selenium 
+--> click on instal package button --> wait for 1/2 minutes --> click on close --> close --> again click on 4 lines on top left corner 
+--> click on settings --> click on python --> no installed selenium will display.)
+2nd option to install selenium
+(click on terminal button on left bottm --> type "pip install selenium" --> now selenium will install
+
+
+
+
+
+
+
+
+
+
+
+	

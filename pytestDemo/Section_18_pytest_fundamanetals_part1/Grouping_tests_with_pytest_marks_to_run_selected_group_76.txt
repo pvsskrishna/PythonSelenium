@@ -8,7 +8,7 @@ Command 6:
 
     Below is the syntax to mark the test case
     ---------------------
-    pytest.mark.marmName
+    pytest.mark.markName
     ---------------------
 
     Ex:

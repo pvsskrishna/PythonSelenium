@@ -44,7 +44,7 @@ Scenario 1:
         PASSED
 
 Scenario 2:
-    Multiple values in one single run:
+   * Multiple values in one single run:
 
     If we want to provide multiple data and specific data only for a particular dataset iteration, we can define it as shown below.
     This ensures that the given data is used only in that specific iteration.
@@ -92,4 +92,4 @@ Scenario 2:
         PASSED
 
 
-        Here it printed all the 0 index values from all data sets
+        " Here it printed all the 0 index values from all data sets "

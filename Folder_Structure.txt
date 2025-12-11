@@ -1,0 +1,16 @@
+Your framework directory structure usually looks like:
+=======================================================
+
+project/
+    tests/
+    pages/
+    utils/
+    data/
+    drivers/
+    reports/
+    screenshots/
+    logs/
+    conftest.py
+    pytest.ini
+    requirements.txt
+    .gitignore

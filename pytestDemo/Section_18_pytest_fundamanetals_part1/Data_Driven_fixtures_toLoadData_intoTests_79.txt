@@ -22,7 +22,7 @@ Scenario 1:
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 INTERVIEW QUESTION:: In what scenario, you will be forced to pass the fixture name in test method, through you have declared globally???
 Ans: Basically when we declared globally it is no need to pass the fixture name into the method as an argument but
-    when we are returning something then we need to forcefully pass the fixture name as the argument to the method through the fixture is globally available.
+    when we are returning something then we need to forcefully pass the fixture name as the argument to the method though the fixture is globally available.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Ex: 1

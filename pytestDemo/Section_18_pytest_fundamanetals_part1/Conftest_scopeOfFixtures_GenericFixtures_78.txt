@@ -52,6 +52,8 @@ Scenario 2:
     -----------------------------------------
 
     Ex:
+        test_fixturedemo1_78.py
+
         @pytest.mark.usefixtures("setup")
         class TestExample:
             def test_fixtureDemoMethod1(self):
