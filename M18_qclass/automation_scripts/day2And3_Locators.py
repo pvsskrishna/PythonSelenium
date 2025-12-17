@@ -405,7 +405,7 @@ sample html code:
 1.tag name      2.attribute1                    attribute2  attribute3   3.text
 """
 """
-assignment:
+Assignment-2:
 -----------
 launch --> https://demowebshop.tricentis.com/ --> click on register link --> enter values for 
 all the fields and register --> click on logout link --> click on login link --> enter un&pwd 

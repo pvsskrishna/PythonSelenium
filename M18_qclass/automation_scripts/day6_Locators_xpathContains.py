@@ -7,8 +7,10 @@ constructor.
 *each browser specific class should be import from below statement.
     from selenium.webdriver import BrowserClassName
 """
+from operator import contains
 from time import sleep
 from webbrowser import Chrome
+
 from selenium.webdriver.common.by import By
 
 """
@@ -404,14 +406,14 @@ sample html code:
 1.tag name      2.attribute1                    attribute2  attribute3   3.text
 """
 """
-Assignment:1
+assignment:
 -----------
 launch --> https://demowebshop.tricentis.com/ --> click on register link --> enter values for 
 all the fields and register --> click on logout link --> click on login link --> enter un&pwd 
 login  
 """
 #####################################################################################################
-#15/12/2025 ---> Day4
+#15/12/2025
 #5.link text
 """
 *link text locator will work only for a text present in <a> tag (or) <span> tag inside <a>
@@ -545,9 +547,263 @@ html
             |__input -->2 (UN4)
 """
 """
-Assignment-2
------------
+assignment2
+------------
 launch --> https://services2.passportindia.gov.in/forms/login --> click on register now link
 -->select radio CPV Delhi--> enter full name, email, select no radio button --> enter login id
 , password and click on signin button.
 """
+###############################################################################################
+#16/12/2025
+"""
+element                 absolute xpath
+=======                 ==============
+UN1                     html/body/div[1]/input[1]
+UN2                     html/body/div[1]/input[2]
+UN3                     html/body/div[2]/input[1]
+UN4                     html/body/div[2]/input[2]
+UN1, UN2                html/body/div[1]/input
+UN3, UN4                html/body/div[2]/input
+UN1, UN3                html/body/div/input[1]
+UN2, UN4                html/body/div/input[2]
+UN1, UN2, UN3, UN4      html/body/div/input
+UN1, UN4                html/body/div[1]/input[1] | html/body/div[2]/input[2]
+UN2, UN3                html/body/div[1]/input[2] | html/body/div[2]/input[1]
+"""
+#drawbck: always it will traverse from parent to its own child
+#         it is very lengthy
+
+"""
+element                 relative xpath
+=======                 ==============
+UN1                     //div[1]//input[1]
+UN2                     //div[1]//input[2]
+UN3                     //div[2]//input[1]
+UN4                     //div[2]//input[2]
+UN1, UN2                //div[1]//input
+UN3, UN4                //div[2]//input
+UN1, UN3                //div//input[1]
+UN2, UN4                //div//input[2]
+UN1, UN2, UN3, UN4      //div//input (or) //input
+UN1, UN4                //div[1]//input[1] | //div[2]//input[2] 
+UN2, UN3                //div[1]//input[2] | //div[2]//input[1] 
+"""
+"""
+what is the difference b/w absolute xpath and relative xpath
+************************************************************
+    absolute xpath                      relative xpath
+    ==============                      ===============
+*indicated by single forward slash(/)   *indicated by double forward slash(//)
+*/ -> it will traverse from parent to   *// -> it will traverse from parent to 
+its own child                             any child
+*xpath is very lengthy                  *xpath is short 
+"""
+
+"""
+xpath by attribute:
+===================
+*inspecting an element by specifying attribute in xpath is called as xpath by attribute.
+
+sample html code:
+-----------------
+<a   href="https://www.gmail.com"   id="a1"   name="n1"> Gmail </a>
+              |                        |          |
+          attribute1              attribute2   attribute3
+
+syntax:
+-------
+//tagname[@attribute_name = 'attribute_value']
+
+example:
+--------
+//a[@href='https://www.gmail.com']
+//a[@id='a1']
+//a[@name='n1']
+
+xpath to inspect mobile number in goibibo
+//input[@name='phone']
+xpath to inspect search button
+//a[@class='primaryBtn font24 latoBold widgetSearchBtn ']
+xpath to inspect signin button in swiggy
+//a[@class='_5-C04']
+
+xpath by group by index:
+========================
+*if xpath is matches with multiple elements to get the particular element then we go
+xpath by group by index.
+*index will starts from 1.
+*write complete xpath in round brackets() and write index in square brackets[]
+
+syntax:
+-------
+(xpath)[index]
+
+xpath to inspect group tours 
+(//a[@href='https://group.gtholidays.in/'])[1]
+xpath to inspect mobile number in goibibo
+(//input[@type='text'])[5]
+//a[@href="https://www.decathlon.in/shop/decathlon-fitness"]
+
+xpath by text() function:
+=========================
+*inspecting and element by specifying text in xpath is called as xpath by text
+
+sample html code:
+-----------------
+<a   href="https://www.gmail.com"   id="a1"   name="n1"> Gmail </a>
+                                                            \\
+syntax:
+-------                                                            text
+//tagname[text() = 'text_value']
+        (or)
+//tagname[. = 'text_value']
+
+example:
+--------
+//a[text() = 'Gmail']
+    (or)
+//a[.='Gmail']
+
+xpath to inspect search buses in goibibo
+//button[text()='Search buses']
+        (or)
+//button[.='Search buses']
+xpath to inspect gym & fitness in decathlon
+//span[.='Gym & Fitness']
+"""
+#############################################################################################
+#17/12/2025 ---> Day6
+#assignment2 solution
+"""
+driver = Chrome(options=o)
+driver.get("https://services2.passportindia.gov.in/forms/login")
+driver.maximize_window()
+driver.find_element(By.XPATH, "//div[text()='Register Now!']").click()
+sleep(2)
+driver.find_element(By.XPATH, "//div[text()='CPV Delhi']").click()
+driver.find_element(By.XPATH, "(//input[@type='text'])[2]").send_keys("selenium")
+driver.find_element(By.XPATH, "(//input[@type='text'])[3]").send_keys("selenium@gmail.com")
+driver.find_element(By.XPATH, "//div[text()='No']").click()
+driver.find_element(By.XPATH, "(//input[@type='text'])[4]").send_keys("seleniumautomation")
+driver.find_element(By.XPATH, "(//input[@type='password'])[2]").send_keys("seLEnium@123")
+driver.find_element(By.XPATH, "//div[text()='Sign Up']").click()
+"""
+################################################################################################
+"""
+handling partially dynamic element:
+-----------------------------------
+*in an element some portion is static and some portion is dynamic is called as partially
+dynamic element.
+*to handle partially dynamic element we use contains().
+
+when to go contains() function?
+-------------------------------
+*to handle partially dynamic element.
+*if text value/attribute value is very lengthy.
+*if text value begins/ends with spaces.
+*if text contains &nbsp
+
+contains with attribute syntax:
+-------------------------------
+//tagname[contains(@attribute_name , 'attribute_value')]
+
+contains with text:
+-------------------
+//tagname[contains(. , 'text_value')]
+
+xpath to inspect windows version
+(//span[contains(., 'Get Windows')])[1]
+
+xpath to inspect python version in python.org
+(//a[contains(., 'Download Python')])[2]
+
+xpath to inspect fruits and vegetables in zepto
+(//span[contains(@class , 'Label-sc-15v1nk5-0')])[9]
+
+xpath to inspect mobile in amazon
+//a[contains(@href, '/mobile-phones/')]
+
+xpath to inspect power bank in dunnzo
+//h5[contains(., '20000 mAh')]
+
+xpath to inspect admissions in jain.com
+(//a[contains(., 'Admissions')])[3]
+
+xpath to inspect books in demo webshop
+(//a[contains(.,'Books')])[1]
+"""
+"""
+assignment3:
+------------
+launch https://www.crocs.in/ --> click on register icon --> click on signin/register link
+--> click on create account --> enter values for all mandatory fields and click on register button
+
+send assignment to below mail-id:
+---------------------------------
+assignmentsql@gmail.com
+"""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

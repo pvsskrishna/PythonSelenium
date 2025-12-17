@@ -551,3 +551,120 @@ launch --> https://services2.passportindia.gov.in/forms/login --> click on regis
 -->select radio CPV Delhi--> enter full name, email, select no radio button --> enter login id
 , password and click on signin button.
 """
+###############################################################################################
+#16/12/2025 ---> Day5
+"""
+element                 absolute xpath
+=======                 ==============
+UN1                     html/body/div[1]/input[1]
+UN2                     html/body/div[1]/input[2]
+UN3                     html/body/div[2]/input[1]
+UN4                     html/body/div[2]/input[2]
+UN1, UN2                html/body/div[1]/input
+UN3, UN4                html/body/div[2]/input
+UN1, UN3                html/body/div/input[1]
+UN2, UN4                html/body/div/input[2]
+UN1, UN2, UN3, UN4      html/body/div/input
+UN1, UN4                html/body/div[1]/input[1] | html/body/div[2]/input[2]
+UN2, UN3                html/body/div[1]/input[2] | html/body/div[2]/input[1]
+"""
+#drawbck: always it will traverse from parent to its own child, it is very lengthy
+
+"""
+element                 relative xpath
+=======                 ==============
+UN1                     //div[1]//input[1]
+UN2                     //div[1]//input[2]
+UN3                     //div[2]//input[1]
+UN4                     //div[2]//input[2]
+UN1, UN2                //div[1]//input
+UN3, UN4                //div[2]//input
+UN1, UN3                //div//input[1]
+UN2, UN4                //div//input[2]
+UN1, UN2, UN3, UN4      //div//input (or) //input
+UN1, UN4                //div[1]//input[1] | //div[2]//input[2] 
+UN2, UN3                //div[1]//input[2] | //div[2]//input[1] 
+"""
+"""
+what is the difference b/w absolute xpath and relative xpath
+************************************************************
+    absolute xpath                      relative xpath
+    ==============                      ===============
+*indicated by single forward slash(/)   *indicated by double forward slash(//)
+*/ -> it will traverse from parent to   *// -> it will traverse from parent to 
+its own child                             any child
+*xpath is very lengthy                  *xpath is short 
+"""
+
+"""
+xpath by attribute:
+===================
+*inspecting an element by specifying attribute in xpath is called as xpath by attribute.
+
+sample html code:
+-----------------
+<a   href="https://www.gmail.com"   id="a1"   name="n1"> Gmail </a>
+              |                        |          |
+          attribute1              attribute2   attribute3
+
+syntax:
+-------
+//tagname[@attribute_name = 'attribute_value']
+
+example:
+--------
+//a[@href='https://www.gmail.com']
+//a[@id='a1']
+//a[@name='n1']
+
+xpath to inspect mobile number in goibibo
+//input[@name='phone']
+xpath to inspect search button
+//a[@class='primaryBtn font24 latoBold widgetSearchBtn ']
+xpath to inspect signin button in swiggy
+//a[@class='_5-C04']
+
+xpath by group by index:
+========================
+*if xpath is matches with multiple elements to get the particular element then we go
+xpath by group by index.
+*index will starts from 1.
+*write complete xpath in round brackets() and write index in square brackets[]
+
+syntax:
+-------
+(xpath)[index]
+
+xpath to inspect group tours 
+(//a[@href='https://group.gtholidays.in/'])[1]
+xpath to inspect mobile number in goibibo
+(//input[@type='text'])[5]
+//a[@href="https://www.decathlon.in/shop/decathlon-fitness"]
+
+xpath by text() function:
+=========================
+*inspecting and element by specifying text in xpath is called as xpath by text
+
+sample html code:
+-----------------
+<a   href="https://www.gmail.com"   id="a1"   name="n1"> Gmail </a>
+                                                            \\
+syntax:
+-------                                                            text
+//tagname[text() = 'text_value']
+        (or)
+//tagname[. = 'text_value']
+
+example:
+--------
+//a[text() = 'Gmail']
+    (or)
+//a[.='Gmail']
+
+xpath to inspect search buses in goibibo
+//button[text()='Search buses']
+        (or)
+//button[.='Search buses']
+xpath to inspect gym & fitness in decathlon
+//span[.='Gym & Fitness']
+"""
