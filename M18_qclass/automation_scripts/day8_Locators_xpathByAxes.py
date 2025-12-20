@@ -7,8 +7,10 @@ constructor.
 *each browser specific class should be import from below statement.
     from selenium.webdriver import BrowserClassName
 """
+from operator import contains
 from time import sleep
 from webbrowser import Chrome
+
 from selenium.webdriver.common.by import By
 
 """
@@ -404,14 +406,14 @@ sample html code:
 1.tag name      2.attribute1                    attribute2  attribute3   3.text
 """
 """
-Assignment:1
+assignment:
 -----------
 launch --> https://demowebshop.tricentis.com/ --> click on register link --> enter values for 
 all the fields and register --> click on logout link --> click on login link --> enter un&pwd 
 login  
 """
 #####################################################################################################
-#15/12/2025 ---> Day4
+#15/12/2025
 #5.link text
 """
 *link text locator will work only for a text present in <a> tag (or) <span> tag inside <a>
@@ -545,14 +547,14 @@ html
             |__input -->2 (UN4)
 """
 """
-Assignment-2
------------
+assignment2
+------------
 launch --> https://services2.passportindia.gov.in/forms/login --> click on register now link
 -->select radio CPV Delhi--> enter full name, email, select no radio button --> enter login id
 , password and click on signin button.
 """
 ###############################################################################################
-#16/12/2025 ---> Day5
+#16/12/2025
 """
 element                 absolute xpath
 =======                 ==============
@@ -568,7 +570,8 @@ UN1, UN2, UN3, UN4      html/body/div/input
 UN1, UN4                html/body/div[1]/input[1] | html/body/div[2]/input[2]
 UN2, UN3                html/body/div[1]/input[2] | html/body/div[2]/input[1]
 """
-#drawbck: always it will traverse from parent to its own child, it is very lengthy
+#drawbck: always it will traverse from parent to its own child
+#         it is very lengthy
 
 """
 element                 relative xpath
@@ -599,30 +602,30 @@ its own child                             any child
 """
 xpath by attribute:
 ===================
-    *inspecting an element by specifying attribute in xpath is called as xpath by attribute.
-    
-    sample html code:
-    -----------------
-    <a   href="https://www.gmail.com"   id="a1"   name="n1"> Gmail </a>
-                  |                        |          |
-              attribute1              attribute2   attribute3
-    
-    syntax:
-    -------
-    //tagname[@attribute_name = 'attribute_value']
-    
-    example:
-    --------
-    //a[@href='https://www.gmail.com']
-    //a[@id='a1']
-    //a[@name='n1']
-    
-    xpath to inspect mobile number in goibibo
-    //input[@name='phone']
-    xpath to inspect search button
-    //a[@class='primaryBtn font24 latoBold widgetSearchBtn ']
-    xpath to inspect signin button in swiggy
-    //a[@class='_5-C04']
+*inspecting an element by specifying attribute in xpath is called as xpath by attribute.
+
+sample html code:
+-----------------
+<a   href="https://www.gmail.com"   id="a1"   name="n1"> Gmail </a>
+              |                        |          |
+          attribute1              attribute2   attribute3
+
+syntax:
+-------
+//tagname[@attribute_name = 'attribute_value']
+
+example:
+--------
+//a[@href='https://www.gmail.com']
+//a[@id='a1']
+//a[@name='n1']
+
+xpath to inspect mobile number in goibibo
+//input[@name='phone']
+xpath to inspect search button
+//a[@class='primaryBtn font24 latoBold widgetSearchBtn ']
+xpath to inspect signin button in swiggy
+//a[@class='_5-C04']
 
 xpath by group by index:
 ========================
@@ -668,3 +671,293 @@ xpath to inspect search buses in goibibo
 xpath to inspect gym & fitness in decathlon
 //span[.='Gym & Fitness']
 """
+#############################################################################################
+#17/12/2025
+#assignment2 solution
+"""
+driver = Chrome(options=o)
+driver.get("https://services2.passportindia.gov.in/forms/login")
+driver.maximize_window()
+driver.find_element(By.XPATH, "//div[text()='Register Now!']").click()
+sleep(2)
+driver.find_element(By.XPATH, "//div[text()='CPV Delhi']").click()
+driver.find_element(By.XPATH, "(//input[@type='text'])[2]").send_keys("selenium")
+driver.find_element(By.XPATH, "(//input[@type='text'])[3]").send_keys("selenium@gmail.com")
+driver.find_element(By.XPATH, "//div[text()='No']").click()
+driver.find_element(By.XPATH, "(//input[@type='text'])[4]").send_keys("seleniumautomation")
+driver.find_element(By.XPATH, "(//input[@type='password'])[2]").send_keys("seLEnium@123")
+driver.find_element(By.XPATH, "//div[text()='Sign Up']").click()
+"""
+################################################################################################
+"""
+handling partially dynamic element:
+-----------------------------------
+*in an element some portion is static and some portion is dynamic is called as partially
+dynamic element.
+*to handle partially dynamic element we use contains().
+
+when to go contains() function?
+-------------------------------
+*to handle partially dynamic element.
+*if text value/attribute value is very lengthy.
+*if text value begins/ends with spaces.
+*if text contains &nbsp
+
+contains with attribute syntax:
+-------------------------------
+//tagname[contains(@attribute_name , 'attribute_value')]
+
+contains with text:
+-------------------
+//tagname[contains(. , 'text_value')]
+
+xpath to inspect windows version
+(//span[contains(., 'Get Windows')])[1]
+
+xpath to inspect python version in python.org
+(//a[contains(., 'Download Python')])[2]
+
+xpath to inspect fruits and vegetables in zepto
+(//span[contains(@class , 'Label-sc-15v1nk5-0')])[9]
+
+xpath to inspect mobile in amazon
+//a[contains(@href, '/mobile-phones/')]
+
+xpath to inspect power bank in dunnzo
+//h5[contains(., '20000 mAh')]
+
+xpath to inspect admissions in jain.com
+(//a[contains(., 'Admissions')])[3]
+
+xpath to inspect books in demo webshop
+(//a[contains(.,'Books')])[1]
+"""
+"""
+assignment3:
+------------
+launch https://www.crocs.in/ --> click on register icon --> click on signin/register link
+--> click on create account --> enter values for all mandatory fields and click on register button
+
+send assignment to below mail-id:
+---------------------------------
+assignmentsql@gmail.com
+"""
+################################################################################################
+#18/12/2025
+"""
+handling completely dynamic element:
+------------------------------------
+*an element is completely changing then it is called as completely dynamic element.
+*we can handle in 2 ways,
+    1.xpath by traversing
+    2.xpath by siblings
+
+1.xpath by traversing:
+======================
+*navigating from one element to another element is called as traversing.
+*traversing is classified into 2 types,
+1.forward traversing
+2.backward traversing
+
+1.forward traversing:
+---------------------
+*navigating from parent to child element by using / (or) // is called as forward traversing.
+
+2.backward traversing:
+----------------------
+*navigating from child to parent element by using /.. (or) //ancestor is called as backward traversing.
+
+how to handle completely dynamic element:
+=========================================
+step1: inspect static element 
+step2: navigate from static element to common parent(common parent means it should be a parent of
+both static and dynamic element)
+step3: navigate from common parent to dynamic element
+"""
+#sample html code
+"""
+<html>
+          <body>		
+	        <table border=3>
+	             <tr>
+                    <td>sl.no</td>
+                    <td>certificate</td>
+                    <td>movie name</td>
+                    <td>collection</td>
+                    <td>rating</td>
+	             </tr>
+	             <tr>
+                    <td>1</td>
+                    <td>U</td>
+                    <td>Kantara</td>
+                    <td>800CR</td>
+                    <td>*****</td>
+	            </tr>	
+	             <tr>
+                    <td>2</td>
+                    <td>U/A</td>
+                    <td>Pushpa2</td>
+                    <td>80CR</td>
+                    <td>**</td>
+	            </tr>
+	             <tr>
+                    <td>3</td>
+                    <td>U/A</td>
+                    <td>KGF</td>
+                    <td>100CR</td>
+                    <td>***</td>
+	            </tr>
+	             <tr>
+                    <td>4</td>
+                    <td>A</td>
+                    <td>Coolie</td>
+                    <td>300CR</td>
+                    <td>****</td>
+	            </tr>
+	        </table>
+          </body>	
+</html>
+"""
+################################################################################################
+"""
+xpath to inspect collection of kantara movie
+(//td[.='Kantara']/..//td)[4]
+
+xpath to inspect ratings of pushpa2 movie
+(//td[.='Pushpa2']/..//td)[5]
+
+xpath to inspect sl.no of kgf movie
+(//td[.='KGF']/..//td)[1]
+
+xpath to inspect stock price of nifty bank
+(//p[.='NIFTY BANK']/..//h3)[2]
+
+xpath to inspect trp of sun tv channel
+(//td[contains(., 'Sun TV')]/..//td)[3]	
+
+xpath to inspect version of python 
+(//p[.='Python']/..//a)[1]
+"""
+##############################################################################################
+"""
+assignment question:
+====================
+https://www.accuweather.com/en/in/india-weather
+inspect weather of Bengaluru
+
+https://www.goodreturns.in/gold-rates/
+inspect price of 22K gold
+"""
+#################################################################################################
+#19/12/2025 ---Day8
+"""
+2.xpath by siblings
+===================
+*a child under a common parent is called as siblings.
+*is used to navigate from one child element to another child element.
+*there are 2 types of sibling tags,
+1.following sibling:
+********************
+*traversing from a child element(static) to below(younger)siblings is called as following sibling.
+    syntax:-
+    ========
+    //following-sibling::tag-name
+
+2.preceding sibling:
+********************
+*traversing from a child element(static) to above(elder)siblings is called as preceding sibling.
+    syntax:-
+    ========
+    //preceding-sibling::tag-name
+
+sample html-code:
+*****************
+                    preceding sibling
+<tr>                    ^
+    <td>1</td>          |   -->2
+    <td>U/A</td>        |   -->1
+    <td>Kantara</td>---->static-element
+    <td>100CR</td>      |   -->1    
+    <td>kan</td>        |   -->2
+    <td>*****</td>      |   -->3
+</tr>                   V
+                    following sibling
+
+steps to follow siblings
+========================
+step1: inspect static element
+step2: check for static element dynamic element should be sibling
+
+#xpath to inspect kantara collection in demo website
+(//td[.='Kantara']//following-sibling::td)[1]
+#xpath to inspect pushpa sl.no in demo website
+(//td[.='Pushpa']//preceding-sibling::td)[1]
+#xpath to inspect stock price of nifty next 50 in nse
+(//p[.='NIFTY NEXT 50'])[2]//following-sibling::h3
+#xpath to inspect stable version of python
+(//p[.='Python']//following-sibling::p)[1]//a
+#xpath to inspect bengaluru weather
+//span[.='Bengaluru']//following-sibling::span
+#xpath to inspect price of 24k gold
+//p[contains(., '24K')]/..//following-sibling::div//span
+
+ancestor:
+---------
+*navigate from child to any parent then we go ancestor.
+
+syntax:
+-------
+    //ancestor::tagname
+
+#xpath to navigate from pushpa to html
+//td[.='Pushpa']//ancestor::html
+#xpath to navigate from pushpa to tbody
+//td[.='Pushpa']//ancestor::tbody
+#xpath to navigate from pushpa to own parent
+//td[.='Pushpa']//ancestor::tr
+"""
+#xpath by axes
+#following-sibling, preceding-sibling, ancestor are called as xpath by axes
+#####################################################################################################
+"""
+assignment
+----------
+https://www.nseindia.com/
+inspect stock price of NIFTY NEXT 50
+
+xpath to inspect no. of likes for a any video in youtube
+xpath to inspect no. of subscribers of any channel in youtube
+xpath to inspect price of any product in amazon
+"""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
