@@ -7,7 +7,13 @@ constructor.
 *each browser specific class should be import from below statement.
     from selenium.webdriver import BrowserClassName
 """
+from operator import contains
+from time import sleep
 from webbrowser import Chrome
+
+import pytest
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
 
 """
 class Chrome:
@@ -28,7 +34,7 @@ c = Chrome()            #object creation
 #ws to launch empty edge  browser
 # from selenium.webdriver import Edge
 # e = Edge()
-###########################################################################################
+###########################################################################################3
 #program to with stand a chrome browser for long duration
 """
 *as per the latest version of selenium chrome browser will close automatically, if we
@@ -43,6 +49,11 @@ o.add_experimental_option("detach", True)
 
 driver = Chrome(options=o)
 """
+from selenium.webdriver import Chrome
+from selenium.webdriver import ChromeOptions
+
+o = ChromeOptions()
+o.add_experimental_option("detach", True)
 ##################################################################################################################
 #10/12/2025
 ###############################################################################################
@@ -114,7 +125,7 @@ driver.fullscreen_window()
 #   syntax: driver.back()
 #forward(): it used to click on forward arrow in the browser.
 #   syntax: driver.forward()
-#refresh(): it used to click on refresh icon in the browser.
+#refresh(): it used to cick on refresh icon in the browser.
 #   syntax: driver.refresh()
 
 #ws to perform backward, forward, refresh action in the browser.
@@ -207,14 +218,5135 @@ print(driver.page_source)
 #<html> ... </html>
 """
 ###############################################################################################
+#11/12/2025
+"""
+html:
+-----
+*html stands for hyper text markup language.
+*html is used to design and develop the webpages.
+*a webpage will be developed by html tags.
+*a keyword which is enclosed within angular brackets(<keyword>) is called as tags.
+*if we open any tag it is mandatory to close the tag(</keyword>).
+
+general structure of html:
+==========================
+<html>
+    <head>
+        <title> title of the webpage </title>
+    </head>
+    <body>
+        #all the components
+    </body>
+</html>
+
+steps to create a webpage:
+==========================
+step1: open notepad
+step2: type the html code and save with .html extension
+step3: select save as type and "all files" option
+"""
+"""
+<html>
+          <head>	
+                <title>E20 Selenium Batch</title>
+          </head>
+          <body bgcolor="pink">		
+         	Username:<input type="text" id="a1"><br/>	
+            Password:<input type="password" id="a2"><br/>
+            <input type="radio" name="n1">New User
+            <input type="radio" name="n2">Old User<br/>
+            <input type="checkbox" class="c1">I accept T&C**<br/>
+            <a href="https://www.gmail.com" class="c2">Forgotten Passwod</a><br/>
+            <img src="C:\\Users\\Hp\\Downloads\\selenium-image.png"><br/>
+            <input type="submit" value="Submit">
+            <input type="reset" value="Cancel">
+         </body>	
+</html>
+"""
+#########################################################################################################
+"""
+locators:
+---------
+*finding/inspecting/searching/locating the path of an element in a webpage is called
+as locators.
+*all locators are belongs to "By" clas
+
+why locators?
+-------------
+*before performing any action(entering, clicking, selecting,..) in a webpage first we 
+need to find the path of an element in a webpage because selenium is not a human it 
+doesn't know the path of element in a webpage. 
+
+types of locators:
+------------------
+1.id            5.link text
+2.name          6.partial link text
+3.class name    7.css selector
+4.tag name      8.xpath
+
+*to find an element in a webpage there are 2 methods are present,
+1.find_element()                2.find_elements()
+
+find_element():
+---------------
+*it is used to find single element in a webpage.
+*the return type of find_element() is web element.
+*if locator value matches with multiple element then it will return 1st element address.
+*if the locator value not matches with any element then it will return "NoSuchElementException".
+syntax: driver.find_element(locator_name, "locator_value")
+                                |
+                                |_By.ID, By.NAME, ...
+find_elements():
+----------------
+*it is used to find multiple elements in a webpage.
+"""
+
+#1.id
+#possiablity1: locator value matches with exactly 1 element
+"""
+driver = Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/demo.html")
+driver.maximize_window()
+#way1: find the element and storing address in a variable -> webelement
+username = driver.find_element(By.ID, 'a1')
+username.send_keys("selenium@gmail.com")
+                    (or)
+#way2: find the element and performing action on same line
+driver.find_element(By.ID, 'a1').send_keys("selenium@gmail.com")
+"""
+#possiablity2: if locator matches with multiple elements then it will return 1st element address
+"""
+driver = Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/demo.html")
+driver.maximize_window()
+driver.find_element(By.ID, "a1").send_keys("selenium@123")
+"""
+#possiablity3: locator values doesn't match with any element then it will throw "NoSuchElementException"
+"""
+driver = Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/demo.html")
+driver.maximize_window()
+driver.find_element(By.ID, "a10").send_keys("selenium@123")
+#NoSuchElementException
+"""
+#########################################################################################################
+#12/12/2025
+#ws to login into facebook.com
+"""
+driver = Chrome(options=o)
+driver.get("https://www.facebook.com/")
+driver.maximize_window()
+driver.find_element(By.ID, 'email').send_keys('selenium@gmail.com')
+driver.find_element(By.ID, 'pass').send_keys('selenium@123')
+driver.find_element(By.NAME, 'login').click()
+"""
+##############################################################################################
+#2.name
+#ws to search for python selenium videos in youtube.com
+"""
+driver = Chrome(options=o)
+driver.get("https://www.youtube.com/")
+driver.maximize_window()
+driver.find_element(By.NAME, "search_query").send_keys("python selenium")
+driver.find_element(By.CLASS_NAME, "ytSearchboxComponentSearchButton").click()
+"""
+##############################################################################################
+#3.class name
+#ws to search for shirts in myntra.com
+"""
+driver = Chrome(options=o)
+driver.get("https://www.myntra.com/")
+driver.maximize_window()
+driver.find_element(By.CLASS_NAME, "desktop-searchBar").send_keys("shirts")
+driver.find_element(By.CLASS_NAME, "desktop-submit").click()
+"""
+#ws to search for movie in book my show
+"""
+driver = Chrome(options=o)
+driver.get("https://in.bookmyshow.com/explore/home/bengaluru")
+driver.maximize_window()
+driver.find_element(By.CLASS_NAME, "sc-1or3vea-15.bMjnfo").click()
+driver.find_element(By.CLASS_NAME, "sc-vuznvr-5.extnng").send_keys("Kantara")
+"""
+#ws to search for shirts in amazon
+"""
+driver = Chrome(options=o)
+driver.get("https://www.amazon.in/ref=nav_logo")
+driver.maximize_window()
+driver.find_element(By.CLASS_NAME, "nav-input.nav-progressive-attribute").send_keys("shirts")
+driver.find_element(By.ID, "nav-search-submit-button").click()
+"""
+##############################################################################################
+#4.tag name
+#ws to enter password in password text field
+"""
+driver = Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/demo.html")
+driver.maximize_window()
+driver.find_element(By.TAG_NAME, 'input').send_keys('selenium@123')
+"""
+
+"""
+way to inspect html code
+========================
+*Fn+F12 (or) F12
+*ctrl+shift+i
+*click on 3 dots on(:) top right corner --> click on more tools --> click on developer tools
+"""
+"""
+sample html code:
+=================
+*a html code will have 3 component,
+1.tag name: anything which is present after angular brackets(<tag_name)    
+2.attribute: LHS=RHS (LHS --> attribute name, RHS --> attribute value)     
+3.text: anything which is present before closing tag
+
+         attribute_name  attribute_value
+             /              /
+<  a        href="https://www.gmail.com"     id="a1"     name="n1" >  Gmail </a>
+   |                 |                          |           |           \
+1.tag name      2.attribute1                    attribute2  attribute3   3.text
+"""
+"""
+assignment:
+-----------
+launch --> https://demowebshop.tricentis.com/ --> click on register link --> enter values for 
+all the fields and register --> click on logout link --> click on login link --> enter un&pwd 
+login  
+"""
+#####################################################################################################
+#15/12/2025
+#5.link text
+"""
+*link text locator will work only for a text present in <a> tag (or) <span> tag inside <a>
+*both are case sensitive.
+*when the link text is very lengthy then we go partial link text.
+"""
+#ws to click on downloads, other lang exist and register now link in selenium.dev
+"""
+driver = Chrome(options=o)
+driver.get("https://www.selenium.dev/")
+driver.maximize_window()
+driver.find_element(By.LINK_TEXT, "Downloads").click()
+sleep(1)
+driver.find_element(By.LINK_TEXT, "other languages exist").click()
+sleep(1)
+driver.find_element(By.LINK_TEXT, "Register now!").click()
+"""
+#example on text present in other than <a> or <span> tag
+"""
+driver = Chrome(options=o)
+driver.get("https://blinkit.com/")
+driver.maximize_window()
+sleep(2)
+driver.find_element(By.LINK_TEXT, "Detect my location").click()
+"""
+#6.partial link text
+#ws to click on samsung phone in amazon.com
+"""
+driver = Chrome(options=o)
+driver.get("https://www.amazon.in/s?k=samsung+mobile+5g+phone&crid=3OFWOFG9GOEJA&sprefix=samsung+mobile%2Caps%2C267&ref=nb_sb_ss_mvt-t11-ranker_1_14")
+driver.maximize_window()
+sleep(2)
+driver.find_element(By.PARTIAL_LINK_TEXT, "Samsung Galaxy M06").click()
+"""
+##############################################################################################
+#7.css selector
+"""
+*css stands for cascading style sheet
+*css is used for decorating a webpage like font, size, color, image, animation, effects, etc..
+*in automation we will css expression.
+
+syntax of css expression:
+-------------------------
+tagname[attribute_name = 'attribute_value']
 
 
+         attribute_name  attribute_value
+             /              /
+<  a        href="https://www.gmail.com"     id="a1"     name="n1" >  Gmail </a>
+   |                 |                          |           |           \
+1.tag name      2.attribute1                    attribute2  attribute3   3.text
+
+example:
+--------
+a[href="https://www.gmail.com"] 
+a[id='a1']      (or)  a#a1
+a[name='n1']
+a[class='c1'] (or) a.c1
+
+steps to verify the css expression:
+***********************************
+step1: right click and inspect
+step2: press ctrl+f --> now find by string search field will appear
+step3: write css expression and press enter
+
+if expression is valid verify the below things:
+-----------------------------------------------
+*the count should display 1of1
+*element should be highlight
+*code should be highlight in yellow color 
+
+drawbacks:
+----------
+*we can't use text in css expression
+"""
+#wsto login to instgram.com
+"""
+driver = Chrome(options=o)
+driver.get("https://www.instagram.com/")
+driver.maximize_window()
+driver.find_element(By.CSS_SELECTOR, "input[name='username']").send_keys("selenium")
+driver.find_element(By.CSS_SELECTOR, "input[name='password']").send_keys("selenium@123")
+driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
+"""
+##############################################################################################
+#8.xpath
+"""
+*path of an element in html tree structure is called as xpath.
+*xpath is classified into 2 types
+1.absolute xpath:
+-----------------
+*it indicates by single forward slash(/)
+* (/) --> traverse from parent to its own child element. 
+2.relative xpath 
+----------------
+*it indicates by double forward slash(//)
+* (//) --> traverse from parent to any ch
+"""
+# sample html code:
+# -----------------
+"""
+<html>
+          <body>		
+	<div>
+	          UN1:<input type='text' id='a1'>	
+	          UN2:<input type='text' id='a2'>	
+	</div>
+	<div>
+	          UN3:<input type='text' id='a3'>	
+	          UN4:<input type='text' id='a4'>	
+	</div>
+         </body>	
+</html>
+"""
+#html tree
+"""
+html
+  |
+  |___body
+        |
+        |___div -->1
+        |   |
+        |   |__input -->1 (UN1) 
+        |   |
+        |   |__input -->2 (UN2)
+        |
+        |___div -->2
+            |
+            |__input -->1 (UN3)
+            |
+            |__input -->2 (UN4)
+"""
+"""
+assignment2
+------------
+launch --> https://services2.passportindia.gov.in/forms/login --> click on register now link
+-->select radio CPV Delhi--> enter full name, email, select no radio button --> enter login id
+, password and click on signin button.
+"""
+###############################################################################################
+#16/12/2025
+"""
+element                 absolute xpath
+=======                 ==============
+UN1                     html/body/div[1]/input[1]
+UN2                     html/body/div[1]/input[2]
+UN3                     html/body/div[2]/input[1]
+UN4                     html/body/div[2]/input[2]
+UN1, UN2                html/body/div[1]/input
+UN3, UN4                html/body/div[2]/input
+UN1, UN3                html/body/div/input[1]
+UN2, UN4                html/body/div/input[2]
+UN1, UN2, UN3, UN4      html/body/div/input
+UN1, UN4                html/body/div[1]/input[1] | html/body/div[2]/input[2]
+UN2, UN3                html/body/div[1]/input[2] | html/body/div[2]/input[1]
+"""
+#drawbck: always it will traverse from parent to its own child
+#         it is very lengthy
+
+"""
+element                 relative xpath
+=======                 ==============
+UN1                     //div[1]//input[1]
+UN2                     //div[1]//input[2]
+UN3                     //div[2]//input[1]
+UN4                     //div[2]//input[2]
+UN1, UN2                //div[1]//input
+UN3, UN4                //div[2]//input
+UN1, UN3                //div//input[1]
+UN2, UN4                //div//input[2]
+UN1, UN2, UN3, UN4      //div//input (or) //input
+UN1, UN4                //div[1]//input[1] | //div[2]//input[2] 
+UN2, UN3                //div[1]//input[2] | //div[2]//input[1] 
+"""
+"""
+what is the difference b/w absolute xpath and relative xpath
+************************************************************
+    absolute xpath                      relative xpath
+    ==============                      ===============
+*indicated by single forward slash(/)   *indicated by double forward slash(//)
+*/ -> it will traverse from parent to   *// -> it will traverse from parent to 
+its own child                             any child
+*xpath is very lengthy                  *xpath is short 
+"""
+
+"""
+xpath by attribute:
+===================
+*inspecting an element by specifying attribute in xpath is called as xpath by attribute.
+
+sample html code:
+-----------------
+<a   href="https://www.gmail.com"   id="a1"   name="n1"> Gmail </a>
+              |                        |          |
+          attribute1              attribute2   attribute3
+
+syntax:
+-------
+//tagname[@attribute_name = 'attribute_value']
+
+example:
+--------
+//a[@href='https://www.gmail.com']
+//a[@id='a1']
+//a[@name='n1']
+
+xpath to inspect mobile number in goibibo
+//input[@name='phone']
+xpath to inspect search button
+//a[@class='primaryBtn font24 latoBold widgetSearchBtn ']
+xpath to inspect signin button in swiggy
+//a[@class='_5-C04']
+
+xpath by group by index:
+========================
+*if xpath is matches with multiple elements to get the particular element then we go
+xpath by group by index.
+*index will starts from 1.
+*write complete xpath in round brackets() and write index in square brackets[]
+
+syntax:
+-------
+(xpath)[index]
+
+xpath to inspect group tours 
+(//a[@href='https://group.gtholidays.in/'])[1]
+xpath to inspect mobile number in goibibo
+(//input[@type='text'])[5]
+//a[@href="https://www.decathlon.in/shop/decathlon-fitness"]
+
+xpath by text() function:
+=========================
+*inspecting and element by specifying text in xpath is called as xpath by text
+
+sample html code:
+-----------------
+<a   href="https://www.gmail.com"   id="a1"   name="n1"> Gmail </a>
+                                                            \\
+syntax:
+-------                                                            text
+//tagname[text() = 'text_value']
+        (or)
+//tagname[. = 'text_value']
+
+example:
+--------
+//a[text() = 'Gmail']
+    (or)
+//a[.='Gmail']
+
+xpath to inspect search buses in goibibo
+//button[text()='Search buses']
+        (or)
+//button[.='Search buses']
+xpath to inspect gym & fitness in decathlon
+//span[.='Gym & Fitness']
+"""
+#############################################################################################
+#17/12/2025
+#assignment2 solution
+"""
+driver = Chrome(options=o)
+driver.get("https://services2.passportindia.gov.in/forms/login")
+driver.maximize_window()
+driver.find_element(By.XPATH, "//div[text()='Register Now!']").click()
+sleep(2)
+driver.find_element(By.XPATH, "//div[text()='CPV Delhi']").click()
+driver.find_element(By.XPATH, "(//input[@type='text'])[2]").send_keys("selenium")
+driver.find_element(By.XPATH, "(//input[@type='text'])[3]").send_keys("selenium@gmail.com")
+driver.find_element(By.XPATH, "//div[text()='No']").click()
+driver.find_element(By.XPATH, "(//input[@type='text'])[4]").send_keys("seleniumautomation")
+driver.find_element(By.XPATH, "(//input[@type='password'])[2]").send_keys("seLEnium@123")
+driver.find_element(By.XPATH, "//div[text()='Sign Up']").click()
+"""
+################################################################################################
+"""
+handling partially dynamic element:
+-----------------------------------
+*in an element some portion is static and some portion is dynamic is called as partially
+dynamic element.
+*to handle partially dynamic element we use contains().
+
+when to go contains() function?
+-------------------------------
+*to handle partially dynamic element.
+*if text value/attribute value is very lengthy.
+*if text value begins/ends with spaces.
+*if text contains &nbsp
+
+contains with attribute syntax:
+-------------------------------
+//tagname[contains(@attribute_name , 'attribute_value')]
+
+contains with text:
+-------------------
+//tagname[contains(. , 'text_value')]
+
+xpath to inspect windows version
+(//span[contains(., 'Get Windows')])[1]
+
+xpath to inspect python version in python.org
+(//a[contains(., 'Download Python')])[2]
+
+xpath to inspect fruits and vegetables in zepto
+(//span[contains(@class , 'Label-sc-15v1nk5-0')])[9]
+
+xpath to inspect mobile in amazon
+//a[contains(@href, '/mobile-phones/')]
+
+xpath to inspect power bank in dunnzo
+//h5[contains(., '20000 mAh')]
+
+xpath to inspect admissions in jain.com
+(//a[contains(., 'Admissions')])[3]
+
+xpath to inspect books in demo webshop
+(//a[contains(.,'Books')])[1]
+"""
+"""
+assignment3:
+------------
+launch https://www.crocs.in/ --> click on register icon --> click on signin/register link
+--> click on create account --> enter values for all mandatory fields and click on register button
+
+send assignment to below mail-id:
+---------------------------------
+assignmentsql@gmail.com
+"""
+################################################################################################
+#18/12/2025
+"""
+handling completely dynamic element:
+------------------------------------
+*an element is completely changing then it is called as completely dynamic element.
+*we can handle in 2 ways,
+    1.xpath by traversing
+    2.xpath by siblings
+
+1.xpath by traversing:
+======================
+*navigating from one element to another element is called as traversing.
+*traversing is classified into 2 types,
+1.forward traversing
+2.backward traversing
+
+1.forward traversing:
+---------------------
+*navigating from parent to child element by using / (or) // is called as forward traversing.
+
+2.backward traversing:
+----------------------
+*navigating from child to parent element by using /.. (or) //ancestor is called as backward traversing.
+
+how to handle completely dynamic element:
+=========================================
+step1: inspect static element 
+step2: navigate from static element to common parent(common parent means it should be a parent of
+both static and dynamic element)
+step3: navigate from common parent to dynamic element
+"""
+#sample html code
+"""
+<html>
+          <body>		
+	        <table border=3>
+	             <tr>
+                    <td>sl.no</td>
+                    <td>certificate</td>
+                    <td>movie name</td>
+                    <td>collection</td>
+                    <td>rating</td>
+	             </tr>
+	             <tr>
+                    <td>1</td>
+                    <td>U</td>
+                    <td>Kantara</td>
+                    <td>800CR</td>
+                    <td>*****</td>
+	            </tr>	
+	             <tr>
+                    <td>2</td>
+                    <td>U/A</td>
+                    <td>Pushpa2</td>
+                    <td>80CR</td>
+                    <td>**</td>
+	            </tr>
+	             <tr>
+                    <td>3</td>
+                    <td>U/A</td>
+                    <td>KGF</td>
+                    <td>100CR</td>
+                    <td>***</td>
+	            </tr>
+	             <tr>
+                    <td>4</td>
+                    <td>A</td>
+                    <td>Coolie</td>
+                    <td>300CR</td>
+                    <td>****</td>
+	            </tr>
+	        </table>
+          </body>	
+</html>
+"""
+################################################################################################
+"""
+xpath to inspect collection of kantara movie
+(//td[.='Kantara']/..//td)[4]
+
+xpath to inspect ratings of pushpa2 movie
+(//td[.='Pushpa2']/..//td)[5]
+
+xpath to inspect sl.no of kgf movie
+(//td[.='KGF']/..//td)[1]
+
+xpath to inspect stock price of nifty bank
+(//p[.='NIFTY BANK']/..//h3)[2]
+
+xpath to inspect trp of sun tv channel
+(//td[contains(., 'Sun TV')]/..//td)[3]	
+
+xpath to inspect version of python 
+(//p[.='Python']/..//a)[1]
+"""
+##############################################################################################
+"""
+assignment question:
+====================
+https://www.accuweather.com/en/in/india-weather
+inspect weather of Bengaluru
+
+https://www.goodreturns.in/gold-rates/
+inspect price of 22K gold
+"""
+#################################################################################################
+#19/12/2025
+"""
+2.xpath by siblings
+===================
+*a child under a common parent is called as siblings.
+*is used to navigate from one child element to another child element.
+*there are 2 types of sibling tags,
+1.following sibling:
+********************
+*traversing from a child element(static) to below(younger)siblings is called as following sibling.
+syntax:-
+========
+//following-sibling::tag-name
+
+2.preceding sibling:
+********************
+*traversing from a child element(static) to above(elder)siblings is called as preceding sibling.
+syntax:-
+========
+//preceding-sibling::tag-name
+
+sample html-code:
+*****************
+                    preceding sibling
+<tr>                    ^
+    <td>1</td>          |   -->2
+    <td>U/A</td>        |   -->1
+    <td>Kantara</td>---->static-element
+    <td>100CR</td>      |   -->1    
+    <td>kan</td>        |   -->2
+    <td>*****</td>      |   -->3
+</tr>                   V
+                    following sibling
+
+steps to follow siblings
+========================
+step1: inspect static element
+step2: check for static element dynamic element should be sibling
+
+#xpath to inspect kantara collection in demo website
+(//td[.='Kantara']//following-sibling::td)[1]
+#xpath to inspect pushpa sl.no in demo website
+(//td[.='Pushpa']//preceding-sibling::td)[1]
+#xpath to inspect stock price of nifty next 50 in nse
+(//p[.='NIFTY NEXT 50'])[2]//following-sibling::h3
+#xpath to inspect stable version of python
+(//p[.='Python']//following-sibling::p)[1]//a
+#xpath to inspect bengaluru weather
+//span[.='Bengaluru']//following-sibling::span
+#xpath to inspect price of 24k gold
+//p[contains(., '24K')]/..//following-sibling::div//span
+
+ancestor:
+---------
+*navigate from child to any parent then we go ancestor.
+
+syntax:
+-------
+    //ancestor::tagname
+
+#xpath to navigate from pushpa to html
+//td[.='Pushpa']//ancestor::html
+#xpath to navigate from pushpa to tbody
+//td[.='Pushpa']//ancestor::tbody
+#xpath to navigate from pushpa to own parent
+//td[.='Pushpa']//ancestor::tr
+"""
+#xpath by axes
+#following-sibling, preceding-sibling, ancestor are called as xpath by axes
+#####################################################################################################
+"""
+assignment
+----------
+https://www.nseindia.com/
+inspect stock price of NIFTY NEXT 50
+
+xpath to inspect no. of likes for a any video in youtube
+xpath to inspect no. of subscribers of any channel in youtube
+xpath to inspect price of any product in amazon
+"""
+################################################################################################
+#23/12/2025
+"""
+web-element methods:
+********************
+"""
+"""
+*find-element() method return type is web-element.
+*a element present in a webpage is called as web-element.
+syntax:
+-------
+var_name = driver.find_element("locator_name", "locator_value")
+  |
+webelement
+
+methods:
+--------
+*click():       
+    *it will perform click on action on web-element.
+*send_keys():
+    *it will send/enter a data in text/text area field.
+clear():
+    *it is used to clear/remove value from text/text area field.
+is_enabled():
+    *it will return True if element is enabled else return False.
+is_selected():  
+    *it will return True if check box/radio button is selected else it will return False.
+    *only if default radio/check box if selected it will work and it should be developed by input.
+is_displayed():
+    *it will return if the element is present/visible/displayed in webpage else it will throw NoSuchElement Exception.
+"""
+#ws to send "hello" in UN text-field and clear the value in UN text field
+"""
+driver =  Chrome(options=o)
+driver.get("https://www.facebook.com/")
+driver.maximize_window()
+username = driver.find_element("id", "email")
+username.send_keys("selenium")
+username.clear()
+username.send_keys("python selenium")
+"""
+#ws to check an element is enabled/disabled
+"""
+driver = Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/E7batch.html")
+driver.maximize_window()
+un1 = driver.find_element("id", "a1")
+print(un1.is_enabled())             #True
+un2 = driver.find_element("id", "a2")
+print(un2.is_enabled())             #False
+"""
+#ws to verify register now and upload resume is enaboled/not
+"""
+driver = Chrome(options=o)
+driver.get("https://www.naukri.com/registration/createAccount?othersrcp=22636")
+driver.maximize_window()
+login = driver.find_element("xpath", "//button[.='Register now']")
+print(login.is_enabled())           #False
+"""
+#wsto verif the checkbox is selected or not
+"""
+driver = Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/E7batch.html")
+driver.maximize_window()
+check1 = driver.find_element("id", "c1")
+print(check1.is_selected())         #False
+check2 = driver.find_element("id", "c2")
+print(check2.is_selected())         #True
+"""
+#wsto verif the radio button is selected or not in ksrtc.com
+"""
+driver = Chrome(options=o)
+driver.get("https://ksrtc.in/")
+driver.maximize_window()
+check1 = driver.find_element(By.ID, "radio_oneway")
+check2 = driver.find_element(By.ID, "radio_roundtrip")
+print(check1.is_selected())             #True
+print(check2.is_selected())             #False
+"""
+#ws to verify google and gmail link is present or not
+"""
+driver = Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/E7batch.html")
+driver.maximize_window()
+link1 = driver.find_element("id", "l1")
+print(link1.is_displayed())         #False
+link2 = driver.find_element("id", "l2")
+print(link2.is_displayed())         #True
+"""
+"""
+get_attribute():
+    *it will return the value of specified attribute name.
+    *if th attribute name is invalid then it will return None.
+    *we need to write/use locator both getting attribute value and inspecting should be under a same tag/html code.
+    *most of we use this method for getting tool-tip.
+
+size:
+    *it will return dictionary of height and width.
+location:
+    *it will return dictionary of x and y axis.
+rect:   
+    *it will return dictionary of height, width, x and y axis.
+text:
+    *it will return a text of an element.
+tag_name:    
+    *it will return a tag-name of an element.
+"""
+#ws to get the text value of google link
+"""
+driver = Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/E7batch.html")
+driver.maximize_window()
+link2 = driver.find_element("id", "l2")
+print(link2.text)               #Google
+"""
+#ws to get the text value of red velvet cake from amma's pastries
+"""
+driver = Chrome(options=o)
+driver.get("https://ammaspastries.in/")
+driver.maximize_window()
+link2 = driver.find_element("xpath", "(//a[contains(@href, '/red-velvet/')])[2]")
+print(link2.text)               #Red Velvet
+"""
+#ws to extract and print tag name of red velvet cake from amma's pastries
+"""
+driver = Chrome(options=o)
+driver.get("https://ammaspastries.in/")
+driver.maximize_window()
+link2 = driver.find_element("xpath", "(//a[contains(@href, '/red-velvet/')])[2]")
+print(link2.tag_name)               #a
+"""
+#ws to verify pizza element text is present in webpage or not
+"""
+driver = Chrome(options=o)
+driver.get("https://www.zomato.com/bangalore/delivery")
+driver.maximize_window()
+pizza = driver.find_element(By.XPATH, "//a[@href='/bangalore/delivery/dish-pizza']")
+print(pizza.text)
+if pizza.text == 'Pizza':
+    print("Pizza element is present in application")
+else:
+    print("Pizza element is not present in application")
+"""
+#sample html code for enabled, selected, displayed method elements
+"""
+<html>
+           <body bgcolor="pink">	
+               	UN1:<input type="text"  id="a1">
+               	UN2:<input type="text"  id="a2" disabled><hr/>
+	            <input type="checkbox" id="c1">Old user
+	            <input type="checkbox" id="c2" checked>New user<hr/>
+	            <a href="https://www.gmail.com" id="l1" style="display: none;">Gmail</a>
+	            <a href="https://www.google.com" id="l2">Google</a>
+           </body>
+</html>
+
+"""
+"""
+assignemnt:
+***********
+ws to click signup --> verify create account is enabled/not in zomato --> .
+https://www.zomato.com/bangalore
+ws to launch the below URL, close the popup if it's displayed --> click on login button --> 
+verify enter mobile number field is displayed or not, verify request OTP button is enabled or not 
+https://www.flipkart.com/
+"""
+############################################################################################################
+#ws to print tooltip of english in wikipedia
+"""
+driver = Chrome()
+driver.get("https://www.wikipedia.org/")
+driver.maximize_window()
+eng = driver.find_element("xpath", "//a[@id='js-link-box-en']")
+tooltip = eng.get_attribute("title")
+print(tooltip)
+#English — Wikipedia — The Free Encyclopedia
+"""
+
+#ws to print google apps tooltip
+"""
+driver = Chrome()
+driver.get("https://www.google.com/")
+driver.maximize_window()
+eng = driver.find_element("xpath", "//a[@aria-label='Google apps']")
+tooltip = eng.get_attribute("aria-label")
+print(tooltip)
+#Google apps
+"""
+
+#example on getting invalid attribute value.
+"""
+driver = Chrome()
+driver.get("https://www.google.com/")
+driver.maximize_window()
+eng = driver.find_element("xpath", "//a[@aria-label='Google apps']")
+tooltip = eng.get_attribute("aria-label-name")
+print(tooltip)
+#None
+"""
+
+#ws to get x,y axis and height,width of an element
+"""
+driver = Chrome()
+driver.get("https://www.fb.com/")
+driver.maximize_window()
+un = driver.find_element("id", "email")
+l = un.location
+print(l)
+#{'x': 780, 'y': 148}
+s = un.size
+print(s)
+# {'height': 52, 'width': 364}
+r = un.rect
+print(r)
+# {'height': 52, 'width': 364, 'x': 780.5, 'y': 148}
+"""
+
+#ws to get the text value of about wipro
+"""
+driver = Chrome()
+driver.get("https://www.wipro.com/")
+driver.maximize_window()
+about = driver.find_element("xpath", "(//a[contains(., 'About')])[1]")
+print(about.text)
+# About Wipro
+"""
+
+#ws to verify error message is displaying or not
+"""
+driver = Chrome()
+driver.get("http://localhost/login.do")
+log_btn = driver.find_element("xpath", "//div[.='Login ']")
+log_btn.click()
+error = driver.find_element("xpath", "(//span[@class='errormsg'])[1]")
+if error.text=="Username or Password is invalid. Please try again.":
+    print("error message is displaying")
+else:
+    print("error message is not displaying")
+"""
+
+#ws to get the tag name of login button
+"""
+driver = Chrome()
+driver.get("http://localhost/login.do")
+log_btn = driver.find_element("xpath", "//div[.='Login ']")
+print(log_btn.tag_name)
+#div
+"""
+##############################################################################################
+#24/12/2025
+"""
+handling drop-down:
+*******************
+"""
+"""
+*a collection of options is called as drop-down.
+*drop-down classified into 2 types,
+    1.standard drop-down
+    2.Non-standard drop-down
+
+1.standard drop-down:
+*********************
+*a drop-down is developed by "select" tag is called as standard drop-down.
+*standard drop-down is classified into 2 types,
+1.single select drop down(SSDD):
+********************************
+    *we can select only single option.
+    *we can't select multiple option.
+    *we can't deselect option.
+
+2.multi select drop down(MSDD):
+*******************************
+    *we can select single option
+    *we can select multiple option.
+    *we can deselect option.
+
+how to automate standard DD
+===========================
+*to automate standard dropdown we use "Select" class.
+*select class constructor will accept one argument that is drop-down address/web-element.
+*need to import Select class from below.
+
+from selenium.webdriver.support.select import Select
+
+class Select:
+    def __init__(self, WebElement):
+        ...
+
+s = Select(DD_address/DD_webelement)
+
+*to select an option we have 3 methods,
+1.select_index(int) --> need to pass index, index starts from 0
+2.select_by_value(string) --> value attribute value we need to pass
+3.select_by_visible_text(text) --> text of an option
+
+*to deselect an option we have methods,
+1.deselect_index(int) --> need to pass index, index starts from 0
+2.deselect_by_value(string) --> value attribute value we need to pass
+3.deselect_by_visible_text(text) --> text of an option
+4.deselect_all()
+"""
+# sample html code of developing drop-down
+"""
+<html>
+           <body bgcolor="pink">	
+               	Subject:<select id="s1">
+	              <option value="v1">Sql</option>	
+	              <option value="v2">Selenium</option>	
+	              <option value="v3">Python</option>	
+	              <option value="v4">Manual</option>	
+	              <option value="v5">API</option>	
+	            </select>
+               	Topic:<select id="s2" multiple>
+	              <option value="v11">Query</option>	
+	              <option value="v22">Scripts</option>	
+	              <option value="v33">Programs</option>	
+	              <option value="v44">SDLC</option>	
+	              <option value="v55">Defect</option>	
+	            </select>
+           </body>
+</html>
+
+"""
+from selenium.webdriver.support.select import Select
+
+# single select drop-down(SSDD)
+# ws to select option from SSDD
+"""
+driver = Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/E7batch.html")
+driver.maximize_window()
+sub = driver.find_element("id", "s1")
+s = Select(sub)
+s.select_by_index(2)
+s.select_by_value("v4")
+s.select_by_visible_text("Selenium")
+"""
+# example on index not matches
+"""
+driver = Chrome()
+driver.get("file:///C:/Users/Admin/Desktop/sample.html")
+driver.maximize_window()
+dd = driver.find_element("id", "a1")        
+s = Select(dd)
+s.select_by_index(10)
+#NoSuchElementException: Message: Could not locate element with index 10
+"""
+# multi select drop down
+# ws to select options in MSDD
+"""
+driver = Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/E7batch.html")
+driver.maximize_window()
+top = driver.find_element("id", "s2")
+s = Select(top)
+s.select_by_index(1)
+s.select_by_value("v44")
+s.select_by_visible_text("Query")
+"""
+# ws to select and deselct options from MSDD
+"""
+driver = Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/E7batch.html")
+driver.maximize_window()
+top = driver.find_element("id", "s2")
+s = Select(top)
+s.select_by_index(1)
+s.select_by_value("v44")
+s.select_by_visible_text("Query")
+sleep(2)
+s.deselect_by_index(3)
+s.deselect_by_value("v11")
+s.deselect_by_visible_text("Scripts")
+"""
+# example on deselcting option from SSDD
+"""
+driver = Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/E7batch.html")
+driver.maximize_window()
+sub = driver.find_element("id", "s1")
+s = Select(sub)
+s.select_by_index(2)
+sleep(2)
+s.deselect_by_index(2)
+#NotImplementedError: You may only deselect options of a multi-select
+"""
+#ws to select date, month, year from dd
+"""
+driver = Chrome(options=o)
+driver.get("https://www.facebook.com/")
+driver.maximize_window()
+driver.find_element("link text", "Create new account").click()
+sleep(2)
+day_dd = driver.find_element("id", "day")
+s = Select(day_dd)
+s.select_by_index(14)
+month_dd = driver.find_element("id", "month")
+s = Select(month_dd)
+s.select_by_value("8")
+year_dd = driver.find_element("id", "year")
+s = Select(year_dd)
+s.select_by_visible_text("2022")
+"""
+
+"""
+is_multiple:
+   *it will return True if a drop-down is MSDD else it will return None.
+options:
+    *it will return list specified drop-down web-element(option) address.
+    *to get the correct output we should run for loop and use .text property of web-element.
+    *it will work for both single select and multi select drop-down.
+all_selected_options:   
+    *it will return list all select options from specified drop-down web-element(option) address.
+    *to get the correct output we should run for loop and use .text property of web-element.
+    *it will work for both single select and multi select drop-down but it's prefferd to use for multi select drop-down.
+"""
+#ws to check dropdown is multi select or not
+"""
+driver = Chrome()
+driver.get("file:///C:/Users/Admin/Desktop/sample.html")
+driver.maximize_window()
+sdd = driver.find_element("id", "a1")               #sdd --> single select drop down address
+mdd = driver.find_element("id", "a2")               #mdd --> multi select drop-down address
+s1 = Select(sdd)
+s2 = Select(mdd)
+print(s1.is_multiple)           #None
+print(s2.is_multiple)           #True
+"""
+
+#ws to print all options of a dropdown
+"""
+driver = Chrome()
+driver.get("file:///C:/Users/Admin/Desktop/sample.html")
+driver.maximize_window()
+sdd = driver.find_element("id", "a1")
+s = Select(sdd)
+ops = s.options
+print(ops)
+#[<selenium.webdriver.remote.webelement.WebElement (session="b0d2594914d1b476228fba05b6c97e7c", element="FA8E7F8FAA2F92C124945E72FCAF6449_element_4")>, <selenium.webdriver.remote.webelement.WebElement (session="b0d2594914d1b476228fba05b6c97e7c", element="FA8E7F8FAA2F92C124945E72FCAF6449_element_6")>, <selenium.webdriver.remote.webelement.WebElement (session="b0d2594914d1b476228fba05b6c97e7c", element="FA8E7F8FAA2F92C124945E72FCAF6449_element_8")>, <selenium.webdriver.remote.webelement.WebElement (session="b0d2594914d1b476228fba05b6c97e7c", element="FA8E7F8FAA2F92C124945E72FCAF6449_element_10")>, <selenium.webdriver.remote.webelement.WebElement (session="b0d2594914d1b476228fba05b6c97e7c", element="FA8E7F8FAA2F92C124945E72FCAF6449_element_12")>]
+"""
+#wsto print all the options from DD
+"""
+driver =  Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/E7batch.html")
+driver.maximize_window()
+sub = driver.find_element("id", "s1")
+s1 = Select(sub)
+eles = s1.options   #eles=[webele1, webele2, webele3, .. ]
+for i in eles:
+    print(i.text)
+"""
+#ws to print all selected options from multi select drop-down
+"""
+driver =  Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/E7batch.html")
+driver.maximize_window()
+top = driver.find_element("id", "s2")
+s2 = Select(top)
+s2.select_by_index(0)
+s2.select_by_index(2)
+s2.select_by_index(3)
+eles = s2.all_selected_options
+for i in eles:
+    print(i.text)
+"""
+
+"""
+assignment question:
+--------------------
+https://www.landrecords.karnataka.gov.in/service2/RTC.aspx
+launch above application select option from district > taluk > hobli > village dd
+"""
+####################################################################################################
+#25/12/2025
+#find_elements():
+#----------------
+"""
+*it is used to find multiple elements.
+*the return type of find_elements() is list of webelement.
+*if the locator value not matches with any element then it will return empty list[].
+*to get the correct o/p we should run for loop and .text property
+
+syntax: var_name = driver.find_elements("locator_name", "locator_value")
+            |
+        list of web-elemet  
+"""
+#sample html code
+"""
+<html>
+             <body>	
+	<a href="https://www.gmail.com" id="a1">Gmail</a>
+	<a href="https://www.google.com" id="a2">Google</a>
+	<a href="https://www.instgram.com" id="a3">Instagram</a>
+	<a href="https://www.wikipedia.com" id="a4">Wikipedia</a>
+             </body>
+</html>
+"""
+
+#ws to print all link text present in demo webpage
+"""
+driver = Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/demo.html")
+driver.maximize_window()
+ops = driver.find_elements("tag name", "a")    #ops = [webelement1, webelement2, ..]
+for i in ops:
+    print(i.text)
+# Gmail
+# Youtube
+"""
+
+#example on locator value not matches with any element
+"""
+driver = Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/demo.html")
+driver.maximize_window()
+ops = driver.find_elements("tag name", "b")    #ops = [webelement1, webelement2, ..]
+print(ops)
+#[]
+"""
+
+#ws to print total no. of links present in amazon webpage
+"""
+driver = Chrome(options=o)
+driver.get("https://www.amazon.in/")
+driver.maximize_window()
+ops = driver.find_elements("xpath", "//a")
+print(len(ops))         #338
+"""
+
+"""
+xpath to to count total no. of links
+//a
+xpath to to count total no. of images
+//img
+xpath to to count total no. of text fields
+//input
+xpath to to count total no. of drop down
+//select
+"""
+
+"""
+what is the difference b/w find_element() and find_elements()
+=============================================================
+            find_element                    find_elements
+            ------------                    -------------
+*it is used to find single element      *it is used to find multiple elements
+*return type is webelement              *return type is list of webelements
+*if the locator value matches with      *if the locator value matches with
+multiple elements then it will return   multiple elements then it will return
+1st element address                     all elements address
+*if locator value not matches           *if locator value not matches then it 
+then it will throw NoSuchElement        will return empty list []
+exception
+"""
+#ws to print auto suggestion of google
+"""
+driver = Chrome(options=o)
+driver.get("https://www.google.com/")
+driver.maximize_window()
+driver.find_element("name", "q").send_keys("python selenium")
+sleep(2)
+ops = driver.find_elements("xpath", "//div[@class='lnnVSe']")
+for i in ops[:10]:
+    print(i.get_attribute("aria-label"))
+"""
+#ws toprint travel info in bmrcl
+"""
+driver = Chrome(options=o)
+driver.get("https://english.bmrc.co.in/")
+driver.maximize_window()
+sleep(2)
+driver.find_element("xpath", "//span[.='English']").click()
+driver.find_element("xpath", "//a[.='TRAVEL INFO']").click()
+ops = driver.find_elements("xpath", "(//li[@class='nav-item'])[11]//a")
+for i in ops:
+    print(i.text)
+"""
+#ws to print all biryani name in zomato
+"""
+driver = Chrome(options=o)
+driver.get("https://www.zomato.com/bangalore/restaurants")
+driver.maximize_window()
+search = driver.find_element("xpath", "//input[@placeholder='Search for restaurant, cuisine or a dish']")
+search.send_keys("biryani")
+search.click()
+sleep(3)
+results = driver.find_elements(By.XPATH, "//p[@class='sc-1hez2tp-0 sc-gFXMyG jkvifB']")
+for i in results:
+    print(i.text)
+"""
 
 
+"""
+assignment
+----------
+ws to print all the options from all drop-down in amazon
+https://www.amazon.in/ref=nav_logo
+
+ws to search for shirt > print all the suggestions in amazon
+https://www.amazon.in/ref=nav_logo
+"""
+###########################################################################################################
+#26/12/2025
+#ws to search for shirt > print all the suggestions in amazon
+"""
+driver = Chrome(options=o)
+driver.get("https://www.amazon.in/ref=nav_logo")
+driver.maximize_window()
+driver.find_element("id", "twotabsearchtextbox").send_keys("shirts")
+sleep(2)
+results = driver.find_elements("xpath", "//div[@class='s-suggestion s-suggestion-ellipsis-direction']")
+for i in results:
+    print(i.text)
+"""
+#ws to print suggestion in google.com
+"""
+driver = Chrome(options=o)
+driver.get("https://www.google.com/")
+driver.maximize_window()
+driver.find_element("name", "q").send_keys("python selenium")
+sleep(1)
+results = driver.find_elements("xpath", "//div[@class='wM6W7d']")
+for i in results[:10]:
+    print(i.text)
+"""
+############################################################################################################
+"""
+action chains class:
+--------------------
+*action chains class used for following uses,
+1.mouse hover action
+2.drag and drop 
+3.double click
+4.right click
+
+*action chains class shoul import from below
+    from selenium.webdriver.common.action_chains import ActionChains
+
+class ActionChains:
+    def __init__(self, driver):
+        ...
+
+a = ActionChains(driver)
+
+note:any method of action chains class should be end with .perform() method
+"""
+
+#1.mouse hover action:
+#---------------------
+#keeping a cursor on an element is called as mouse hover action
+# syntax: a.move_to_element(web_element).perform()
+
+from selenium.webdriver.common.action_chains import ActionChains
+
+#ws to mouse hover on men and click on jeans link
+"""
+driver = Chrome(options=o)
+driver.get("https://www.ajio.com/")
+driver.maximize_window()
+men = driver.find_element("xpath", "//span[.='MEN']")
+a = ActionChains(driver)
+a.move_to_element(men).perform()
+driver.find_element("xpath", "//a[.='Jeans']").click()
+"""
+#ws to mouse hover on baby tab in mamaearth
+"""
+driver = Chrome(options=o)
+driver.get("https://mamaearth.in/")
+driver.maximize_window()
+baby = driver.find_element("xpath", "//a[text()='Baby']")
+a = ActionChains(driver)
+a.move_to_element(baby).perform()
+"""
+
+###############################################################################################
+#2.drag and drop:
+#----------------
+#dragging an element from position and dropping to another position is called as
+# drag and drop
+#syntax: a.drag_and_drop(src_webelement, dest_webelement)
+
+#ws to drag and drop
+"""
+driver = Chrome(options=o)
+driver.get("https://pschool.in/science-3-sc/drag-drop-organs")
+driver.maximize_window()
+src1 = driver.find_element("xpath", "//div[.='Brain']")
+dest1 = driver.find_element("xpath", "(//div[@class='blank '])[1]")
+a = ActionChains(driver)
+a.drag_and_drop(src1, dest1).perform()
+src2 = driver.find_element("xpath", "//div[.='Heart']")
+dest2 = driver.find_element("xpath", "(//div[@class='blank '])[2]")
+a.drag_and_drop(src2, dest2).perform()
+"""
+#############################################################################################
+#3.double click:
+#---------------
+# when ever we want to double click on an element then we use below methods of action
+#chains class.
+# syntax: a.double_click(web_element).perform()
+
+#ws to double click in demo webapplication
+"""
+driver = Chrome(options=o)
+driver.get("https://demo.guru99.com/test/simple_context_menu.html")
+driver.maximize_window()
+double = driver.find_element("xpath", "//button[.='Double-Click Me To See Alert']")
+a = ActionChains(driver)
+a.double_click(double).perform()
+"""
+###############################################################################################
+#4.right click:
+#to right on an element in a webpage we use below method.
+#syntax: a.context_click(webelement).perform()
+
+#wsto right click on study material in byjus
+"""
+driver = Chrome(options=o)
+driver.get("https://byjus.com/")
+driver.maximize_window()
+study = driver.find_element("link text", "Study Materials")
+a = ActionChains(driver)
+a.context_click(study).perform()
+"""
+"""
+assignment:
+-----------
+launch --> https://english.bmrc.co.in/ --> click on english button --> mouse hover on travel-info 
+element --> print all the suggestion/options.
+"""
+#########################################################################################################
+#29/12/2025
+"""
+handling frames:
+----------------
+*a webpage inside another webpage is called as frames/nested frames/embedded webpage.
+*to develop a frame developer will use <iframe> tag.
+*by default control will present in parent webpage, we need to switch control from
+parent to child webpage will use following method.
+    driver.switch_to.frame(arg)
+*frame() method will accept 3 different types of arguments,
+    *index : starts from 0
+    *name : name attribute value
+    *webelement : address of a frame
+*to switch control from child to parent there are 2 methods are present,
+    driver.switch_to.parent_frame() -->it switch from child to its own parent
+    driver.switch_to.default_content() ->it will switch from child to main parent(ancestor)
+*frame() method is an example for polymorphism.
+*if argument(index/name/webelement) is not matches then it will throw "NoSuchFrameException" 
+"""
+#ws to enter hello in UN1 and bye in UN2
+"""
+driver = Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/parent.html")
+driver.maximize_window()
+un1 = driver.find_element("id", "a1")
+un1.send_keys("hello")
+un2 = driver.find_element("id", "a2")
+un2.send_keys("bye")
+#NoSuchElementException
+#according to above script the control is present in parent webpage, we need to switch 
+control from parent to child webpage.
+"""
+#ws to enter hello in UN1, bye in UN2, good in UN3 by using index as argument
+"""
+driver = Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/parent.html")
+driver.maximize_window()
+un1 = driver.find_element("id", "a1")
+un1.send_keys("hello")
+driver.switch_to.frame(0)
+un2 = driver.find_element("id", "a2")
+un2.send_keys("bye")
+driver.switch_to.frame(0)
+un3 = driver.find_element("id", "a3")
+un3.send_keys("good")
+"""
+#ws to enter hello in UN1, bye in UN2, good in UN3 by using name as argument
+"""
+driver = Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/parent.html")
+driver.maximize_window()
+un1 = driver.find_element("id", "a1")
+un1.send_keys("hello")
+driver.switch_to.frame("n1")
+un2 = driver.find_element("id", "a2")
+un2.send_keys("bye")
+driver.switch_to.frame("n2")
+un3 = driver.find_element("id", "a3")
+un3.send_keys("good")
+"""
+#ws to enter hello in UN1, bye in UN2, good in UN3 by using webelement as argument
+"""
+driver = Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/parent.html")
+driver.maximize_window()
+un1 = driver.find_element("id", "a1")
+un1.send_keys("hello")
+frame1 = driver.find_element("xpath", "//iframe[@id='f1']")
+driver.switch_to.frame(frame1)
+un2 = driver.find_element("id", "a2")
+un2.send_keys("bye")
+frame2 = driver.find_element("xpath", "//iframe[@id='f2']")
+driver.switch_to.frame(frame2)
+un3 = driver.find_element("id", "a3")
+un3.send_keys("good")
+"""
+#example on switching control from child to its own parent
+"""
+driver = Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/parent.html")
+driver.maximize_window()
+un1 = driver.find_element("id", "a1")
+un1.send_keys("hello")
+frame1 = driver.find_element("xpath", "//iframe[@id='f1']")
+driver.switch_to.frame(frame1)
+un2 = driver.find_element("id", "a2")
+un2.send_keys("bye")
+frame2 = driver.find_element("xpath", "//iframe[@id='f2']")
+driver.switch_to.frame(frame2)
+un3 = driver.find_element("id", "a3")
+un3.send_keys("good")
+driver.switch_to.parent_frame()
+un2.send_keys("back to parent")
+"""
+#example on switching control from child to main parent(ancestor)
+"""
+driver = Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/parent.html")
+driver.maximize_window()
+un1 = driver.find_element("id", "a1")
+un1.send_keys("hello")
+frame1 = driver.find_element("xpath", "//iframe[@id='f1']")
+driver.switch_to.frame(frame1)
+un2 = driver.find_element("id", "a2")
+un2.send_keys("bye")
+frame2 = driver.find_element("xpath", "//iframe[@id='f2']")
+driver.switch_to.frame(frame2)
+un3 = driver.find_element("id", "a3")
+un3.send_keys("good")
+driver.switch_to.default_content()
+un1.send_keys("back to main parent")
+"""
+#################################################################################################
+#example on NoSuchFrameException
+"""
+driver = Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/parent.html")
+driver.maximize_window()
+un1 = driver.find_element("id", "a1")
+un1.send_keys("hello")
+driver.switch_to.frame(10)
+un2 = driver.find_element("id", "a2")
+un2.send_keys("bye")
+#NoSuchFrameException
+"""
+#ws to click on signup with google button in x.com
+"""
+driver = Chrome(options=o)
+driver.get("https://x.com/nopCommerce")
+driver.maximize_window()
+sleep(4)
+sign_frame = driver.find_element("xpath", "//iframe[contains(@title, 'Google')]")
+driver.switch_to.frame(sign_frame)
+driver.find_element("xpath", "//span[.='Sign up with Google']").click()
+"""
+##############################################################################################
+"""
+assignment
+----------
+open https://www.zomato.com/bangalore/restaurants > click on login button > click on sign in with google
+"""
+###########################################################################################################
+#30/12/2025
+"""
+assert:
+-------
+*assert is a keyword it is used for conditional checking.
+*we will specify the condition in assert, id condition is True then it will continue
+the execution, if condition become False then it will stop the execution and throw
+"AssertionError".
+syntax: assert condition, ["message"]
+"""
+
+#example on assert condtion True
+"""
+assert 10==10, "number not matches"
+print("same")
+print("end")
+# same
+# end
+"""
+#example on assert condtion False
+"""
+assert 10==100, "number not matches"
+print("same")
+print("end")
+#AssertionError: number not matches
+"""
+
+###############################################################################################
+"""
+taking screenshot:
+------------------
+*while testing if TE find any defect then will take screenshot, because it is a proof
+to show for developer we got defect.
+*in selenium to take screenshot we have below method.
+    driver.save_screenshot("filename.png") 
+*by default it will save in current location.
+*if we want to save in particular location then need to specify the path.
+"""
+
+#ws to save a screenshot(it will save in current location)
+"""
+driver = Chrome(options=o)
+driver.get("https://www.redbus.in/")
+driver.maximize_window()
+driver.save_screenshot("defect1.png")
+"""
+
+#ws to save a screenshot in screenshot folder
+"""
+file_path = "C:\\Users\\Hp\\PycharmProjects\\SeleneiumE7\\screenshots"
+driver = Chrome(options=o)
+driver.get("https://www.redbus.in/")
+driver.maximize_window()
+driver.save_screenshot(f"{file_path}\\defect.png")
+"""
+#extracting current date and time
+"""
+from datetime import datetime
+
+d = datetime.now()
+print(d)                #2025-07-24 20:35:43.112124
+d = datetime.now().strftime("%d-%m-%Y %H-%M-%S")
+print(d)                #24-07-2025 20-38-27
+"""
+from datetime import datetime
+
+#saving screenshot with current date and time
+"""
+d = datetime.now().strftime("%d-%m-%Y %H-%M-%S")
+
+file_path = "C:\\Users\\Hp\\PycharmProjects\\SeleneiumE7\\screenshots"
+driver = Chrome(options=o)
+driver.get("https://www.redbus.in/")
+driver.maximize_window()
+driver.save_screenshot(f"{file_path}\\{d}.png")
+"""
+#real time example on assert and screenshot
+"""
+step1: open the browser and enter URl           welcome page should display
+step2: click on medicine tab                    buy medicine page should display
+step3: search a medicine and select             order medicine page should display
+step4: click on add to cart, select a qty       cart page should display 
+        and click on view cart 
+step5: click on add delivery address, 
+        enter mobile number and click on OTP
+"""
+"""
+def verify_title(etitle):
+    d = datetime.now().strftime("%d-%m-%Y %H-%M-%S")
+    assert driver.title == etitle, driver.save_screenshot("C:\\Users\\Hp\\PycharmProjects\\M18_selenium79AM\\screenshots\\{d}.png")
+
+driver = Chrome(options=o)
+driver.get("https://pharmeasy.in/")
+driver.maximize_window()
+verify_title("PharmEasy – Online Pharmacy & Medical Store with Healthcare Services in India | 50 Lakhs+ Customers")
+driver.find_element("xpath", "(//a[text()='Medicine'])[2]").click()
+verify_title("Buy Medicines Online - Up to 24% OFF | Fast Delivery by PharmEasy")
+driver.find_element("xpath", "//span[text()='Search for Medicines...']").click()
+driver.find_element("xpath", "//input[@type='text']").send_keys("dolo 650")
+sleep(3)
+driver.find_element("xpath", "(//div[text()='Dolo 650'])[1]").click()
+verify_title("Order DOLO 650 Online - PharmEasy")
+driver.find_element("xpath","//button[.='Add To Cart']").click()
+driver.find_element("xpath","//li[text()='1']").click()
+driver.find_element("xpath","//span[text()='View Cart']").click()
+sleep(3)
+verify_title("Order Medicines Online - Cart - PharmEasy")
+driver.find_element("xpath", "//span[text()='Add Delivery Address']").click()
+driver.find_element("id", "mobile").send_keys("9988776655")
+driver.find_element("xpath", "//button[text()='Send OTP']").click()
+"""
+"""
+assignment on assert and take screenshot
+launch https://medlineplus.gov/ > click on genetics > click on genetic conditions > click on see Triple A syndrome  
+> Autonomic Nervous System Disorders > Find an Expert 
+"""
+###########################################################################################################
+#31-12-2025
+"""
+handling popup's
+----------------
+*a popup is a small window/small tab.
+*popups are classified into 5 types,
+1.alert and confirmation/java script popup
+2.hidden division popup
+3.file upload popup
+4.file download popup
+5.child browser popup 
+6.notification popup
+"""
+#1.alert and confirmation/java script popup
+"""
+*a popup which consisting of "OK/Cancel" button thn it is called as alert and confirmation popup.
+*it is classified into 2 types,
+1.simple alert : a alert which consist of either "OK"/"Cancel" button.
+2.alert and confirmation : a alert which consist of both "OK and Cancel" button.
+
+*to automate alert and confirmation popup, first we need to switch control from webpage
+ to alert.
+*we use below method for handling alert,
+    driver.switch_to.alert
+*to click on OK button we use accept()
+*to click on Cancel button we use dismiss()
+
+characteristics of alert and confirmation:
+-----------------------------------------
+*we can't inspect the popup
+*we can't move/drag the popup
+
+note:
+-----
+we can't use both accept() and dismiss() method for single alert, if we use then it will
+throw "NoAlertPresentException".
+"""
+#ws to handle simple alert
+"""
+driver = Chrome(options=o)
+driver.get("https://demowebshop.tricentis.com/")
+driver.maximize_window()
+driver.find_element("xpath", "//input[@value='Search']").click()
+a = driver.switch_to.alert
+a.accept()
+"""
+#ws to click on ok button in alert and confirmartion popup
+"""
+driver = Chrome(options=o)
+driver.get("https://licindia.in/")
+driver.maximize_window()
+driver.find_element("xpath", "//a[@title='Login']").click()
+a = driver.switch_to.alert
+a.accept()
+"""
+#ws to click on cancel button in alert and confirmartion popup
+"""
+driver = Chrome(options=o)
+driver.get("https://licindia.in/")
+driver.maximize_window()
+driver.find_element("xpath", "//a[@title='Login']").click()
+a = driver.switch_to.alert
+a.dismiss()
+"""
+#example on using both accept and dismiss method
+"""
+driver = Chrome(options=o)
+driver.get("https://licindia.in/")
+driver.maximize_window()
+driver.find_element("xpath", "//a[@title='Login']").click()
+a = driver.switch_to.alert
+a.accept()
+a.dismiss()
+#NoAlertPresentException
+"""
+#ws to print text of a popup
+"""
+driver = Chrome(options=o)
+driver.get("https://demowebshop.tricentis.com/")
+driver.maximize_window()
+driver.find_element("xpath", "//input[@value='Search']").click()
+a = driver.switch_to.alert
+print(a.text)
+#Please enter some search keyword
+"""
+########################################################################################
+#2.hidden division popup
+"""
+*initially a popup will be hidden, if we perform any action then a popup will be appear 
+this is called as hidden division popup.
+*will automate this popup by find_element(), click(), send_keys() methods.
+
+characteristics of alert and confirmation:
+-----------------------------------------
+*we can inspect the popup
+*we can't move/drag the popup
+"""
+#ws to enter mobile number in redbus login page
+"""
+driver = Chrome(options=o)
+driver.get("https://www.redbus.in/")
+driver.maximize_window()
+driver.find_element("xpath", "//div[.='Account']").click()
+sleep(2)
+driver.find_element("xpath", "//button[.='Log in']").click()
+sleep(2)
+driver.find_element("xpath", "//input[@inputmode='numeric']").send_keys("9988776655")
+"""
+#ws to generate a otp in mamaearth
+"""
+driver = Chrome(options=o)
+driver.get("https://mamaearth.in/")
+driver.maximize_window()
+driver.find_element("xpath", "//div[.='Login']").click()
+sleep(2)
+driver.find_element("xpath", "//input[@type='number']").send_keys("9988776655")
+driver.find_element("xpath", "//button[.='Login with OTP']").click()
+"""
+#########################################################################################
+"""
+open https://passbook.epfindia.gov.in/MemberPassBook/login > click on login button > handle the popup
+
+open https://www.amazon.in/ref=nav_logo > click on all button > click on best seller > click on any product
+> click on add to cart > click on proceed to buy
+"""
+"""
+can we take screenshot of alert?
+--------------------------------
+No, because its a native/JS popup,in selenium we can't take screenshot
+"""
+######################################################################################################
+#01/01/2026
+#3.file upload popup
+"""
+*uploading a file in webpage is called as file upload popup
+*to automate this popup we use send_keys(r"path of a file")
+*file upload popup should be developed by "input tag and type="file" attribute"
+
+characteristics of alert and confirmation:
+-----------------------------------------
+*we can't inspect the popup
+*we can move/drag the popup
+"""
+#ws to upload resume in naukri.com
+"""
+driver = Chrome(options=o)
+driver.get("https://www.naukri.com/registration/createAccount?othersrcp=22636")
+driver.maximize_window()
+sleep(3)
+driver.find_element("xpath", "(//h2[@class='main-3'])[1]").click()
+driver.find_element("id", "resumeUpload").send_keys(r"C:\\Users\\Hp\\Desktop\\manual grooming notes.pdf")
+"""
+#ws to upload resume in shine.com
+"""
+driver = Chrome(options=o)
+driver.get("https://www.shine.com/registration/")
+driver.maximize_window()
+driver.find_element("xpath", "//input[@type='file']").send_keys("C:\\Users\\Hp\\Downloads\\pshort resume.pdf")
+"""
+##################################################################################################
+#4.file download popup
+"""
+*downloading a file from a webpage is a called as file download popup.
+*when ever we are downloading browser will think un-authorized person is downloading, 
+it will not download, and default it will download in downloads folder, to over come 
+this we use below code.
+
+o = ChromeOptions()
+o.add_experimental_option("prefs", {"safebrowsing.enabled":True,
+                                    "download.default_directory":r"path of folder"})
+"""
+#ws to download python version from python.org(it will throw error)
+"""
+driver = Chrome(options=o)
+driver.get("https://www.python.org/downloads/")
+driver.maximize_window()
+driver.find_element("xpath", "(//a[.='Download Python 3.12.5'])[2]").click()
+#unverified person is downloading, ON Safe Browsing
+"""
+#ws to download python version from python.org
+"""
+o = ChromeOptions()
+o.add_experimental_option("prefs", {"safebrowsing.enabled":True})
+o.add_experimental_option("detach", True)
+
+driver = Chrome(options=o)
+driver.get("https://www.python.org/downloads/")
+driver.maximize_window()
+driver.find_element("xpath", "(//a[.='Download Python 3.12.5'])[2]").click()
+"""
+#ws to download python version from python.org in specified location
+"""
+o = ChromeOptions()
+o.add_experimental_option("prefs", {"safebrowsing.enabled":True,
+                                    "download.default_directory":r"E:\\pythonnnn"})
+o.add_experimental_option("detach", True)
+
+driver = Chrome(options=o)
+driver.get("https://www.python.org/downloads/")
+driver.maximize_window()
+driver.find_element("xpath", "(//a[.='Download Python 3.12.5'])[2]").click()
+"""
+#ws to verify file is downloaded in the specified location or not
+"""
+import os
+
+driver = Chrome(options=o)
+driver.get("https://www.python.org/downloads/")
+driver.maximize_window()
+sleep(5)
+driver.find_element("xpath", "(//a[text()='Python 3.14.2'])[4]").click()
+sleep(15)
+files = os.listdir("E:\\SQL 11G")
+assert "python-3.14.2-amd64.exe" in files, "file not downloaded"
+print("file downloaded successfully")
+"""
+######################################################################################################
+#5.child browser popup
+"""
+*a browser inside another browser is called as child browser.
+*by default a control will be present in parent window, we need to switch control
+from parent to child window, by following method.
+    syntax: driver.switch_to.window(window_address)
+*to get the window address there are 2 property,
+    1.driver.current_window_handle --> it will return only parent window address 
+    2.driver.window_handles --> it will return list of parent followed by child window address
+                            [parent, child1, child2, ... ] 
+"""
+#ws to click on settings in twitter page
+"""
+driver = Chrome(options=o)
+driver.get("https://demowebshop.tricentis.com/")
+driver.maximize_window()
+driver.find_element("xpath", "//a[.='Facebook']").click()
+driver.find_element("xpath", "//a[.='Twitter']").click()
+driver.find_element("xpath", "//a[.='Google+']").click()
+driver.find_element("xpath", "//span[.='Settings']").click()
+#NoSuchElementException
+#because by default control will be present in parent webpage, we need to switch 
+control from parent to child webpage.
+"""
+#example on parent and all child window address
+"""
+driver = Chrome(options=o)
+driver.get("https://demowebshop.tricentis.com/")
+driver.maximize_window()
+driver.find_element("xpath", "//a[.='Facebook']").click()
+driver.find_element("xpath", "//a[.='Twitter']").click()
+driver.find_element("xpath", "//a[.='Google+']").click()
+pid = driver.current_window_handle
+print(pid)              #51EA5808430D2C8BBCF32FD376D1D1C1
+all_id = driver.window_handles
+print(all_id)           #['51EA5808430D2C8BBCF32FD376D1D1C1', '112ADB9A56EF4AB26D37B08C74ED9E3F', 'A119BB326D867D39DA99587F74D55D48', '2B69761AF745A5CE41C37B7FA70F9D13']
+"""
+#ws to print all window title
+"""
+driver = Chrome(options=o)
+driver.get("https://demowebshop.tricentis.com/")
+driver.maximize_window()
+driver.find_element("xpath", "//a[.='Facebook']").click()
+driver.find_element("xpath", "//a[.='Twitter']").click()
+driver.find_element("xpath", "//a[.='Google+']").click()
+all_id = driver.window_handles  #[parent, child1, child2, child3]
+for i in all_id:                #i=parent
+    driver.switch_to.window(i)  #switch_to.window(parent)
+    sleep(5)
+    print(driver.title)
+# Demo Web Shop
+# Google Workspace Updates: New community features for Google Chat and an update on Currents
+# NopCommerce | Facebook
+# nopCommerce (@nopCommerce) / X
+"""
+#ws to print all child window title
+"""
+driver = Chrome(options=o)
+driver.get("https://demowebshop.tricentis.com/")
+driver.maximize_window()
+driver.find_element("xpath", "//a[.='Facebook']").click()
+driver.find_element("xpath", "//a[.='Twitter']").click()
+driver.find_element("xpath", "//a[.='Google+']").click()
+all_id = driver.window_handles      #[parent, child1, child2, child3]
+for i in all_id[1:]:                #i=child1
+    driver.switch_to.window(i)      #switch_to.window(child1)
+    sleep(5)
+    print(driver.title)
+# NopCommerce | Facebook
+# nopCommerce (@nopCommerce) / X
+# Google Workspace Updates: New community features for Google Chat and an update on Currents
+"""
+#ws to close all windows one by one
+"""
+driver = Chrome(options=o)
+driver.get("https://demowebshop.tricentis.com/")
+driver.maximize_window()
+driver.find_element("xpath", "//a[.='Facebook']").click()
+driver.find_element("xpath", "//a[.='Twitter']").click()
+driver.find_element("xpath", "//a[.='Google+']").click()
+all_id = driver.window_handles      #[parent, child1, child2, child3]
+for i in all_id:                #i=child1
+    driver.switch_to.window(i)      #switch_to.window(child1)
+    sleep(2)
+    driver.close()
+"""
+#ws to close all child window
+"""
+driver = Chrome(options=o)
+driver.get("https://demowebshop.tricentis.com/")
+driver.maximize_window()
+driver.find_element("xpath", "//a[.='Facebook']").click()
+driver.find_element("xpath", "//a[.='Twitter']").click()
+driver.find_element("xpath", "//a[.='Google+']").click()
+all_id = driver.window_handles      #[parent, child1, child2, child3]
+for i in all_id[1:]:                #i=child1
+    driver.switch_to.window(i)      #switch_to.window(child1)
+    sleep(2)
+    driver.close()
+"""
+#ws to close only parent window
+"""
+driver = Chrome(options=o)
+driver.get("https://demowebshop.tricentis.com/")
+driver.maximize_window()
+driver.find_element("xpath", "//a[.='Facebook']").click()
+driver.find_element("xpath", "//a[.='Twitter']").click()
+driver.find_element("xpath", "//a[.='Google+']").click()
+driver.close()
+"""
+#ws to click on settings in twitter page
+"""
+driver = Chrome(options=o)
+driver.get("https://demowebshop.tricentis.com/")
+driver.maximize_window()
+driver.find_element("xpath", "//a[.='Twitter']").click()
+driver.find_element("xpath", "//a[.='Facebook']").click()
+driver.find_element("xpath", "//a[.='Google+']").click()
+all_ids = driver.window_handles     #allids=[parent, child1, child2, child3]
+for i in all_ids:                   #i=parent
+    driver.switch_to.window(i)      #switch_to.window(parent)
+    sleep(4)
+    if driver.title=="nopCommerce (@nopCommerce) / X":
+        driver.find_element("xpath","//span[.='Settings']").click()
+        break
+"""
+"""
+assignment
+----------
+open https://mohfw.gov.in/?q=en > click on Organisation > click on Departments of Health and Family Welfare
+> click Disaster Management Cell > click on Provider Course Manual for Doctors (5.39 MB) >  
+click download icon.
+"""
+##########################################################################################################
+#02/01/2026
+#notification popup
+"""
+o = ChromeOptions()
+o.add_argument("--disable-notifications")
+o.add_experimental_option("detach", True)
+
+driver = Chrome(options=o)
+driver.get("https://www.irctc.co.in/nget/train-search")
+driver.maximize_window()
+"""
+"""
+data driven testing
+===================
+
+*testing an application with different set of input, reading data from excel is as
+data driven testing.
+*will store multiple set of inputs inside a excel file.
+*since excel is a standalone application selenium will not support, so we use xlrd
+as a 3rd plugin/application.
+
+steps to install xlrd:
+----------------------
+option1: click on hamburger(4lines) --> click on settings --> click on python --> click on interpreter
+--> click on + --> search for xlrd and select version as 1.2.0 --> click on install package 
+
+option2: open terminal -> type the command > pip install xlrd==1.2.0
+steps to create a excel file in pycharm:
+----------------------------------------
+*create a directory in pycharm named as excel_file
+*go to pycharm project location(right click on project-->click on open in --> click on explorer)
+*click on excel_file folder
+*create a new excel file(right click --> click on new --> click on microsoft excel)
+
+steps to read data from excel file:
+-----------------------------------
+step1: open excel file
+step2: specify the sheet name
+step3: specify the row, colum number(both row and column index starts from 0)
+
+method of extracting row and colum values
+-----------------------------------------
+row_values(row_num) : it will return list of the specified row all columns values
+row_values(row_num, start_col): it will return list of specified row, from specified column
+                            to till last column values
+row_values(row_num, start_col, end_col): it will return list of specified row, from specified
+start colum to specified end colum values
+"""
+from xlrd import *
+
+#wp to print 4th row all columns
+"""
+#step1
+wb = open_workbook("../excel_files/demo.xlsx")
+#step2
+sh = wb.sheet_by_name("Sheet1")
+#step3
+data = sh.row_values(3)
+print(data)
+#['simpledimple', 'simdim@12221']
+"""
+#wp to print 2nd row all columns
+"""
+wb = open_workbook("../excel_files/demo.xlsx")
+sh = wb.sheet_by_name("Sheet1")
+data = sh.row_values(2)
+print(data)
+#['test', 'test@12345', 'pass', 'fail']
+"""
+#wp to print 3rd row from 1st to last column
+"""
+wb = open_workbook("../excel_files/demo.xlsx")
+sh = wb.sheet_by_name("Sheet1")
+data = sh.row_values(2, 1)
+print(data)
+#['test@12345', 'pass', 'fail']
+"""
+#ws to print 3rd row 1st and 2nd column
+"""
+wb = open_workbook("../excel_files/demo.xlsx")
+sh = wb.sheet_by_name("Sheet1")
+data = sh.row_values(2, 0, 2)
+print(data)
+#['test', 'test@12345']
+"""
+#wp to print total number of rows and column
+"""
+wb = open_workbook("../excel_files/demo.xlsx")
+sh = wb.sheet_by_name("Sheet1")
+row_count = sh.nrows
+print(row_count)            #6
+col_count = sh.ncols
+print(col_count)            #4
+"""
+#wp to print all username and password present in excel file
+"""
+wb = open_workbook("../excel_files/demo.xlsx")
+sh = wb.sheet_by_name("Sheet1")
+row_count = sh.nrows        #6
+for i in range(row_count):  #[0, 1, .. 5]
+    data = sh.row_values(i, 0, 2)
+    print(data)
+# ['username', 'password']
+# ['demo', 'demo@123']
+"""
+#create a dictionary of username and password pair
+"""
+d = {}
+wb = open_workbook("../excel_files/demo.xlsx")
+sh = wb.sheet_by_name("Sheet1")
+row_count = sh.nrows                        #6
+for i in range(row_count):                  #[0, 1, .. 5]
+    data = sh.row_values(i, 0, 2)           #['username', 'password']
+    d[data[0]] = data[1]
+print(d)        #{'username': 'password', 'demo': 'demo@123', 'test': 'test@12345', 'simpledimple': 'simdim@12221', 'admin': 'manager', 'a1b2': '1a2b'}
+"""
+###############################################################################################
+#ws to test facebook login page by entering 5 set of inputs
+"""
+wb = open_workbook("E:\\github_topic\\test1\\E20_SeleniumBatch\\excel_files\\data.xlsx")
+sh = wb.sheet_by_name("Sheet1")
+row_count = sh.nrows        #6
+for i in range(1, row_count):           #i=1                        i=2
+    data = sh.row_values(i, 0, 2)       #(1, 0, 2)                  (2, 0, 2)
+    print(data) 
+"""                        #['amith', 'amith@1234']    ['praveen@gmail.com', 'praveen112233']
+"""
+d = {}   #{'amith': 'amith@1234', 'praveen@gmail.com': 'praveen112233', 'hemanth123': 'hemanth123', 'akash': '', '': 'akash@123'}
+wb = open_workbook("E:\\github_topic\\test1\\E20_SeleniumBatch\\excel_files\\data.xlsx")
+sh = wb.sheet_by_name("Sheet1")
+row_count = sh.nrows        #6
+for i in range(1, row_count):           #i=1                        i=2
+    data = sh.row_values(i, 0, 2)       #data = ['amith', 'amith@1234']
+    d[data[0]] = data[1]
+
+for un, pwd in d.items():
+    driver = Chrome(options=o)
+    driver.get("https://www.facebook.com/")
+    driver.maximize_window()
+    driver.find_element("id", "email").send_keys(un)
+    driver.find_element("id", "pass").send_keys(pwd)
+    driver.find_element("name", "login").click()
+    sleep(3)
+    driver.close()
+"""
+###########################################################################################################
+#05/01/2025
+#ws to print list of food suggestion,read food name from excel file
+"""
+l = []
+wb = open_workbook("C:\\Users\\Hp\\PycharmProjects\\M18_selenium79AM\\excel_files\\data.xlsx")
+sh = wb.sheet_by_name("Sheet2")
+row_count = sh.nrows                #row_count=6
+for i in range(1, row_count):       #i=1
+    data = sh.row_values(i)         #data=['dosa']
+    l.append(data)
+
+for food in l:
+    driver= Chrome(options=o)
+    driver.get("https://www.zomato.com/bangalore/restaurants")
+    driver.maximize_window()
+    search = driver.find_element("xpath", "//input[@class='sc-dBfaGr dyyfrm']")
+    search.send_keys(food)
+    search.click()
+    sleep(5)
+    results = driver.find_elements("xpath", "//p[@class='sc-1hez2tp-0 sc-gFXMyG jkvifB']")
+    food_list = []
+    for i in results:
+        food_list.append(i.text)
+    print(food_list)
+    driver.close()
+"""
+"""
+assignment:
+-----------
+ws to launch https://www.naukri.com/registration/createAccount?othersrcp=23531&wExp=N&utm_source=google&utm_medium=cpc&utm_campaign=Brand&gclsrc=aw.ds&gad_source=1&gad_campaignid=19863995494&gbraid=0AAAAADLp3cEygg3qqw3KWN4HIBioCYA2e&gclid=Cj0KCQiAvOjKBhC9ARIsAFvz5lguz00zGqk13g89vp5afVI5YcUzCKh0x2PJ4vdFcMR8uaiJfCVUnoQaAq6tEALw_wcB 
+create 5 different naukri profile, read data from excel file. 
+"""
+################################################################################################################
+"""
+synchronization:
+----------------
+*the process if matching selenium speed with application speed is called as synchronization.
+                    (or)
+*the process of matching selenium and application wavelength is called as synchronization.
+
+*we can synchronization in 4 ways,
+1.sleep()
+2.implicitly_wait()
+3.WebdriverWait()
+4.fluent wait()
+
+1.sleep():
+----------
+*it is a method of time module.
+*it is used to sleep/pause the execution.
+*it will accept seconds as a time duration.
+    from time import sleep
+    sleep(seconds)
+
+drawbacks:
+----------
+*to synchronize 'n' elements we should write 'n' times sleep() method, because of this 
+code length will get increase and there is no optimization
+*if element is visible less than the specified time duration, but sleep method
+will wait complete timeduration because of this execution will take more time. 
+"""
+#########################################################################################
+#ws to enter first name in demo webpage
+"""
+driver = Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/loading.html")
+driver.maximize_window()
+driver.find_element("name", "fname").send_keys("selenium")
+#ElementNotInteractableException
+"""
+#ws to enter first name in demo webpage
+"""
+driver = Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/loading.html")
+driver.maximize_window()
+sleep(15)
+driver.find_element("name", "fname").send_keys("selenium")
+"""
+
+"""
+2.implicitly_wait():
+--------------------
+*it is a method to synchronize find_element() and find_elements() method.
+*it will accept seconds as a time duration.
+*if the element is visible less than the specified time duration the remaining time will
+be ignored.
+*for 'n' element 1 implicitly wait method is sufficient.
+*if the element is not visible within the specified time duration then it will throw
+"NoSuchElementException"
+    syntax: driver.implicitly_wait(seconds)
+"""
+###############################################################################################
+#ws to enter first name in demo webpage
+"""
+driver = Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/loading.html")
+driver.maximize_window()
+driver.implicitly_wait(15)
+driver.find_element("name", "fname").send_keys("selenium")
+"""
+#example on specifying lesstime in implicitly_wait()
+"""
+driver = Chrome(options=o)
+driver.get("file:///C:/Users/Hp/Desktop/loading.html")
+driver.maximize_window()
+driver.implicitly_wait(5)
+driver.find_element("name", "fname").send_keys("selenium")
+#ElementNotInteractableException
+"""
+###################################################################################################
+#ws to login for instgram.com
+"""
+driver = Chrome(options=o)
+driver.get("https://www.instagram.com/")
+driver.maximize_window()
+driver.implicitly_wait(10)
+driver.find_element("name", "username").send_keys("selenium")
+driver.find_element("name", "password").send_keys("selenium@123")
+driver.find_element("xpath", "//div[.='Log in']").click()
+"""
+#################################################################################################
+"""
+3.webdriverwait/explicitwait:
+#----------------------------
+*it is a class which is used to synchronize title, url, text including find_element()
+and find_elements() method.
+*we need to import the class from below statement
+    from selenium.webdriver.support.wait import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+*webdriverwait class constructor will accept driver and time duration as an argument.
+*if the specified condition is False then it will throw TimeOutException.
+"""
+
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+#ws to verify the twitter page
+"""
+driver = Chrome(options=o)
+driver.get("https://demowebshop.tricentis.com/")
+driver.maximize_window()
+driver.find_element("xpath","//a[.='Twitter']").click()
+ids = driver.window_handles
+driver.switch_to.window(ids[1])
+assert driver.title=="nopCommerce (@nopCommerce) / X"
+print("verification")
+#AssertionError
+
+*according to above script we will get AssertionError, bcz selenium very fastly checking the title, but application takes time to 
+load, bcz of this getting Error.
+*to sync title, URL, etc we use explicitwait.
+"""
+#titl_is: compelte title matches
+#ws to verify title of twitter webpage
+"""
+driver = Chrome(options=o)
+driver.get("https://demowebshop.tricentis.com/")
+driver.maximize_window()
+driver.implicitly_wait(10)
+driver.find_element("xpath","//a[.='Twitter']").click()
+ids = driver.window_handles
+driver.switch_to.window(ids[1])
+wait = WebDriverWait(driver, 10)
+wait.until(EC.title_is("nopCommerce (@nopCommerce) / X"))
+print("verification")
+#verification
+"""
+#example on title not matches
+"""
+driver = Chrome(options=o)
+driver.get("https://demowebshop.tricentis.com/")
+driver.maximize_window()
+driver.implicitly_wait(10)
+driver.find_element("xpath","//a[.='Twitter']").click()
+ids = driver.window_handles
+driver.switch_to.window(ids[1])
+wait = WebDriverWait(driver, 10)
+wait.until(EC.title_is("nopCommerce (@nopCommerce)"))
+print("verification")
+#TimeoutException: Message
+"""
+#ws to verify title of twitter webpage
+"""
+driver = Chrome(options=o)
+driver.get("https://demowebshop.tricentis.com/")
+driver.maximize_window()
+driver.implicitly_wait(10)
+driver.find_element("xpath","//a[.='Twitter']").click()
+ids = driver.window_handles
+driver.switch_to.window(ids[1])
+wait = WebDriverWait(driver, 10)
+wait.until(EC.title_contains("nopCommerce"))
+print("verification")
+#verification
+"""
+#ws to verify title of twitter webpage
+"""
+driver = Chrome(options=o)
+driver.get("https://demowebshop.tricentis.com/")
+driver.maximize_window()
+driver.implicitly_wait(10)
+driver.find_element("xpath","//a[.='Twitter']").click()
+ids = driver.window_handles
+driver.switch_to.window(ids[1])
+wait = WebDriverWait(driver, 10)
+wait.until(EC.url_to_be("https://x.com/nopCommerce"))
+print("verification")
+#verification
+"""
+#ws to verify title of twitter webpage
+#title_contains : wait until the title contains in the main title
+"""
+driver = Chrome(options=o)
+driver.get("https://demowebshop.tricentis.com/")
+driver.maximize_window()
+driver.implicitly_wait(10)
+driver.find_element("xpath","//a[.='Twitter']").click()
+ids = driver.window_handles
+driver.switch_to.window(ids[1])
+wait = WebDriverWait(driver, 10)
+wait.until(EC.url_contains("https://x.com"))
+print("verification")
+#verification
+"""
+#visibility_of_element_located : it will wait until the element is visible in webpage
+"""
+driver = Chrome()
+driver.get("https://www.walmart.com/")
+driver.maximize_window()
+wait = WebDriverWait(driver, 10)
+wait.until(EC.visibility_of_element_located(("xpath", "//button[.='Services']")))
+print("Element is visible in webpage")
+"""
+#text_to_be_present_in_element : it will wait until the text in the element is present or not
+"""
+driver = Chrome()
+driver.get("https://www.dmartindia.com/")
+driver.maximize_window()
+wait = WebDriverWait(driver, 10)
+wait.until(EC.text_to_be_present_in_element(("xpath", "(//span[@class='MuiButton-label'])[2]"), "CATEGORIES"))
+print("Text in Element is present")
+"""
+#################################################################################################################
+"""
+4.fluent wait:
+--------------
+*when the polling frequency is customize then it is called as fluent wait.
+*by default is 0.5 second.
+"""
+"""
+driver = Chrome()
+driver.get("https://www.walmart.com/")
+driver.maximize_window()
+wait = WebDriverWait(driver, 10, poll_frequency=1)
+"""
+"""
+what is the difference b/w implicitly wait and webdriver/explicit wait:
+***********************************************************************
+implicitly wait:
+----------------
+*it will synchronize only for find_element() and find_elements().
+*it will throw "NoSuchElement Exception" if element is not visible within time duration.
+*it is a method of browser class / web driver(no importing stmt).
+*we will pass 1 argument that is time duration in seconds.
+*we can't specify any conditions.
+
+webdriver/explicit wait:
+--------------
+*it will synchronize all methods including find_element() and find_elements().
+*it will throw "TimeOut Exception" if element is not visible within time duration.
+*it is a method of WebDriverWait class, and also we need to specify the "expected_conditions"
+we need to import both.
+*we will pass two argument that is "driver and time duration".
+*we will specify the conditions.
+"""
+#############################################################################################
+#07/01/2026
+#handling keyboard action
+"""
+handling keyboard actions:
+--------------------------
+*to handle keyboard actions we use "Keys" module from below statement.
+    from selenium.webdriver.common.keys import Keys
+*we should use send_keys() method to perform keyboard action.
+    syntax: web_element.send_keys(Keys.key_name)
+"""
+
+from selenium.webdriver.common.keys import Keys
+
+#ws to click on backspace
+"""
+driver = Chrome(options=o)
+driver.get("https://www.facebook.com/")
+driver.maximize_window()
+un = driver.find_element("id", "email")
+un.send_keys("selenium")
+un.send_keys(Keys.BACK_SPACE)
+"""
+#ws to perform backspace for 3 times
+"""
+driver = Chrome(options=o)
+driver.get("https://www.facebook.com/")
+driver.maximize_window()
+un = driver.find_element("id", "email")
+un.send_keys("selenium")
+for i in range(3):
+    un.send_keys(Keys.BACKSPACE)
+"""
+#ws to clear the data without using clear() method
+"""
+driver = Chrome(options=o)
+driver.get("https://www.facebook.com/")
+driver.maximize_window()
+un = driver.find_element("id", "email")
+un.send_keys("selenium")
+un.send_keys(Keys.CONTROL+"a")
+un.send_keys(Keys.BACKSPACE)
+"""
+#ws to enter selenium in UN and copy pate in PWD text field
+"""
+driver = Chrome(options=o)
+driver.get("https://www.facebook.com/")
+driver.maximize_window()
+un = driver.find_element("id", "email")
+pwd = driver.find_element("id", "pass")
+un.send_keys("selenium")
+un.send_keys(Keys.CONTROL+"a")
+un.send_keys(Keys.CONTROL+"c")
+pwd.send_keys(Keys.CONTROL+"v")
+"""
+#ws to click on forgotten password without using click() method
+"""
+driver = Chrome(options=o)
+driver.get("https://www.facebook.com/")
+driver.maximize_window()
+link = driver.find_element("xpath", "//a[.='Forgotten password?']")
+link.send_keys(Keys.ENTER)
+"""
+#ws to delete particular character in word
+"""
+driver = Chrome(options=o)
+driver.get("https://www.facebook.com/")
+driver.maximize_window()
+un = driver.find_element("name", "email")
+un.send_keys("selenium")
+un.send_keys(Keys.ARROW_LEFT)
+un.send_keys(Keys.SHIFT, Keys.ARROW_LEFT, Keys.BACKSPACE)
+"""
+#example on tab key usage
+"""
+driver = Chrome(options=o)
+driver.get("https://www.facebook.com/")
+driver.maximize_window()
+link = driver.find_element("link text", "Forgotten password?")
+link.send_keys(Keys.TAB)
+"""
+#############################################################################################
+"""
+scrolling a webpage:
+--------------------
+*to scroll in a webpage we use below method,
+    ->driver.execute_script("window.scrollBy(x, y)")
+    the above method will perform scroll down action
+    ->driver.execute_script("window.scrollTo(x, y)")
+    the above method will perform scroll up action    
+"""
+#ws to scroll down 500pixel
+"""
+driver = Chrome(options=o)
+driver.get("https://www.decathlon.in/")
+driver.maximize_window()
+driver.execute_script("window.scrollBy(0, 500)")
+"""
+#ws to scroll down 3times
+"""
+driver = Chrome(options=o)
+driver.get("https://www.decathlon.in/")
+driver.maximize_window()
+for i in range(3):
+    driver.execute_script("window.scrollBy(0, 500)")
+"""
+#ws to scroll down to free online eye test in lenskart
+"""
+driver = Chrome(options=o)
+driver.get("https://www.lenskart.com/")
+driver.maximize_window()
+sleep(2)
+ele = driver.find_element("xpath", "//h4[.='Free Online Eye Test']")
+d = ele.location            #d={'x': 40, 'y': 2239}
+driver.execute_script(f"window.scrollBy({d['x']}, {d['y']})")
+"""
+#ws to scroll down and scroll up
+"""
+driver = Chrome(options=o)
+driver.get("https://www.lenskart.com/")
+driver.maximize_window()
+sleep(2)
+driver.execute_script(f"window.scrollBy(0, 1700)")
+sleep(2)
+driver.execute_script("window.scrollTo(500, 0)")
+"""
+#ws to scroll down to trending sunglasses and scroll up to free online eye test
+"""
+driver = Chrome(options=o)
+driver.get("https://www.lenskart.com/")
+driver.maximize_window()
+sleep(2)
+ele = driver.find_element("xpath", "//h4[.='Trending Sunglasses']")
+d = ele.location            #d={'x': 40, 'y': 2239}
+driver.execute_script(f"window.scrollBy({d['x']}, {d['y']})")
+sleep(2)
+ele = driver.find_element("xpath", "//h4[.='Free Online Eye Test']")
+d = ele.location            #d={'x': 40, 'y': 2239}
+driver.execute_script(f"window.scrollTo({d['x']}, {d['y']})")
+"""
+###################################################################################################
+#08/01/2025
+"""
+pytest
+"""
+from time import sleep
+import pytest
+
+"""
+pytest:
+*******
+*pytest is a unit-testing framework basically developer will be used.
+*pytest will be used by QA for following reason,
+    *to run test function/method automatically.
+    *to run multiple testcase at oneshot.
+    *to generate reports.
+    *to achieve parallel execution(compatibility).
+
+steps to install pytest:
+************************
+click on file-->click on settings-->click on project-->click python interpreter-->click on plus icon
+-->search for pytest-->click on specify version(latest version)-->click on install package.
+
+naming convention for pytest:
+*****************************
+*function/method name should be starts with test keyword(test_*).
+*class name should starts with Test keyword and 1st letter should be capital(Test_*) and pytest class should
+not consist of constructor(__init__).
+*module name can starts with test (or) end with test keyword(test_* (or) *_test).
+
+how to run pytest function/class:
+*********************************
+*copy the path where pytest function/file is present(right click on folder-->click on copy path-->click on absolute path)
+*open cmd --> change directory by below command
+    >>cd path_of_pytest_file
+    >>pytest -vs pytest_filename.py
+
+v->verbosity
+s->scripting    
+*vs is used to get the output/message in detailed format.
+
+right click on file --> click on open in -->click on terminal-->type the command
+
+note:
+-----
+*a function which starts with test keyword is called as test function/method
+*a class which starts with test keyword is called as test class.
+*a module start/end with test keyword is called as test module.
+"""
+
+#calling a function
+"""
+def sample():
+    print("sample testcase")
+
+sample()
+#sample testcase
+"""
+
+#calling a method
+"""
+class Demo:
+    def simple(self):
+        print("simple testcase")
+
+d = Demo()
+d.simple()
+#simple testcase
+""""""
+*according to above example function and method will bet execute when ever we are calling explicitly.
+*if we want to execute a function/method without calling explicitly then we need go for "pytest" concept.
+"""
+#####################################################################################################
+#function level
+#test function
+"""
+def test_TC1():
+    print("testcase1 function")
+def test_TC2():
+    print("testcase2 function")
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 2 items
+
+pytestconcept.py::test_TC1 testcase1 function
+PASSED
+pytestconcept.py::test_TC2 testcase2 function
+PASSED
+"""
+#non-test function
+"""
+def TC1_test():
+    print("testcase1 function")
+def test_TC2():
+    print("testcase2 function")
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 1 item
+
+pytestconcept.py::test_TC2 testcase2 function
+PASSED
+"""
+#non-test function
+"""
+def TC1():
+    print("testcase1 function")
+def TC2():
+    print("testcase2 function")
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 0 items
+"""
+##################################################################################################
+#class and method level
+#non-testclass and test method
+"""
+class Sample:
+    def test_m1(self):
+        print("method1 testcase")
+    def test_m2(self):
+        print("method2 testcase")
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 0 items
+"""
+#testclass and test method
+"""
+class TestSample:
+    def test_m1(self):
+        print("method1 testcase")
+    def test_m2(self):
+        print("method2 testcase")
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 2 items
+
+pytestconcept.py::TestSample::test_m1 method1 testcase
+PASSED
+pytestconcept.py::TestSample::test_m2 method2 testcase
+PASSED
+"""
+#testclass and non-test method
+"""
+class TestSample:
+    def m1(self):
+        print("method1 testcase")
+    def m2(self):
+        print("method2 testcase")
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 0 items
+"""
+#testclass and non-test method
+"""
+class TestSample:
+    def test_m1(self):
+        print("method1 testcase")
+    def m2_test(self):
+        print("method2 testcase")
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 1 item
+
+pytestconcept.py::TestSample::test_m1 method1 testcase
+PASSED
+"""
+##########################################################################################
+#class level
+"""
+class TestSample:
+    def test_m1(self):
+        print("m1 testcase1")
+    def test_m2(self):
+        print("m2 testcase2")
+
+class TestSimple:
+    def test_m3(self):
+        print("m3 testcase1")
+    def test_m4(self):
+        print("m4 testcase2")
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 4 items
+
+pytestconcept.py::TestSample::test_m1 m1 testcase1
+PASSED
+pytestconcept.py::TestSample::test_m2 m2 testcase2
+PASSED
+pytestconcept.py::TestSimple::test_m3 m3 testcase1
+PASSED
+pytestconcept.py::TestSimple::test_m4 m4 testcase2
+PASSED
+"""
+#non-test class andnon-test method
+"""
+class TestSample:
+    def test_m1(self):
+        print("m1 testcase1")
+    def test_m2(self):
+        print("m2 testcase2")
+
+class SimpleTest:
+    def test_m3(self):
+        print("m3 testcase1")
+    def test_m4(self):
+        print("m4 testcase2")
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 2 items
+
+pytestconcept.py::TestSample::test_m1 m1 testcase1
+PASSED
+pytestconcept.py::TestSample::test_m2 m2 testcase2
+PASSED
+"""
+#non-test class andnon-test method
+"""
+class TestSample:
+    def test_m1(self):
+        print("m1 testcase1")
+    def m2(self):
+        print("m2 testcase2")
+
+class SimpleTest:
+    def m3(self):
+        print("m3 testcase1")
+    def test_m4(self):
+        print("m4 testcase2")
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 1 item
+
+pytestconcept.py::TestSample::test_m1 m1 testcase1
+PASSED
+"""
+#test class consist of constructor
+"""
+class TestDemo:
+    def __init__(self):
+        print("im a constructor")
+    def test_m1(self):
+        print("m1 testcase")
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 0 items
+ PytestCollectionWarning: cannot collect test class 'TestDemo'
+because it has a __init__ constructor (from: pytestconcept.py)
+"""
+############################################################################################
+#module level
+"""
+def test_fun1():
+    print("testcase function")
+
+class TestGmail:
+    def test_compose(self):
+        print("compos testcase")
+    def test_inbox(self):
+        print("inbox testcase")
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 3 items
+
+pytestconcept.py::test_fun1 testcase function
+PASSED
+pytestconcept.py::TestGmail::test_compose compos testcase
+PASSED
+pytestconcept.py::TestGmail::test_inbox inbox testcase
+PASSED
+"""
+############################################################################################################
+#01/08/2025
+"""
+markers:
+--------
+*markers are used to execute the specific test function/method/class/module.
+*pytest markers are classified into 2 types,
+    1.custom markers
+    2.built-in markers
+
+Pytest custom markers
+=====================
+ @pytest.mark is a decorator used to add the metadata to the test.
+ Metadata : details about the data.
+Grouping test cases using custom markers
+ We can create custom markers by using, @pytest.mark.markerName
+ We can group the test cases.
+ To execute: pytest filename.py –vs –m “name of the marker”
+
+ To execute multiple markers: 
+o pytest filename.py –vs –m “marker1 or marker2”  executes testcases which are 
+marked with either marker1 or marker2
+o pytest filename.py –vs –m “marker1 and marker2”  executes the testcases which are 
+marked with both marker1 and marker2.
+o pytest filename.py –vs –m “not marker2”  executes the testcases which are not 
+marked with marker2.
+"""
+# function level
+"""
+@pytest.mark.smoke
+def test_login():
+    print("loginpage testcase")
+def test_trash():
+    print("tash testcase")
+@pytest.mark.smoke
+def test_compose():
+    print("compose testcase")
+def test_bin():
+    print("bin testcase")
+"""
+"""
+>pytest -vs -m "smoke" pytestconcept.py
+collected 4 items / 2 deselected / 2 selected
+
+pytestconcept.py::test_login loginpage testcase
+PASSED
+pytestconcept.py::test_compose compose testcase
+PASSED
+"""
+# executing which are marked with p3
+"""
+@pytest.mark.smoke
+def test_login():
+    print("loginpage testcase")
+@pytest.mark.p3
+def test_trash():
+    print("tash testcase")
+@pytest.mark.smoke
+def test_compose():
+    print("compose testcase")
+@pytest.mark.p3
+def test_bin():
+    print("bin testcase")
+"""
+"""
+>pytest -vs -m "p3" pytestconcept.py
+collected 4 items / 2 deselected / 2 selected
+
+pytestconcept.py::test_trash tash testcase
+PASSED
+pytestconcept.py::test_bin bin testcase
+PASSED
+"""
+# executing which are marked with smoke
+"""
+@pytest.mark.smoke
+def test_login():
+    print("loginpage testcase")
+@pytest.mark.p3
+@pytest.mark.smoke
+def test_trash():
+    print("tash testcase")
+@pytest.mark.smoke
+def test_compose():
+    print("compose testcase")
+@pytest.mark.p3
+def test_bin():
+    print("bin testcase")
+"""
+"""
+>pytest -vs -m "smoke" pytestconcept.py
+collected 4 items / 1 deselected / 3 selected
+
+pytestconcept.py::test_login loginpage testcase
+PASSED
+pytestconcept.py::test_trash tash testcase
+PASSED
+pytestconcept.py::test_compose compose testcase
+PASSED
+"""
+# executing which are marked with regression
+"""
+@pytest.mark.smoke
+def test_login():
+    print("loginpage testcase")
+@pytest.mark.p3
+@pytest.mark.smoke
+def test_trash():
+    print("tash testcase")
+@pytest.mark.smoke
+def test_compose():
+    print("compose testcase")
+@pytest.mark.p3
+def test_bin():
+    print("bin testcase")
+"""
+"""
+>pytest -vs -m "regression" pytestconcept.py
+collected 4 items / 4 deselected / 0 selected
+"""
+# example on writing multiple marker name
+"""
+@pytest.mark.smoke
+def test_login():
+    print("loginpage testcase")
+@pytest.mark.p3
+@pytest.mark.smoke
+def test_trash():
+    print("tash testcase")
+@pytest.mark.reg
+def test_compose():
+    print("compose testcase")
+@pytest.mark.p3
+def test_bin():
+    print("bin testcase")
+"""
+"""
+>pytest -vs -m "reg, smoke" pytestconcept.py
+collected 4 items
+ERROR: Wrong expression passed to '-m': reg, smoke: at column 4: unexpected character ","
+"""
+# executing smoke and p3 marker
+"""
+@pytest.mark.smoke
+def test_login():
+    print("loginpage testcase")
+@pytest.mark.p3
+@pytest.mark.smoke
+def test_trash():
+    print("tash testcase")
+@pytest.mark.reg
+def test_compose():
+    print("compose testcase")
+@pytest.mark.p3
+def test_bin():
+    print("bin testcase")
+"""
+"""
+>pytest -vs -m "smoke and p3" pytestconcept.py
+collected 4 items / 3 deselected / 1 selected
+
+pytestconcept.py::test_trash tash testcase
+PASSED
+"""
+# executing smoke or reg marker
+"""
+@pytest.mark.smoke
+def test_login():
+    print("loginpage testcase")
+@pytest.mark.p3
+@pytest.mark.smoke
+def test_trash():
+    print("tash testcase")
+@pytest.mark.reg
+def test_compose():
+    print("compose testcase")
+@pytest.mark.p3
+def test_bin():
+    print("bin testcase")
+"""
+"""
+>pytest -vs -m "smoke or reg" pytestconcept.py
+collected 4 items / 1 deselected / 3 selected
+
+pytestconcept.py::test_login loginpage testcase
+PASSED
+pytestconcept.py::test_trash tash testcase
+PASSED
+pytestconcept.py::test_compose compose testcase
+PASSED
+"""
+# executing excluding m3 marker
+"""
+@pytest.mark.smoke
+def test_login():
+    print("loginpage testcase")
+@pytest.mark.p3
+@pytest.mark.smoke
+def test_trash():
+    print("tash testcase")
+@pytest.mark.reg
+def test_compose():
+    print("compose testcase")
+@pytest.mark.p3
+def test_bin():
+    print("bin testcase")
+"""
+"""
+>pytest -vs -m "not p3" pytestconcept.py
+collected 4 items / 2 deselected / 2 selected
+
+pytestconcept.py::test_login loginpage testcase
+PASSED
+pytestconcept.py::test_compose compose testcase
+PASSED
+"""
+#################################################################################################
+# method level
+# executing only regression marker
+"""
+class TestInsta:
+    @pytest.mark.regression
+    def test_post(self):
+        print("post testcase")
+    def test_story(self):
+        print("story testcase")
+    @pytest.mark.regression
+    def test_chat(self):
+        print("chat testcase")
+"""
+"""
+>pytest -vs -m "regression" pytestconcept.py
+collected 3 items / 1 deselected / 2 selected
+
+pytestconcept.py::TestInsta::test_post post testcase
+PASSED
+pytestconcept.py::TestInsta::test_chat chat testcase
+PASSED
+"""
+# executing only regression marker
+"""
+class TestInsta:
+    @pytest.mark.regression
+    def test_post(self):
+        print("post testcase")
+    def test_story(self):
+        print("story testcase")
+    @pytest.mark.regression
+    def chat(self):
+        print("chat testcase")
+    def test_register(self):
+        print("register testcase")
+"""
+"""
+>pytest -vs -m "regression" pytestconcept.py
+collected 3 items / 2 deselected / 1 selected
+
+pytestconcept.py::TestInsta::test_post post testcase
+PASSED
+"""
+# executinh regression and high marker
+"""
+class TestInsta:
+    @pytest.mark.regression
+    @pytest.mark.high
+    def test_post(self):
+        print("post testcase")
+    @pytest.mark.critical
+    def test_story(self):
+        print("story testcase")
+    @pytest.mark.regression
+    @pytest.mark.low
+    def test_chat(self):
+        print("chat testcase")
+    @pytest.mark.high
+    def test_register(self):
+        print("register testcase")
+"""
+"""
+>pytest -vs -m "regression and high" pytestconcept.py
+collected 4 items / 3 deselected / 1 selected
+
+pytestconcept.py::TestInsta::test_post post testcase
+PASSED
+"""
+# executinh regression or high marker
+"""
+class TestInsta:
+    @pytest.mark.regression
+    @pytest.mark.high
+    def test_post(self):
+        print("post testcase")
+    @pytest.mark.critical
+    def test_story(self):
+        print("story testcase")
+    @pytest.mark.regression
+    @pytest.mark.low
+    def test_chat(self):
+        print("chat testcase")
+    @pytest.mark.high
+    def test_register(self):
+        print("register testcase")
+"""
+"""
+>pytest -vs -m "regression or high" pytestconcept.py
+collected 4 items / 1 deselected / 3 selected
+
+pytestconcept.py::TestInsta::test_post post testcase
+PASSED
+pytestconcept.py::TestInsta::test_chat chat testcase
+PASSED
+pytestconcept.py::TestInsta::test_register register testcase
+PASSED
+"""
+##############################################################################################
+# class level
+# executinh which are marked with imp
+"""
+@pytest.mark.imp
+class TestInsta:
+    def test_post(self):
+        print("post testcase")
+    def test_story(self):
+        print("story testcase")
+class TestFb:
+    def test_chat(self):
+        print("chat testcase")
+    def test_register(self):
+        print("register testcase")
+"""
+"""
+>pytest -vs -m "imp" pytestconcept.py
+collected 4 items / 2 deselected / 2 selected
+
+pytestconcept.py::TestInsta::test_post post testcase
+PASSED
+pytestconcept.py::TestInsta::test_story story testcase
+PASSED
+"""
+# executinh which are marked with imp
+"""
+@pytest.mark.imp
+class TestInsta:
+    def test_post(self):
+        print("post testcase")
+    def test_story(self):
+        print("story testcase")
+class TestFb:
+    def test_chat(self):
+        print("chat testcase")
+@pytest.mark.imp
+class TestSample:
+    def test_register(self):
+        print("register testcase")
+"""
+"""
+>pytest -vs -m "imp" pytestconcept.py
+collected 4 items / 1 deselected / 3 selected
+
+pytestconcept.py::TestInsta::test_post post testcase
+PASSED
+pytestconcept.py::TestInsta::test_story story testcase
+PASSED
+pytestconcept.py::TestSample::test_register register testcase
+PASSED
+"""
+# executing class except mark with imp
+"""
+@pytest.mark.imp
+class TestInsta:
+    def test_post(self):
+        print("post testcase")
+    def test_story(self):
+        print("story testcase")
+class TestFb:
+    def test_chat(self):
+        print("chat testcase")
+@pytest.mark.imp
+class TestSample:
+    def test_register(self):
+        print("register testcase")
+"""
+"""
+>pytest -vs -m "not imp" pytestconcept.py
+collected 4 items / 3 deselected / 1 selected
+
+pytestconcept.py::TestFb::test_chat chat testcase
+PASSED
+"""
+# combination of class level and method level marker
+"""
+@pytest.mark.imp
+class TestInsta:
+    @pytest.mark.m1
+    def test_post(self):
+        print("post testcase")
+    def test_story(self):
+        print("story testcase")
+class TestFb:
+    @pytest.mark.m2
+    def test_chat(self):
+        print("chat testcase")
+    @pytest.mark.m1
+    def test_register(self):
+        print("register testcase")
+"""
+"""
+>pytest -vs -m "m1" pytestconcept.py
+collected 4 items / 2 deselected / 2 selected
+
+pytestconcept.py::TestInsta::test_post post testcase
+PASSED
+pytestconcept.py::TestFb::test_register register testcase
+PASSED
+"""
+# combination of class level and method level marker
+"""
+@pytest.mark.imp
+class TestInsta:
+    @pytest.mark.m1
+    def test_post(self):
+        print("post testcase")
+    def test_story(self):
+        print("story testcase")
+class TestFb:
+    @pytest.mark.m2
+    def test_chat(self):
+        print("chat testcase")
+    @pytest.mark.m1
+    def test_register(self):
+        print("register testcase")
+"""
+"""
+>pytest -vs -m "imp" pytestconcept.py
+collected 4 items / 2 deselected / 2 selected
+
+pytestconcept.py::TestInsta::test_post post testcase
+PASSED
+pytestconcept.py::TestInsta::test_story story testcase
+PASSED
+"""
+
+# single function multiple markers
+"""
+@pytest.mark.m1
+@pytest.mark.m2
+@pytest.mark.m3
+@pytest.mark.m4
+@pytest.mark.m5
+@pytest.mark.m6
+def test_chat():
+    print("chat testcase")
+"""
+"""
+>pytest -vs -m "m5" pytestconcept.py
+collected 1 item
+
+pytestconcept.py::test_chat chat testcase
+PASSED
+"""
+################################################################################################
+# module level
+# marking for entire module
+"""
+pytestmark = pytest.mark.smoke
+
+def test_fun1():
+    print("funtion testcase")
+
+class TestSample:
+    def test_tc1(self):
+        print("test method1")
+    def test_tc2(self):
+        print("test method2")
+"""
+"""
+>pytest -vs -m "smoke" pytestconcept.py
+collected 3 items
+
+pytestconcept.py::test_fun1 funtion testcase
+PASSED
+pytestconcept.py::TestSample::test_tc1 test method1
+PASSED
+pytestconcept.py::TestSample::test_tc2 test method2
+PASSED
+"""
+#########################################################################################
+"""
+built-in markers:
+----------------
+1.skip
+2.skipif
+3.xfail
+4.parameterize
+5.usefixture
+"""
+"""
+Skipping test functions
+1. Skip
+ The simplest way to skip a test function is to mark it with the skip decorator which may 
+be passed an optional reason:
+   @pytest.mark.skip(reason=””) : skips the testcases always without any reason
+2. Skipif
+  If you wish to skip something conditionally then you can use skipif instead.
+  @pytest.mark.skipif(condition, reason): skips the testcases only when the condition is  True.
+"""
+#function level
+"""
+def test_tc1():
+    print("testcase1")
+@pytest.mark.skip
+def test_tc2():
+    print("testcase2")
+def test_tc3():
+    print("testcase3")
+@pytest.mark.skip
+def test_tc4():
+    print("testcase4")
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 4 items
+
+pytestconcept.py::test_tc1 testcase1
+PASSED
+pytestconcept.py::test_tc2 SKIPPED (unconditional skip)
+pytestconcept.py::test_tc3 testcase3
+PASSED
+pytestconcept.py::test_tc4 SKIPPED (unconditional skip)
+"""
+
+"""
+def test_tc1():
+    print("testcase1")
+@pytest.mark.skip(reason="low priority")
+def test_tc2():
+    print("testcase2")
+def test_tc3():
+    print("testcase3")
+@pytest.mark.skip(reason="not important")
+def test_tc4():
+    print("testcase4")
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 4 items
+
+pytestconcept.py::test_tc1 testcase1
+PASSED
+pytestconcept.py::test_tc2 SKIPPED (low priority)
+pytestconcept.py::test_tc3 testcase3
+PASSED
+pytestconcept.py::test_tc4 SKIPPED (not important)
+"""
+#############################################################################################
+"""
+class TestSample:
+    def test_tc1(self):
+        print("testcase1")
+    @pytest.mark.skip(reason="low priority")
+    def test_tc2(self):
+        print("testcase2")
+    def test_tc3(self):
+        print("testcase3")
+    @pytest.mark.skip(reason="not important")
+    def test_tc4(self):
+        print("testcase4")
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 4 items
+
+pytestconcept.py::test_tc1 testcase1
+PASSED
+pytestconcept.py::test_tc2 SKIPPED (low priority)
+pytestconcept.py::test_tc3 testcase3
+PASSED
+pytestconcept.py::test_tc4 SKIPPED (not important)
+"""
+
+"""
+@pytest.mark.skip(reason="all method are not required")
+class TestSample:
+    def test_tc1(self):
+        print("testcase1")
+    def test_tc2(self):
+        print("testcase2")
+class TestSimple:
+    def test_tc3(self):
+        print("testcase3")
+    def test_tc4(self):
+        print("testcase4")
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 4 items
+
+pytestconcept.py::TestSample::test_tc1 SKIPPED (all method are not required)
+pytestconcept.py::TestSample::test_tc2 SKIPPED (all method are not required)
+pytestconcept.py::TestSimple::test_tc3 testcase3
+PASSED
+pytestconce
+"""
+#################################################################################################
+#example on skipif
+"""
+testid = 3423
+def test_TC1():
+    print("testcas1")
+@pytest.mark.skipif(testid in [5671, 2233, 3423, 7890], reason="test_case not required")
+def test_TC2():
+    print("testcas2")
+def test_TC3():
+    print("testcas3")
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 3 items
+
+pytestconcept.py::test_TC1 testcas1
+PASSED
+pytestconcept.py::test_TC2 SKIPPED (test_case not required)
+pytestconcept.py::test_TC3 testcas3
+PASSED
+"""
+
+"""
+testid = 3428
+def test_TC1():
+    print("testcas1")
+@pytest.mark.skipif(testid in [5671, 2233, 3423, 7890], reason="test_case not required")
+def test_TC2():
+    print("testcas2")
+def test_TC3():
+    print("testcas3")
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 3 items
+
+pytestconcept.py::test_TC1 testcas1
+PASSED
+pytestconcept.py::test_TC2 testcas2
+PASSED
+pytestconcept.py::test_TC3 testcas3
+PASSED
+"""
+
+"""
+class TestExe:
+    os = "mac"
+    def test_TC1(self):
+        print("testcas1")
+    @pytest.mark.skipif(os in ["linux", "window", "mac"], reason="platform missmatch")
+    def test_TC2(self):
+        print("testcas2")
+    def test_TC3(self):
+        print("testcas3")
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 3 items
+
+pytestconcept.py::TestExe::test_TC1 testcas1
+PASSED
+pytestconcept.py::TestExe::test_TC2 SKIPPED (platform missmatch)
+pytestconcept.py::TestExe::test_TC3 testcas3
+PASSED
+"""
+"""
+browser="IE"
+class TestDemo:
+    def test_Tc1(self):
+        print("method1 testcase")
+    def test_Tc2(self):
+        print("method2 testcase")
+@pytest.mark.skipif(browser=="IE", reason="IE not exists")
+class TestSample:
+    def test_Tc3(self):
+        print("method3 testcase")
+    def test_Tc4(self):
+        print("method4 testcase")
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 4 items
+
+pytestconcept.py::TestDemo::test_Tc1 method1 testcase
+PASSED
+pytestconcept.py::TestDemo::test_Tc2 method2 testcase
+PASSED
+pytestconcept.py::TestSample::test_Tc3 SKIPPED (IE not exists)
+pytestconcept.py::TestSample::test_Tc4 SKIPPED (IE not exists)
+"""
+###################################################################################################
+"""
+XFail
+=====
+ mark test functions as expected to fail
+ You can use the xfail marker to indicate that you expect a test to fail:
+Syntax: @pytest.mark.xfail([parameters])
+
+1. condition parameter : If a test is only expected to fail under a certain condition, you can pass 
+that condition as the first parameter:
+Eg:
+@pytest.mark.xfail(sys.platform == "win32", reason="bug in a 3rd party library")
+def test_function():
+    . . .
+
+2. reason parameter: You can specify the motive of an expected failure with 
+the reason parameter
+Eg:
+@pytest.mark.xfail(reason="known parser issue")
+def test_function():
+    . . .
+
+3. raises parameter: If you want to be more specific as to why the test is failing, you can specify 
+a single exception, or a tuple of exceptions, in the raises argument.
+Eg: 
+@pytest.mark.xfail(raises=RuntimeError)
+def test_function():
+    . . .
+note:
+*****
+*this marker will go when intenstaionally we want to fail the testcase because a feature is not stable/
+new feature/not implemented/open defect/reqt changes etc.. 
+*it will not print "fail" in result it will print as "xpass".
+"""
+
+"""
+def test_chat():
+    print("chat module")
+def test_status():
+    print("status module")
+@pytest.mark.xfail
+def test_channel():
+    print("channel module")
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 3 items
+
+pytestconcept.py::test_chat chat module
+PASSED
+pytestconcept.py::test_status status module
+PASSED
+pytestconcept.py::test_channel channel module
+XPASS
+"""
+
+"""
+brw = "IE"
+def test_chat():
+    print("chat module")
+def test_status():
+    print("status module")
+@pytest.mark.xfail(brw in ["mozilla","chrome", "IE"], reason="not implemented")
+def test_channel():
+    print("channel module")
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 3 items
+
+pytestconcept.py::test_chat chat module
+PASSED
+pytestconcept.py::test_status status module
+PASSED
+pytestconcept.py::test_channel channel module
+XPASS (not implemented)
+"""
+
+"""
+brw = "safari"
+def test_chat():
+    print("chat module")
+def test_status():
+    print("status module")
+@pytest.mark.xfail(brw in ["mozilla","chrome", "IE"], reason="not implemented")
+def test_channel():
+    print("channel module")
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 3 items
+
+pytestconcept.py::test_chat chat module
+PASSED
+pytestconcept.py::test_status status module
+PASSED
+pytestconcept.py::test_channel channel module
+PASSED
+"""
+"""
+note:
+*****
+*in xfail marker if cond the is True then the result is "xpass" else if the cond is False the result
+is "PASSED".
+"""
+######################################################################################################
+#09/01/2026
+"""
+parameterize:
+-------------
+@pytest.mark.parametrize: The builtin pytest.mark.parametrize decorator enables parametrization 
+of arguments for a test function.
+Here is a typical example of a test function that implements checking that a certain input leads to an 
+expected output
+note:
+-----
+*in "parametrize" the number of names must be equal to the number of values.
+
+syntax:-
+========
+@pytest.mark.parametrize("value1, value2", [[val1, val2], [val3, val4],....])
+def func(value1, value2):
+     . . .
+
+note:
+-----
+*no. of variable should be equal to no. of values.
+*no. of test function call equal to no. of inputs/values.
+*when ever we are declaring multiple variables then multiple variables should be enclosed within
+any brackets like tuple, list, set.
+"""
+
+"""
+def add():
+    a = 10
+    b = 20
+    print(a+b)
+add()       #30
+add()       #30
+"""
+
+"""
+def add(a, b):
+    print(a+b)
+add(4, 8)       #12
+add(7, 1)       #8
+add(9, 2)       #11
+"""
+#according to above function add is a normal function, it will accept parameters when we call a function.
+#but if it is test function we can't pass a argument bcz test function are not explicitly callable.
+#for any test function/method if we pass any argument then it will consider as a fixture.
+
+"""
+def test_add(a, b):
+    print(a+b)
+test_add(2, 3)
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 1 item
+
+pytestconcept.py::test_add ERROR
+fixture 'a' not found
+"""
+#to over come above drawback we use "parameterize" as builtin marker.
+"""
+@pytest.mark.parametrize("a", [10, 20, 30, 40])
+def test_add(a):
+    print(f"input is {a}")
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 4 items
+
+pytestconcept.py::test_add[10] input is 10
+PASSED
+pytestconcept.py::test_add[20] input is 20
+PASSED
+pytestconcept.py::test_add[30] input is 30
+PASSED
+pytestconcept.py::test_add[40] input is 40
+PASSED
+"""
+#function level
+"""
+@pytest.mark.parametrize("a, b", [[10, 20], [2, 8], [8, 4]])
+def test_add(a, b):
+    print(f"result is:{a+b}")
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 3 items
+
+pytestconcept.py::test_add[10-20] result is:30
+PASSED
+pytestconcept.py::test_add[2-8] result is:10
+PASSED
+pytestconcept.py::test_add[8-4] result is:12
+PASSED
+"""
+
+"""
+@pytest.mark.parametrize("a, b", [[10, 20], [2, 8], [8, 4]])
+def test_add(c, b):
+    print(f"result is:{c+b}")
+"""
+"""
+>pytest -vs pytestconcept.py
+collected 0 items / 1 error
+
+======================================================== ERRORS =========================================================
+___________________________________________ ERROR collecting pytestconcept.py ___________________________________________
+In test_add: function uses no argument 'a'
+"""
+
+"""
+@pytest.mark.parametrize("a, b, c", [[10, 20], [2, 8], [8, 4]])
+def test_add(a, b, c):
+    print(f"result is:{a+b+c}")
+"""
+"""
+>pytest -vs pytestconcept.py
+pytestconcept.py::test_add: in "parametrize" the number of names (3):
+  ['a', 'b', 'c']
+must be equal to the number of values (2):
+  [10, 20]
+"""
+#method level
+"""
+class Test_Demo:
+    @pytest.mark.parametrize(["a", "b"], [["hey", "bye"], ["class", "over"]])
+    def test_tc1(self, a, b):
+        print(a, b)
+"""
+"""
+>pytest -vs pyconcept.py
+collected 2 items
+
+pyconcept.py::Test_Demo::test_tc1[hey-bye] hey bye
+PASSED
+pyconcept.py::Test_Demo::test_tc1[class-over] class over
+PASSED
+"""
+##########################################################################################
+#script to create multiple account in jeevansathi.com
+"""
+@pytest.mark.parametrize("relation, gender, email, mob, pwd", [("Self", "Male", "akash98734@gmail.com", "9897969594", "Akash@1234^"),
+                                                               ("Son", "Male", "amith4567@gmail.com", "8877665544", "AMIth@#$123"),
+                                                               ("Daughter", "Female", "ganuganu34@gmail.com", "8687898085","GaNu@346%")])
+def test_register(relation, gender, email, mob, pwd):
+    driver = Chrome(options=o)
+    driver.get("https://www.jeevansathi.com/")
+    driver.maximize_window()
+    driver.implicitly_wait(10)
+    driver.find_element("id", "relationshipBlock").click()
+    driver.find_element("xpath", f"//li[text()='{relation}']").click()
+    if relation == "Self":
+        driver.find_element("id", "gender").click()
+        driver.find_element("xpath", f"//li[text()='{gender}']").click()
+    driver.find_element("id", "email").send_keys(email)
+    driver.find_element("id", "phoneNumber").send_keys(mob)
+    driver.find_element("id", "password").send_keys(pwd)
+    driver.find_element("xpath", "(//button[text()='Register for Free'])[2]").click()
+    sleep(3)
+    driver.close()
+"""
+#ws to pass different product and print all there product names
+"""
+@pytest.mark.parametrize("product", ["wedding gift", "baby", "book lover gifts", "host gift"])
+def test_Etsy(product):
+    driver = Chrome(options=o)
+    driver.get("https://www.etsy.com/in-en/?ref=lgo")
+    driver.maximize_window()
+    driver.implicitly_wait(10)
+    driver.find_element("id", "global-enhancements-search-query").send_keys(product+Keys.ENTER)
+    products = driver.find_elements("xpath", "//h3[contains(@id, 'listing-title-')]")
+    for i in products:
+        print(i.text)
+    sleep(5)
+    driver.close()
+"""
+#ws to login for instagram.com with multiple set of inputs
+"""
+@pytest.mark.parametrize("un, pwd", [["lokesh", "lokesh@1234"],
+                                     ["mahesh", "mahesh@12123"],
+                                     ["kumar", "kumar@!2334"]])
+def test_login(un, pwd):
+    driver = Chrome(options=o)
+    driver.get("https://www.instagram.com/")
+    driver.maximize_window()
+    driver.implicitly_wait(10)
+    driver.find_element("name", "username").send_keys(un)
+    driver.find_element("name", "password").send_keys(pwd)
+    driver.find_element("xpath", "//div[.='Log in']").click()
+    sleep(3)
+    driver.close()
+"""
+############################################################################################################
+#12/010/2026
+
+#script to create multiple account in jeevansathi.com by using xlrd and paramterize
+"""
+result = []                         #result=[["Self", "Male", "akash98734@gmail.com", "9897969594", "Akash@1234^"]]
+wb = open_workbook("C:\\Users\\Hp\\PycharmProjects\\M18_selenium79AM\\excel_files\\data.xlsx")
+sh = wb.sheet_by_name("Sheet3")
+row_count = sh.nrows
+for i in range(1, row_count):       #i=1
+    data = sh.row_values(i)         #data=["Self", "Male", "akash98734@gmail.com", "9897969594", "Akash@1234^"]
+    result.append(data)
 
 
+@pytest.mark.parametrize("relation, gender, email, mob, pwd", result)
+def test_register(relation, gender, email, mob, pwd):
+    driver = Chrome(options=o)
+    driver.get("https://www.jeevansathi.com/")
+    driver.maximize_window()
+    driver.implicitly_wait(10)
+    driver.find_element("id", "relationshipBlock").click()
+    driver.find_element("xpath", f"//li[text()='{relation}']").click()
+    if relation == "Self":
+        driver.find_element("id", "gender").click()
+        driver.find_element("xpath", f"//li[text()='{gender}']").click()
+    driver.find_element("id", "email").send_keys(email)
+    driver.find_element("id", "phoneNumber").send_keys(mob)
+    driver.find_element("id", "password").send_keys(pwd)
+    driver.find_element("xpath", "(//button[text()='Register for Free'])[2]").click()
+    sleep(7)
+    driver.close()
+"""
+#######################################################################################################
+"""
+fixtures
+"""
+"""
+def outer(func):
+    def inner(*args, **kwargs):
+        func(*args, **kwargs)
+    return inner
 
+@outer
+def fun():
+    ...
+fun()
+"""
+def check_data(func):
+    def inner(*args, **kwargs):
+        print("check for internet and VPN connection")
+        func(*args, **kwargs)
+    return inner
+@check_data         #tc1 = check_data(tc1)
+def tc1():
+    print("testcase1")
+@check_data
+def tc2():
+    print("testcase2")
+@check_data
+def tc3():
+    print("testcase3")
+# tc1()
+# tc2()
+# tc3()
+# check for internet and VPN connection
+# testcase1
+# check for internet and VPN connection
+# testcase2
+# check for internet and VPN connection
+# testcase3
+"""
+*according to above example there are 3 testcase are present, we should decorate for all 3 function and we should
+call manually all 3 functions,so code length will get increase to avoid this we go for fixtures.
+"""
+"""
+fixture:
+--------
+*fixture is a kind of decorator,it will execute before and after each test function/class/module.
+*fixture should be marked with "@pytest.fixture" for fixture function.
+*fixture(decorator function) should not start with "test" keyword.(it can start with test keyword but it is not recommended)
+*we can use/call fixture in 2 ways,
+1.we can call fixture manually in each test function/method, by specifying fixture name as a "1st argument" in each 
+test function/method.
+2.by using "autouse=True" keyword argument it will applies for all function and method.(no need to manually
+calling the fixture)
 
+syntax:
+-------
+@pytest.fixture
+def func():
+    ...
+    yield
+    ...
 
+def test_tc1(func):
+    ...
 
+*the order of execution is 1st fixture will execute, then control will given to test_function and test function will
+execute, then control give to yield.
 
+autouse
+*******
+*in the above example we are not passing fixture name as an argument to test function, in this case, fixture
+will not execute, to over come this drawback, without even passing the fixture name it should use automatically for
+all the test function that case we should pass "autouse=True" as an argumnet.
+*by default "autouse=False"(will be in False state)
+*by default scope of fixture/autouse will be for function level.
+
+yield
+=====
+*we have a scenario that before and after each function/class/module a fixture should execute, then in this case
+we use "yield" keyword.
+
+*"yield" will pause the execution and it will give control where the function been called, after function execution
+again control will give to yield, after yield what ever present it will execute and control give to next function.
+
+note:
+-----
+*fixture can starts with test keyword, but dont start with test keyword, because we will get confusion
+"""
+#######################################################################################################
+#function level fixture
+#fixture without yield
+"""
+@pytest.fixture
+def outer():
+    print("check for internet connect")
+
+def test_testcase1(outer):
+    print("testcase1")
+
+def test_testcase2(outer):
+    print("testcase2")
+"""
+"""
+>pytest -vs pyconcept.py
+collected 2 items
+
+pyconcept.py::test_testcase1 check for internet connect
+testcase1
+PASSED
+pyconcept.py::test_testcase2 check for internet connect
+testcase2
+PASSED
+"""
+
+"""
+@pytest.fixture
+def outer():
+    print("check for internet connect")
+
+def test_testcase1(outer):
+    print("testcase1")
+
+def test_testcase2():
+    print("testcase2")
+"""
+"""
+>pytest -vs pyconcept.py
+collected 2 items
+
+pyconcept.py::test_testcase1 check for internet connect
+testcase1
+PASSED
+pyconcept.py::test_testcase2 testcase2
+PASSED  
+"""
+
+"""
+@pytest.fixture
+def outer():
+    print("check for internet connect")
+    yield
+    print("off internet")
+
+def test_testcase1(outer):
+    print("testcase1")
+
+def test_testcase2(outer):
+    print("testcase2")
+"""
+"""
+>pytest -vs pyconcept.py
+collected 2 items
+
+pyconcept.py::test_testcase1 check for internet connect
+testcase1
+PASSEDoff internet
+
+pyconcept.py::test_testcase2 check for internet connect
+testcase2
+PASSEDoff internet
+"""
+
+"""
+@pytest.fixture
+def outer1():
+    print("check for internet connection")
+    yield
+    print("off internet")
+@pytest.fixture
+def outer2():
+    print("check for server connection")
+    yield
+    print("off server")
+
+def test_testcase1(outer1, outer2):
+    print("testcase1")
+
+def test_testcase2(outer1, outer2):
+    print("testcase2")
+"""
+"""
+>pytest -vs pyconcept.py
+collected 2 items
+
+pyconcept.py::test_testcase1 check for internet connection
+check for server connection
+testcase1
+PASSEDoff server
+off internet
+
+pyconcept.py::test_testcase2 check for internet connection
+check for server connection
+testcase2
+PASSEDoff server
+off internet
+"""
+
+"""
+@pytest.fixture
+def outer1():
+    print("check for internet connection")
+    yield
+    print("off internet")
+@pytest.fixture
+def outer2():
+    print("check for server connection")
+    yield
+    print("off server")
+
+@pytest.mark.smoke
+def test_testcase1(outer1, outer2):
+    print("testcase1")
+
+def test_testcase2(outer1, outer2):
+    print("testcase2")
+"""
+"""
+>pytest -vs -m "smoke" pyconcept.py
+collected 2 items / 1 deselected / 1 selected
+
+pyconcept.py::test_testcase1 check for internet connection
+check for server connection
+testcase1
+PASSEDoff server
+off internet
+"""
+#################################################################################################################
+#function level with autouse
+"""
+@pytest.fixture(autouse=True)
+def instal():
+    print("instal build")
+    yield
+    print("uninstal build")
+
+def test_login():
+    print("testcase on login")
+def test_signup():
+    print("testcase on signup")
+def test_reels():
+    print("testcase on reels")
+def test_story():
+    print("testcase on story")
+"""
+"""
+>pytest -vs pyconcept.py
+collected 4 items
+
+pyconcept.py::test_login instal build
+testcase on login
+PASSEDuninstal build
+
+pyconcept.py::test_signup instal build
+testcase on signup
+PASSEDuninstal build
+
+pyconcept.py::test_reels instal build
+testcase on reels
+PASSEDuninstal build
+
+pyconcept.py::test_story instal build
+testcase on story
+PASSEDuninstal build
+"""
+"""
+note:
+*****
+*in fixture method also consider as a function only.
+*when we set "autouse=True" both function level and method level will get execute automatically.
+"""
+
+"""
+@pytest.fixture
+def instal():
+    print("instal build")
+    yield
+    print("uninstal build")
+
+def test_login(instal):
+    print("testcase on login")
+def test_signup():
+    print("testcase on signup")
+def test_reels(instal):
+    print("testcase on reels")
+def test_story():
+    print("testcase on story")
+"""
+"""
+>pytest -vs pyconcept.py
+collected 4 items
+
+pyconcept.py::test_login instal build
+testcase on login
+PASSEDuninstal build
+
+pyconcept.py::test_signup testcase on signup
+PASSED
+pyconcept.py::test_reels instal build
+testcase on reels
+PASSEDuninstal build
+
+pyconcept.py::test_story testcase on story
+PASSED
+"""
+
+"""
+@pytest.fixture()
+def instal():
+    print("instal build")
+    yield
+    print("uninstal build")
+
+class Test_Insta:
+    def test_login(self, instal):
+        print("testcase on login")
+    def test_signup(self):
+        print("testcase on signup")
+    def test_reels(self, instal):
+        print("testcase on reels")
+    def test_story(self):
+        print("testcase on story")
+"""
+"""
+collected 4 items
+
+pyconcept.py::Test_Insta::test_login instal build
+testcase on login
+PASSEDuninstal build
+
+pyconcept.py::Test_Insta::test_signup testcase on signup
+PASSED
+pyconcept.py::Test_Insta::test_reels instal build
+testcase on reels
+PASSEDuninstal build
+
+pyconcept.py::Test_Insta::test_story testcase on story
+PASSED
+"""
+
+"""
+@pytest.fixture(autouse=True)
+def instal():
+    print("instal build")
+    yield
+    print("uninstal build")
+
+class Test_Insta:
+    def test_login(self):
+        print("testcase on login")
+    def test_signup(self):
+        print("testcase on signup")
+    def test_reels(self):
+        print("testcase on reels")
+    def test_story(self):
+        print("testcase on story")
+"""
+"""
+>pytest -vs pyconcept.py
+collected 4 items
+
+pyconcept.py::Test_Insta::test_login instal build
+testcase on login
+PASSEDuninstal build
+
+pyconcept.py::Test_Insta::test_signup instal build
+testcase on signup
+PASSEDuninstal build
+
+pyconcept.py::Test_Insta::test_reels instal build
+testcase on reels
+PASSEDuninstal build
+
+pyconcept.py::Test_Insta::test_story instal build
+testcase on story
+PASSEDuninstal build
+"""
+############################################################################################################
+#method level
+"""
+@pytest.fixture
+def instal():
+    print("instal build")
+    yield
+    print("uninstal build")
+
+@pytest.mark.usefixtures("instal")
+class Test_Insta:
+    def test_login(self):
+        print("testcase on login")
+    def test_signup(self):
+        print("testcase on signup")
+
+@pytest.mark.usefixtures("instal")
+class Test_FB:
+    def test_reels(self):
+        print("testcase on reels")
+    def test_story(self):
+        print("testcase on story")
+"""
+"""
+>pytest -vs pyconcept.py
+collected 4 items
+
+pyconcept.py::Test_Insta::test_login instal build
+testcase on login
+PASSEDuninstal build
+
+pyconcept.py::Test_Insta::test_signup instal build
+testcase on signup
+PASSEDuninstal build
+
+pyconcept.py::Test_FB::test_reels instal build
+testcase on reels
+PASSEDuninstal build
+
+pyconcept.py::Test_FB::test_story instal build
+testcase on story
+PASSEDuninstal build
+"""
+#############################################################################################################
+#class level
+"""
+scope="class"
+*************
+->before each class it will execute one time.
+"""
+"""
+@pytest.fixture(scope="class", autouse=True)
+def instal():
+    print("instal build")
+    yield
+    print("uninstal build")
+
+class Test_Insta:
+    def test_login(self):
+        print("testcase on login")
+    def test_signup(self):
+        print("testcase on signup")
+
+class Test_FB:
+    def test_reels(self):
+        print("testcase on reels")
+    def test_story(self):
+        print("testcase on story")
+"""
+"""
+>pytest -vs pyconcept.py
+collected 4 items
+
+pyconcept.py::Test_Insta::test_login instal build
+testcase on login
+PASSED
+pyconcept.py::Test_Insta::test_signup testcase on signup
+PASSEDuninstal build
+
+pyconcept.py::Test_FB::test_reels instal build
+testcase on reels
+PASSED
+pyconcept.py::Test_FB::test_story testcase on story
+PASSEDuninstal build
+"""
+####################################################################################################################
+#module levele
+"""
+scope="module"
+**************
+->before all function/class it will execute one time.
+"""
+"""
+pytestmark = pytest.mark.usefixtures("setup")
+
+@pytest.fixture()
+def setup():
+    print("before")
+    yield
+    print("end")
+
+def test_tc1():
+    print("tescase1")
+
+class Test_FB:
+    def test_reels(self):
+        print("testcase on reels")
+    def test_story(self):
+        print("testcase on story")
+"""
+"""
+>pytest -vs pyconcept.py
+collected 3 items
+
+pyconcept.py::test_tc1 before
+tescase1
+PASSEDend
+
+pyconcept.py::Test_FB::test_reels before
+testcase on reels
+PASSEDend
+
+pyconcept.py::Test_FB::test_story before
+testcase on story
+PASSEDend
+"""
+
+"""
+pytestmark = pytest.mark.usefixtures("setup")
+
+@pytest.fixture(scope="module")
+def setup():
+    print("before")
+    yield
+    print("end")
+
+def test_tc1():
+    print("tescase1")
+
+class Test_FB:
+    def test_reels(self):
+        print("testcase on reels")
+    def test_story(self):
+        print("testcase on story")
+"""
+"""
+collected 3 items
+
+pyconcept.py::test_tc1 before
+tescase1
+PASSED
+pyconcept.py::Test_FB::test_reels testcase on reels
+PASSED
+pyconcept.py::Test_FB::test_story testcase on story
+PASSEDend
+"""
+########################################################################################################################
+"""
+@pytest.fixture(autouse=True)
+def greet():
+    print("welcome")
+    yield
+    print("end")
+
+def test_TC1():
+    print("testcase1")
+def test_TC2():
+    print("testcase2")
+def test_TC3():
+    print("testcase3")
+"""
+"""
+collected 3 items
+
+conftest.py::test_TC1 welcome
+testcase1
+PASSEDend
+
+conftest.py::test_TC2 welcome
+testcase2
+PASSEDend
+
+conftest.py::test_TC3 welcome
+testcase3
+PASSEDend
+"""
+
+"""
+*according to above example when we write autouse="True" with scope="function" then a fixture will get
+execute for all the function, but we want a fixture to be execute only for a particular 
+function/method/module/class then we use "@pytest.mark.usefixtures("fixture_name")" marker.
+
+*usefixtures:
+-------------
+*it is a built-in marker will be marked for a particular class/module to execute a fixture.
+
+note:
+-----
+*for function/method if we specify the fixture name as an argument then it will work similar to "usefixtures" marker.
+"""
+#############################################################################################################
+"""
+callling multiple fixture:
+**************************
+*when ever we are calling multiple fixture, it will execute all the fixture in order then function/class/module
+will get execute.
+
+@pytest.fixture
+def fix1():
+    stmt1
+    yield
+    stmt2
+@pytest.fixture
+def fix2():
+    stmt3
+    yield
+    stmt4
+
+def func1(fix1, fix2):
+    stmt5
+
+order of execution:
+--------------------
+<----before yield------->     function   ---->after yield<----    
+stmt1(fix1)-->stmt3(fix2)-->stmt5(func1)-->stmt4(fix2)-->stmt2(fix1)
+
+"""
+#multiple fixtures for single function manually calling(without yield)
+"""
+@pytest.fixture
+def fix1():
+    print("start1")
+@pytest.fixture
+def fix2():
+    print("start2")
+
+def test_tc1(fix1,fix2):
+    print("testcase1")
+"""
+"""
+collected 1 item
+
+conftest.py::test_tc1 start1
+start2
+testcase1
+PASSED
+"""
+################################################################################################################
+"""
+params:
+=======
+*when we want to execute fixture for multiple of set of i/p then we use "params" as a keyword argument.
+*params will always accept iterable.
+
+@pytest.fixture(params=iterable)
+def fix:
+    ...
+
+def test_func1(fix):
+    ...
+
+note:
+-----
+no.of execution of fixture = no. of elements in params
+"""
+#function level
+#fixture with parameter without yield
+"""
+@pytest.fixture(autouse=True, params=["id1", "id2", "id3"])
+def wish():
+    print("welcome")
+
+def test_tc1():
+    print("testcase1")
+
+def test_tc2():
+    print("testcase2")
+"""
+"""
+collected 6 items
+
+pyconcept.py::test_tc1[id1] welcome
+testcase1
+PASSED
+pyconcept.py::test_tc1[id2] welcome
+testcase1
+PASSED
+pyconcept.py::test_tc1[id3] welcome
+testcase1
+PASSED
+pyconcept.py::test_tc2[id1] welcome
+testcase2
+PASSED
+pyconcept.py::test_tc2[id2] welcome
+testcase2
+PASSED
+pyconcept.py::test_tc2[id3] welcome
+testcase2
+PASSED
+"""
+
+"""
+@pytest.fixture(autouse=True, params=["id1", "id2", "id3"])
+def wish():
+    print("welcome")
+    yield
+    print("end")
+
+def test_tc1():
+    print("testcase1")
+
+def test_tc2():
+    print("testcase2")
+"""
+"""
+collected 6 items
+
+pyconcept.py::test_tc1[id1] welcome
+testcase1
+PASSEDend
+
+pyconcept.py::test_tc1[id2] welcome
+testcase1
+PASSEDend
+
+pyconcept.py::test_tc1[id3] welcome
+testcase1
+PASSEDend
+
+pyconcept.py::test_tc2[id1] welcome
+testcase2
+PASSEDend
+
+pyconcept.py::test_tc2[id2] welcome
+testcase2
+PASSEDend
+
+pyconcept.py::test_tc2[id3] welcome
+testcase2
+PASSEDend
+"""
+######################################################################################################################
+#method level
+"""
+@pytest.fixture(autouse=True, params=["id1", "id2", "id3"])
+def wish():
+    print("welcome")
+    yield
+    print("end")
+
+class Test_Facebook:
+    def test_tc1(self):
+        print("testcase1")
+class Test_Insta:
+    def test_tc2(self):
+        print("testcase2")
+"""
+"""
+collected 6 items
+
+pyconcept.py::Test_Facebook::test_tc1[id1] welcome
+testcase1
+PASSEDend
+
+pyconcept.py::Test_Facebook::test_tc1[id2] welcome
+testcase1
+PASSEDend
+
+pyconcept.py::Test_Facebook::test_tc1[id3] welcome
+testcase1
+PASSEDend
+
+pyconcept.py::Test_Insta::test_tc2[id1] welcome
+testcase2
+PASSEDend
+
+pyconcept.py::Test_Insta::test_tc2[id2] welcome
+testcase2
+PASSEDend
+
+pyconcept.py::Test_Insta::test_tc2[id3] welcome
+testcase2
+PASSEDend
+"""
+#####################################################################################################################
+#class level
+"""
+@pytest.fixture(autouse=True, scope="class", params=["id1", "id2"])
+def wish():
+    print("welcome")
+    yield
+    print("end")
+
+class Test_Insta:
+    def test_tc2(self) :
+        print("testcase2")
+    def test_tc3(self):
+        print("testcase3")
+"""
+"""
+collected 4 items
+
+pyconcept.py::Test_Insta::test_tc2[id1] welcome
+testcase2
+PASSED
+pyconcept.py::Test_Insta::test_tc3[id1] testcase3
+PASSED
+pyconcept.py::Test_Insta::test_tc2[id2] end
+welcome
+testcase2
+PASSED
+pyconcept.py::Test_Insta::test_tc3[id2] testcase3
+PASSEDend
+"""
+######################################################################################################################
+"""
+utilizing parameters(params) inside a fixture:
+***********************************************
+*to use parameters inside a fixture we should write "request" as an argument in fixture.
+*to utilize inside a fixture function we should write "request.param".
+
+synatx:
+-------
+@pytest.fixture(params="iterables")
+def fixture_name(request):
+    request.param
+
+"""
+
+#parameters inside a fixture
+"""
+@pytest.fixture(autouse=True, params=["id1", "id2"])
+def wish(request):
+    print("welcome")
+    print(f"the input is {request.param}")
+
+def test_tc2():
+    print("testcase2")
+def test_tc3():
+    print("testcase3")
+"""
+"""
+collected 4 items
+
+pyconcept.py::test_tc2[id1] welcome
+the input is id1
+testcase2
+PASSED
+pyconcept.py::test_tc2[id2] welcome
+the input is id2
+testcase2
+PASSED
+pyconcept.py::test_tc3[id1] welcome
+the input is id1
+testcase3
+PASSED
+pyconcept.py::test_tc3[id2] welcome
+the input is id2
+testcase3
+PASSED
+"""
+
+"""
+@pytest.fixture(autouse=True, params=[4563, 6745, 2345, 7812, 1234])
+def wish(request):
+    print("welcome")
+    if request.param<3000:
+        print(f"the ID-{request.param} for regression")
+
+def test_tc2():
+    print("testcase2")
+def test_tc3():
+    print("testcase3")
+"""
+"""
+collected 10 items
+
+pyconcept.py::test_tc2[4563] welcome
+testcase2
+PASSED
+pyconcept.py::test_tc2[6745] welcome
+testcase2
+PASSED
+pyconcept.py::test_tc2[2345] welcome
+the ID-2345 for regression
+testcase2
+PASSED
+pyconcept.py::test_tc2[7812] welcome
+testcase2
+PASSED
+pyconcept.py::test_tc2[1234] welcome
+the ID-1234 for regression
+testcase2
+PASSED
+pyconcept.py::test_tc3[4563] welcome
+testcase3
+PASSED
+pyconcept.py::test_tc3[6745] welcome
+testcase3
+PASSED
+pyconcept.py::test_tc3[2345] welcome
+the ID-2345 for regression
+testcase3
+PASSED
+pyconcept.py::test_tc3[7812] welcome
+testcase3
+PASSED
+pyconcept.py::test_tc3[1234] welcome
+the ID-1234 for regression
+testcase3
+PASSED
+"""
+
+#parameters inside a fixture
+"""
+@pytest.fixture(params=[["demo","demo@123"], ["sample", "sample@123"], ["log", "log@123"]])
+def wish(request):
+    print("Welcome")
+    print(request.param)
+    yield
+    print("End")
+
+def test_tc1(wish):
+    print("Testcase1")
+"""
+"""
+collected 3 items
+
+conftest.py::test_tc1[wish0] Welcome
+['demo', 'demo@123']
+Testcase1
+PASSEDEnd
+
+conftest.py::test_tc1[wish1] Welcome
+['sample', 'sample@123']
+Testcase1
+PASSEDEnd
+
+conftest.py::test_tc1[wish2] Welcome
+['log', 'log@123']
+Testcase1
+PASSEDEnd
+"""
+
+#parameters inside a fixture with condition
+"""
+@pytest.fixture(params=[["demo","demo@123"], ["sample", "sample@123"], ["log", "log@123"]])
+def wish(request):
+    if len(request.param[0])>=4:        #["demo","demo@123"]  len(demo)>=4 T len(sample)>=4 T  len(log)>=4 F
+        print("Welcome")
+        print(f"Valid username is {request.param[0]}")
+    yield
+    print("End")
+
+def test_tc1(wish):
+    print("Testcase1")
+"""
+"""
+collected 3 items
+
+conftest.py::test_tc1[wish0] Welcome
+Valid username is demo
+Testcase1
+PASSEDEnd
+
+conftest.py::test_tc1[wish1] Welcome
+Valid username is sample
+Testcase1
+PASSEDEnd
+
+conftest.py::test_tc1[wish2] Testcase1
+PASSEDEnd
+"""
+
+######################################################################################################################
+"""
+parameters present in fixture accessing in test function:
+*********************************************************
+*a value present in fixture to access inside a test function/method we should return a value by "yield" stmt.
+*then call the fixture inside a test function/method, it will return some value and store it in a variable and
+access it.
+
+syntax:
+-------
+@pytest.fixture(params="iterables")
+def fix_name(request):
+    yield request.param
+
+def test_fun(fix_name):
+    var_name = fix_name
+
+note:
+*we can't write autouse=True when we are returning/yielding a value
+"""
+#example on accessing a value from one function inside a another function
+"""
+def add():
+    a = 10
+    return a
+def sub():
+    b = 5
+    a = add()
+    print(a - b)
+"""
+
+#parameters inside a test function
+"""
+@pytest.fixture(params=["mozila", "chrome", "ie"])
+def wish(request):
+    print("welcome")
+    yield request.param
+
+def test_tc1(wish):
+    a = wish
+    print(a)
+    print("testcase1")
+"""
+"""
+collected 3 items
+
+pyconcept.py::test_tc1[mozila] welcome
+mozila
+testcase1
+PASSED
+pyconcept.py::test_tc1[chrome] welcome
+chrome
+testcase1
+PASSED
+pyconcept.py::test_tc1[ie] welcome
+ie
+testcase1
+PASSED
+"""
+
+#example on returning local variable in test function
+"""
+@pytest.fixture
+def wish():
+    ip = "123.567.678.0.0"
+    print("welcome")
+    yield ip
+
+def test_tc1(wish):
+    ip = wish
+    print(ip)
+    print("testcase1")
+"""
+"""
+collected 1 item
+
+pyconcept.py::test_tc1 welcome
+123.567.678.0.0
+testcase1
+PASSED
+"""
+######################################################################################################
+#13/01/2026
+"""
+testcase1:
+----------
+step1: open the browser and enter url
+step2: click on show timings
+step3: click on 10.30PM time slot for MANA SHANKARA drama
+step4: click on accept
+step5: close the browser
+
+testcase2:
+----------
+step1: open the browser and enter url
+step2: click on login button
+step3: enter phone number and click on proceed button
+step4: close the browser
+
+testcase3:
+----------
+step1: open the browser and enter url
+step2: click on offers button
+step3: click view button of any offer and click on close
+step4: close the browser
+"""
+"""
+def test_tc1():
+    driver = Chrome(options=o)
+    driver.get("https://www.inoxmovies.com/")
+    driver.maximize_window()
+    driver.implicitly_wait(10)
+    driver.find_element("xpath", "//div[text()='Showtimings']").click()
+    driver.find_element("xpath", "//h5[text()='10:30 PM']").click()
+    driver.find_element("xpath", "//button[text()='Accept']").click()
+    sleep(2)
+    driver.find_element("xpath", "//button[text()='Accept']").click()
+    driver.find_element("xpath", "//span[text()='14']").click()
+    driver.find_element("xpath", "//button[text()='Proceed']").click()
+    driver.close()
+
+def test_tc2():
+    driver = Chrome(options=o)
+    driver.get("https://www.inoxmovies.com/")
+    driver.maximize_window()
+    driver.implicitly_wait(10)
+    driver.find_element("xpath", "//div[text()='Offers']").click()
+    sleep(3)
+    driver.find_element("xpath", "//button[text()='View']").click()
+    sleep(3)
+    driver.find_element("xpath", "//span[text()='Close ']").click()
+    driver.close()
+"""
+#real time example on fixture
+"""
+@pytest.fixture
+def setup():
+    driver = Chrome(options=o)
+    driver.get("https://www.inoxmovies.com/")
+    driver.maximize_window()
+    driver.implicitly_wait(10)
+    yield driver
+    driver.close()
+
+def test_tc1(setup):
+    driver = setup
+    driver.find_element("xpath", "//div[text()='Showtimings']").click()
+    driver.find_element("xpath", "//h5[text()='10:25 PM']").click()
+    driver.find_element("xpath", "//button[text()='Accept']").click()
+    sleep(2)
+    driver.find_element("xpath", "//button[text()='Accept']").click()
+    driver.find_element("xpath", "//span[text()='14']").click()
+    driver.find_element("xpath", "//button[text()='Proceed']").click()
+
+def test_tc2(setup):
+    driver = setup
+    driver.find_element("xpath", "//div[text()='Offers']").click()
+    sleep(3)
+    driver.find_element("xpath", "//button[text()='View']").click()
+    sleep(3)
+    driver.find_element("xpath", "//span[text()='Close ']").click()
+"""
+"""
+assignment question
+testcase1:
+----------
+step1: open the browser and enter url
+step2: click on english link
+step3: click on view history link
+step4: click on talk link
+step5: close the browser
+
+testcase2:
+----------
+step1: open the browser and enter url
+step2: click on search button
+step3: click on login link
+step4: enter UN, PWD and click on login button 
+step5: close the browser
+
+testcase3: 
+----------
+step1: open the browser and enter url
+step2: click on search button
+step3: click on create account link
+step4: enter UN, PWD, ConfirmPWD, Email and click on create your account button 
+step5: close the browser
+"""
+#################################################################################################################
+#14/01/2025
+"""
+pom - page object model
+*design pattern technique  
+*pom consisting of 3 stages
+1.declaration : for ever element we declare a seperate method, 
+    ex: login -> username, password, login button
+    def username(self):                 def password(self):
+        driver.find_element()               driver.find_element()
+    
+2.initialization : will utilize constructor
+    def __init__(self):
+        ...
+        
+3.utilization : we will call a method, create an object and call a method 
+    l.username()
+    l.password()
+"""
+"""
+testcase1:
+==========
+step1: open the browser and enter URL
+step2: click on accounts and apply button
+step3: enter full name, pan, pincode, mobile number, otp and click on apply now button 
+step4: close the browser
+
+testcase2:
+==========
+step1: open the browser and enter URL
+step2: click on loans and select higher education check box and click on next
+step3: click on apply button for icici bank education loan
+step4: enter first name, last name, mobile number, email, country to study, pincode
+    select check box and click on submit button 
+step5: close the browser
+
+testcase3: 
+==========
+step1: open the browser and enter URL
+step2: click on deposit, fixed deposits
+step3: click on 10L, click on on maturity, click on senior citizen, click on next button
+step4: click on open fixed deposit    
+step5: enter user-id, password and click on login button 
+step6: close the browser
+"""
+###############################################################################################################
+#20/01/2026
+#pom assignment question and genertereport
+"""
+url: https://www.sakraworldhospital.com/
+testcase1:
+=========
+step1: open the browser and enter url
+step2: click on doctors
+step3: select location as sakra world hospital, select any speciality and any doctor name 
+step4: click on book appointment, select date, time, mobile number and click on send OTP
+step5: enter all the details and click on register(from Select Title to TC check box all the fields should be filled) 
+step6: close the browser
+
+testcase2:
+==========
+step1: open the browser and enter url
+step2: click on pay online
+step3: enter data for all the fields and click on confirm
+step4: close the browser
+
+testcase3:
+==========
+step1: open the browser and enter url
+step2: click on Sakra Premium Clinic and click on health check-up button
+step3: click on view button for Premium Comprehensive package
+syep4: enter all the details 
+step5: close the browser
+"""

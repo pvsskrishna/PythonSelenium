@@ -1,0 +1,81 @@
+interview question(experience people):
+=================================
+1.explain ur framework architecture?
+2.what is ur roles and responsablity in framework/automation?
+3.how u have been implemented pytest in ur automation?
+4.what is POM and how it works?
+5.what is synchronization?
+6.have u implemented data driven testing/how to read excle?
+7.what r pop ups, what are the types of popup u have seen?
+8.what are the challenges u faced while doing automation?
+*in my project there was a module, when we mouse over on that it will dispaly plaing blank page.
+*we are not able to inspect the auto suggesstion.
+*automatic popup are displaying.
+*locators value are keep on changing because of this script are failing.
+howto over come: i was communicate with developer to code changes for automation
+9.what kind of exception/error faced while automation?
+*Nosuchelement --> when locator value is not in webpage
+*timeout execption
+*nosuchframeexecption
+*nosuchalert
+*assertion
+*nosuchwindow etc..
+10.what kind of test cases u will pick for automation?/when to go for automation
+=====================================================================
+*when the module/feature are stable
+*when module is tested manual for longer runs 
+*when we have more regression test case
+*when we want to repate/test same test again and again we push for automation.
+*when we have less time and more testcase should execute we go automation.
+*when there is no reqt changes from customer.
+
+11.what are locators and where u will store locators?(more on xpath all types)
+12.what are the oops concept u have used in ur frmework?
+*class, object, method,__init__,excption hadling,decorators, inheritance
+13.drop down,action chain class, screenshot
+14.how to click all the elements in entrire webpage.
+answer: tagname as locator(1st aproach) and xpath(2nd appraoch) by using find_elements()
+15.how many test case u can convert into automation script per day.
+ans:- it depends on complexity of testcase, aprox daily i can convert 2 to 3, some times even 
+i have written 4 to 5.
+
+all exepriec candiates go through the,below
+git and github(version control tool) , jenkins(ci/cd pipe line) --> i have not involved my senior wer doing
+==============================================================================================
+interview question(freshers)
+========================
+*locators and difference b/w absolute and relative xpath, different way if writing xpath
+*explain drop down, action chain class, popups
+*excel reading, synchronization, screen shot
+*pytest,pom
+*difference b/w implicit and explicit wait (or)
+difference b/w sleep() and implicit wait
+difference b/w find_element() and find_elements()
+*knowledge in framework.
+*explain the exeception u face while automating.
+
+resume points(freshers):
+=====================
+*good knowledge on inspecting elements by using various locators.
+*good knowledge on handling Drop-Down, Action chain class and Pop-ups, frames.
+*good knowledge on excel file handling by using xlrd module.
+*good knowledge on pytest, POM, synchronization.
+*good knowledge on Hybrid framework.
+##############################################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

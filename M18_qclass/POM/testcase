@@ -1,0 +1,26 @@
+"""
+testcase1:
+==========
+step1: open the browser and enter URL
+step2: click on accounts and apply button
+step3: enter full name, pan, pincode, mobile number, otp and click on apply now button
+step4: close the browser
+
+testcase2:
+==========
+step1: open the browser and enter URL
+step2: click on loans and select higher education check box and click on next
+step3: click on apply button for icici bank education loan
+step4: enter first name, last name, mobile number, email, country to study, pincode
+    select check box and click on submit button
+step5: close the browser
+
+testcase3:
+==========
+step1: open the browser and enter URL
+step2: click on deposit, fixed deposits
+step3: click on 10L, click on on maturity, click on senior citizen, click on next button
+step4: click on open fixed deposit
+step5: enter user-id, password and click on login button
+step6: close the browser
+"""
