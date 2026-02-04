@@ -65,3 +65,7 @@ Thumbs.db
 *.db
 *.sqlite3
 *.csv
+
+
+Assignments/screenshots_test/
+screenshots_test/
