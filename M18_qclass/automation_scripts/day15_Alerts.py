@@ -1914,7 +1914,7 @@ handling popup's
 """
 #1.alert and confirmation/java script popup
 """
-*a popup which consisting of "OK/Cancel" button thn it is called as alert and confirmation popup.
+*a popup which consisting of "OK/Cancel" button then it is called as alert and confirmation popup.
 *it is classified into 2 types,
 1.simple alert : a alert which consist of either "OK"/"Cancel" button.
 2.alert and confirmation : a alert which consist of both "OK and Cancel" button.
