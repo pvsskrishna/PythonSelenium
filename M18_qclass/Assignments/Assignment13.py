@@ -17,6 +17,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 o = ChromiumOptions()
 o.add_experimental_option("detach",False)
+o.add_argument("--disable-sync")
+o.add_argument("--log-level=3")
 driver = Chrome(options=o)
 
 def takeScreenshot():
@@ -50,6 +52,29 @@ def testCase1():
     except Exception as e:
         takeScreenshot()
         print(f"error is:{e}")
-        driver.close()
+        
+    finally:
+        driver.quit()
 
+def testCase2():
+    try:
+        driver.get("https://www.shine.com/registration/")
+        driver.maximize_window()
+        time.sleep(2)
+        try:
+            driver.find_element(By.XPATH,"//input[@type='file']").send_keys(r"C:\Users\varun\Downloads\dummy1.pdf")
+            time.sleep(2)
+        except:
+            driver.find_element(By.XPATH, "//input[@type='file']").send_keys(
+                r"C:\Users\varun\Downloads\dummy-pdf_4.pdf")
+        finally:
+            print("test case 2 is executed")
+    except Exception as e:
+        takeScreenshot()
+        print(f"error is: {e}")
 
+    finally:
+        driver.quit()
+
+testCase1()
+testCase2()
