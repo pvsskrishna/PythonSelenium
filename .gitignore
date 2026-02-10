@@ -1,71 +1,93 @@
-# ===========================
-# Python Basics
-# ===========================
+# ===============================
+# Python
+# ===============================
 __pycache__/
 *.py[cod]
+*$py.class
 
-# ===========================
+# ===============================
 # Virtual Environments
-# ===========================
+# ===============================
 .venv/
 venv/
-ENV/
 env/
-*.env
+ENV/
 
-# ===========================
-# PyTest
-# ===========================
+# ===============================
+# Environment / Secrets
+# ===============================
+.env
+*.env
+*.local
+config.ini
+config.yaml
+*.ini
+*.json
+
+# ===============================
+# PyTest / Test Caches
+# ===============================
 .pytest_cache/
 .cache/
+.tox/
+.nox/
 
-# ===========================
-# Test Reports
-# ===========================
-html-report/
+# ===============================
+# Test Reports & Artifacts
+# ===============================
 reports/
+html-report/
+htmlcov/
 allure-results/
 allure-report/
+coverage.xml
+*.cover
+*.coverage
 test-output/
 
-# ===========================
-# Logs & Screenshots
-# ===========================
+# ===============================
+# Selenium Artifacts
+# ===============================
+screenshots/
+M18_qclass/Assignments/screenshots_test/
+report-screenshots/
+downloads/
+
+# ===============================
+# Logs
+# ===============================
 logs/
 *.log
-screenshots/
-report-screenshots/
 
-# ===========================
-# Selenium Drivers
-# ===========================
+# ===============================
+# WebDriver Binaries
+# ===============================
 chromedriver*
 geckodriver*
 msedgedriver*
 
-# ===========================
-# Config / Secrets
-# ===========================
-config.yaml
-*.ini
-*.json
-.env
-
-# ===========================
+# ===============================
 # IDE Files
-# ===========================
+# ===============================
 .idea/
+*.iml
 .vscode/
+
+# ===============================
+# OS / System Files
+# ===============================
 .DS_Store
 Thumbs.db
+ehthumbs.db
 
-# ===========================
-# Misc
-# ===========================
+# ===============================
+# Jupyter
+# ===============================
+.ipynb_checkpoints/
+
+# ===============================
+# Databases / Data Files
+# ===============================
 *.db
 *.sqlite3
 *.csv
-
-
-Assignments/screenshots_test/
-screenshots_test/

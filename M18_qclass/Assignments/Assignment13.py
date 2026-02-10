@@ -17,9 +17,12 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 o = ChromiumOptions()
 o.add_experimental_option("detach",False)
-o.add_argument("--disable-sync")
-o.add_argument("--log-level=3")
-driver = Chrome(options=o)
+o.add_experimental_option("prefs",{"safebrowsing.enabled":True,
+                                   "download.default_directory":r"D:\sample"}
+                          )
+# o.add_argument("--disable-sync")
+# o.add_argument("--log-level=3")
+driver = Chrome(options = o)
 
 def takeScreenshot():
     screenshot_name = datetime.now().strftime("%y-%m-%d_%H-%M-%S")
@@ -76,5 +79,26 @@ def testCase2():
     finally:
         driver.quit()
 
-testCase1()
-testCase2()
+def testCase3():
+    try:
+        driver.get(r"https://www.python.org/downloads/")
+        driver.maximize_window()
+        driver.find_element("xpath", "(//a[.='Python 3.12.5'])").click()
+    except Exception as e:
+        takeScreenshot()
+        print(f"Bug is: {e}")
+    finally:
+        driver.quit()
+
+def testCase4():
+    try:
+        driver.get(r"https://www.python.org/downloads/")
+        driver.maximize_window()
+        driver.find_element("xpath", "//a[.='Download Python install manager']").click()
+    except Exception as e:
+        takeScreenshot()
+        print(f"Bug is: {e}")
+    finally:
+        driver.quit()
+
+testCase4()
