@@ -8,6 +8,7 @@ open https://mohfw.gov.in/?q=en > click on Organisation > click on Departments o
 > click Disaster Management Cell > click on Provider Course Manual for Doctors (5.39 MB) >
 click download icon.
 """
+import os
 import time
 from datetime import datetime
 from selenium.webdriver import Chrome
@@ -101,4 +102,20 @@ def testCase4():
     finally:
         driver.quit()
 
-testCase4()
+def testCase5():
+    try:
+        driver.get("https://www.python.org/downloads/")
+        driver.maximize_window()
+        time.sleep(5)
+        driver.find_element("xpath", "(//a[text()='Python 3.14.2'])[4]").click()
+        time.sleep(15)
+        files = os.listdir(r'C:\Users\Varun\Downloads')
+        #files = os.listdir("E:\\SQL 11G")
+        assert "python-3.14.2-amd64.exe" in files, "file not downloaded"
+        print("file downloaded successfully")
+    except Exception as e:
+        takeScreenshot()
+        print(f"exception is: {e}")
+    finally:
+        driver.quit()
+testCase5()
