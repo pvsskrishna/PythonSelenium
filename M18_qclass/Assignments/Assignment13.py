@@ -118,4 +118,26 @@ def testCase5():
         print(f"exception is: {e}")
     finally:
         driver.quit()
-testCase5()
+
+def testCase6():
+    try:
+        driver.get("https://demowebshop.tricentis.com/")
+        driver.maximize_window()
+        time.sleep(2)
+        driver.find_element("xpath", "//a[.='Facebook']").click()
+        time.sleep(2)
+        driver.find_element("xpath", "//a[.='Twitter']").click()
+        time.sleep(2)
+        driver.find_element("xpath", "//a[.='Google+']").click()
+        time.sleep(2)
+        pid = driver.current_window_handle
+        print(pid)  # 51EA5808430D2C8BBCF32FD376D1D1C1
+        all_id = driver.window_handles
+        for i in all_id:
+            driver.switch_to.window(i)
+            print(driver.title)
+        print(all_id)
+
+    except Exception as e:
+        takeScreenshot()
+        print(f"exception is : {e}")
