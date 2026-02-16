@@ -16,8 +16,6 @@ o = ChromiumOptions()
 o.add_experimental_option("detach", False)
 o.add_argument("--disable-notifications")
 
-from openpyxl import *
-
 driver = Chrome(options = o)
 wait = WebDriverWait(driver,10)
 
@@ -28,52 +26,41 @@ def takeScreenshot():
 def exceldata():
     workbook = openpyxl.load_workbook(r"./datasets_excels/data.xlsx")
     sheet = workbook["Sheet2"]
-    details = []
-    headers = [cell.value for cell in sheet[1]]
+
+    headers = [cell.value for cell in sheet[1] if cell.value is not None]
     print(f"headers:{headers}") #['fullName','emaiID','password','mobileNo','workStatus']
 
-    row_data = []
-    for value in sheet.iter_rows(min_row=2,values_only=True):
-        row_data.append(value)
+    data = list(sheet.iter_rows(min_row=2,max_col=len(headers),values_only=True))
+    print(f"data:  {data}")
 
-    creds = {}
-    for header,value in zip(headers,row_data):
-        creds[header] = value
-    details.append(creds)
-    print(details)
+    return data
 
+def testCase1():
+    try:
+        data = exceldata()
+        for fullName,emaiID,password,mobileNo,workStatus in data:
+            driver.get(r"https://www.naukri.com/registration/createAccount")
+            driver.maximize_window()
 
+            driver.find_element(By.XPATH,"//input[@id='name']").send_keys(fullName) #fullName
+            driver.find_element(By.XPATH,"//input[@id='email']").send_keys(emaiID) #emaiID
+            driver.find_element(By.XPATH,"//input[@id='password']").send_keys(password) #password
+            driver.find_element(By.XPATH,"//input[@id='mobile']").send_keys(mobileNo) #mobileNo
 
+            if workStatus == 'yes':
+                driver.find_element(By.XPATH,"//div[@data-val='exp']").send_keys(workStatus) #workStatus
+            else:
+                driver.find_element(By.XPATH, "//div[@data-val='fresher']").send_keys(workStatus)  # workStatus
 
+            driver.find_element(By.XPATH,"//span[text()='Send me important updates & promotions via SMS, email, and']").click() #checkBox
+            driver.find_element(By.XPATH,"//button[.='Register now']").click() #registerBtn
 
-
-        # fullName = ""
-        # emaiID = ""
-        # password = ""
-        # mobileNo = ""
-        # workStatus = ""
-        # checkBox = ""
-        # registerBtn = ""
-
-# def testCase1():
-#     try:
-#         driver.get(r"https://www.naukri.com/registration/createAccount?othersrcp=23531&wExp=N&utm_source=google&utm_medium"
-#                    r"=cpc&utm_campaign=Brand&gclsrc=aw.ds&gad_source=1&gad_campaignid=19863995494&gbraid=0AAAAADLp3cEygg"
-#                    r"3qqw3KWN4HIBioCYA2e&gclid=Cj0KCQiAvOjKBhC9ARIsAFvz5lguz00zGqk13g89vp5afVI5YcUzCKh0x2PJ4vdFcMR8uaiJfCVUnoQaAq6tEALw_wcB")
-#         driver.maximize_window()
-#         driver.find_element(By.XPATH,"") #fullName
-#         driver.find_element(By.XPATH,"") #emaiID
-#         driver.find_element(By.XPATH,"") #password
-#         driver.find_element(By.XPATH,"") #mobileNo
-#         driver.find_element(By.XPATH,"") #workStatus
-#         driver.find_element(By.XPATH,"") #checkBox
-#         driver.find_element(By.XPATH,"") #registerBtn
-#
-#     except Exception as e:
-#         takeScreenshot()
-#         print(f"error is: {e}")
-#         raise
-#     finally:
-#         driver.close()
+    except Exception as e:
+        takeScreenshot()
+        print(f"error is: {e}")
+        raise
+    finally:
+        driver.close()
 
 exceldata()
+testCase1()
