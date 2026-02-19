@@ -1081,3 +1081,210 @@ note:
 is "PASSED".
 """
 ######################################################################################################
+
+"""
+PYTEST.INI – COMPLETE OPTIMIZED NOTES (Automation Framework Ready)
+--------------------------------------------------------------------
+What is pytest.ini?
+pytest.ini is a configuration file used to control pytest behavior globally.
+It helps in:
+
+        Registering custom markers
+        Setting default command-line options
+        Controlling test discovery
+        Avoiding PytestUnknownMarkWarning
+        Enforcing strict test standards
+    
+    It acts as the global settings file for your pytest project.
+--------------------------------------------------------------------
+Where to Place pytest.ini?
+    It must be placed in the project root directory.
+    
+    Example structure:
+    
+    ProjectFolder/
+    │
+    ├── pytest.ini (must be here)
+    ├── conftest.py
+    ├── tests/
+    │ ├── test_login.py
+    │ ├── test_cart.py
+    
+    Pytest automatically detects this file.
+--------------------------------------------------------------------
+Basic Structure
+
+All configurations must be under:
+[pytest]
+--------------------------------------------------------------------
+How to Register Markers
+
+Correct format:
+
+    [pytest]
+    markers =
+    smoke: smoke test cases
+    regression: regression test cases
+    api: api automation tests
+    ui: ui automation tests
+    p1: priority 1 tests
+    p2: priority 2 tests
+    p3: priority 3 tests
+
+Rules:
+    
+    No quotes
+    No commas
+    No brackets
+    One marker per line
+    Always add description after colon (best practice)
+
+Markers must NOT be written inside Python test files.
+--------------------------------------------------------------------
+What is addopts?
+
+    addopts means:
+    Default options that pytest automatically applies whenever you run pytest.
+    
+    Example:
+    
+    [pytest]
+    addopts = -v -s --strict-markers
+    
+    Now when you run:
+    pytest
+    
+    It internally behaves like:
+    pytest -v -s --strict-markers
+--------------------------------------------------------------------
+Meaning of Common addopts Options
+
+1. -v (Verbose Mode)
+    Shows detailed test names in output.
+    Used in CI/CD logs for clarity.
+
+    Without -v:
+    ....
+    With -v:
+    test_login.py::test_valid_login PASSED
+
+2. -s (Show Print Statements)
+    Normally pytest hides print() output.
+    With -s, print statements are visible.
+    Useful for debugging Selenium tests.
+
+    In production CI, often removed.
+
+3. --strict-markers (Very Important)
+    If a marker is not registered in pytest.ini, execution fails.
+    
+    Example typo:
+    
+    @pytest.mark.smokee (wrong)
+    
+    Without strict:
+    Only warning, test still runs.
+    
+    With strict:
+    Execution stops with error.
+    
+    Prevents silent mistakes in large automation projects.
+--------------------------------------------------------------------
+How Does Pytest Know Which Marker to Execute?
+
+    Important Concept:
+    
+    If you run:
+    pytest
+    
+    All tests will run.
+    
+    Markers DO NOT automatically filter tests.
+    They only group tests.
+    
+    To filter tests, you must use:
+    
+    pytest -m smoke
+    This runs only smoke tests.
+--------------------------------------------------------------------
+Can We Set Default Marker?
+
+    Yes.
+    
+    Example:
+    
+    [pytest]
+    addopts = -v --strict-markers -m smoke
+    
+    Now when you run pytest,
+    Only smoke tests execute.
+    
+    However, in professional environments,
+    Marker filtering is usually controlled in CI tools (Jenkins, GitHub Actions),
+    not inside pytest.ini.
+--------------------------------------------------------------------
+Other Useful pytest.ini Settings
+
+    [pytest]
+    addopts = -v --strict-markers
+    testpaths = tests
+    python_files = test_.py
+    python_classes = Test
+    python_functions = test_*
+    
+    Explanation:
+    
+    testpaths → Folder where tests are located
+    python_files → Pattern for test file names
+    python_classes → Pattern for test class names
+    python_functions → Pattern for test functions
+--------------------------------------------------------------------
+Professional pytest.ini Template (Recommended)
+
+    [pytest]
+    addopts = -v --strict-markers
+    testpaths = tests
+    
+    markers =
+    smoke: smoke test cases
+    regression: regression suite
+    sanity: sanity tests
+    api: api automation tests
+    ui: ui automation tests
+    slow: long execution tests
+    p1: priority 1 tests
+    p2: priority 2 tests
+    p3: priority 3 tests
+--------------------------------------------------------------------
+Real-Time CI/CD Usage Example
+
+    Developer local run:
+    pytest
+    
+    Smoke run in Jenkins:
+    pytest -m smoke
+    
+    Nightly regression:
+    pytest -m regression
+--------------------------------------------------------------------
+Key Differences Summary
+
+    markers → Used to group tests
+    -m → Used to select tests
+    addopts → Default pytest behavior
+    --strict-markers → Prevents marker mistakes
+--------------------------------------------------------------------
+Final Summary
+
+    pytest.ini is used to:
+    
+    1. Register markers
+    2. Avoid unknown marker warnings
+    3. Set default pytest behavior
+    4. Improve framework structure
+    5. Enforce professional standards
+    
+    Markers group tests.
+    -m selects tests.
+    addopts sets default behavior.
+"""
