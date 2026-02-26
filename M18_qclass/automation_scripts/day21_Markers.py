@@ -284,7 +284,7 @@ PASSED
 
 #01/08/2025 ---> Day 21
 """
-markers:
+markers:    
 --------
 *markers are used to execute the specific test function/method/class/module.
 *pytest markers are classified into 2 types,

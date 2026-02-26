@@ -1311,19 +1311,29 @@ fixtures
 """
 def outer(func):
     def inner(*args, **kwargs):
+        print("Before function call")
         func(*args, **kwargs)
+        print("After function call")
     return inner
 
 @outer
 def fun():
-    ...
-fun()
+    print("Hello")
+
+fun()       #calling the function
+
+o/p:
+    Before function call
+    Hello
+    After function call
 """
 def check_data(func):
     def inner(*args, **kwargs):
         print("check for internet and VPN connection")
         func(*args, **kwargs)
     return inner
+
+
 @check_data         #tc1 = check_data(tc1)
 def tc1():
     print("testcase1")
